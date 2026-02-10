@@ -1,0 +1,171 @@
+/* ============================================
+   TYPOGRAPHY
+   Swiss Design + Retro Futurism Typography
+   ============================================ */
+
+/* Base Typography Scale */
+:root {
+    /* Font Sizes */
+    --text-xs: 0.75rem;      /* 12px */
+    --text-sm: 0.875rem;     /* 14px */
+    --text-base: 1rem;       /* 16px */
+    --text-lg: 1.125rem;     /* 18px */
+    --text-xl: 1.25rem;      /* 20px */
+    --text-2xl: 1.5rem;      /* 24px */
+    --text-3xl: 2rem;        /* 32px */
+    --text-4xl: 2.5rem;      /* 40px */
+    --text-5xl: 3rem;        /* 48px */
+    --text-6xl: 4rem;        /* 64px */
+
+    /* Line Heights */
+    --leading-tight: 1.2;
+    --leading-normal: 1.5;
+    --leading-relaxed: 1.7;
+    --leading-loose: 2;
+
+    /* Letter Spacing */
+    --tracking-tight: -0.02em;
+    --tracking-normal: 0;
+    --tracking-wide: 0.05em;
+    --tracking-wider: 0.1em;
+    --tracking-widest: 0.2em;
+}
+
+/* Heading Styles */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    font-weight: 900;
+    line-height: var(--leading-tight);
+    letter-spacing: var(--tracking-tight);
+    color: var(--color-white);
+}
+
+h1 {
+    font-size: var(--text-5xl);
+}
+
+h2 {
+    font-size: var(--text-4xl);
+}
+
+h3 {
+    font-size: var(--text-2xl);
+}
+
+h4 {
+    font-size: var(--text-xl);
+}
+
+h5 {
+    font-size: var(--text-lg);
+}
+
+h6 {
+    font-size: var(--text-base);
+}
+
+/* Paragraph Styles */
+p {
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    line-height: var(--leading-relaxed);
+    color: var(--color-gray-700);
+}
+
+/* Link Styles */
+a {
+    color: var(--color-red);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+a:hover {
+    color: var(--color-red-light);
+}
+
+/* Text Utilities */
+.text-display {
+    font-family: var(--font-display);
+}
+
+.text-mono {
+    font-family: var(--font-body);
+}
+
+.text-uppercase {
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wider);
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-right {
+    text-align: right;
+}
+
+/* Color Utilities */
+.text-primary {
+    color: var(--color-white);
+}
+
+.text-secondary {
+    color: var(--color-gray-700);
+}
+
+.text-accent-red {
+    color: var(--color-red);
+}
+
+.text-accent-red-light {
+    color: var(--color-red-light);
+}
+
+.text-accent-pink {
+    color: var(--color-pink);
+}
+
+.text-accent-orange {
+    color: var(--color-orange);
+}
+
+/* Weight Utilities */
+.font-normal {
+    font-weight: 400;
+}
+
+.font-medium {
+    font-weight: 500;
+}
+
+.font-bold {
+    font-weight: 700;
+}
+
+.font-black {
+    font-weight: 900;
+}
+
+/* Responsive Typography */
+@media (max-width: 768px) {
+    :root {
+        --text-3xl: 1.75rem;
+        --text-4xl: 2rem;
+        --text-5xl: 2.5rem;
+        --text-6xl: 3rem;
+    }
+}
+
+@media (max-width: 480px) {
+    :root {
+        --text-2xl: 1.25rem;
+        --text-3xl: 1.5rem;
+        --text-4xl: 1.75rem;
+        --text-5xl: 2rem;
+    }
+}

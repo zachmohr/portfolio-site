@@ -1,0 +1,24 @@
+{
+  "name": "zach-mohr-portfolio",
+  "version": "1.0.0",
+  "description": "Portfolio website for Zach Mohr - Mechanical Engineer, Product Designer, Maker",
+  "main": "index.html",
+  "scripts": {
+    "dev": "echo 'Open index.html in your browser or use Live Server'",
+    "deploy": "echo 'Push to GitHub and deploy via Cloudflare Pages'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YOUR_USERNAME/portfolio.git"
+  },
+  "keywords": [
+    "portfolio",
+    "mechanical-engineering",
+    "product-design",
+    "swiss-design",
+    "retro-futurism"
+  ],
+  "author": "Zach Mohr <zmohr026@gmail.com>",
+  "license": "UNLICENSED",
+  "private": true
+}

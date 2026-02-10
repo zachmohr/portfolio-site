@@ -1,0 +1,404 @@
+/* ============================================
+   DITHERING EFFECTS
+   Retro-Futurism Texture & Visual Effects
+   ============================================ */
+
+/* ============================================
+   DITHERING BASE PATTERN
+   Using CSS Filters & Background Patterns
+   ============================================ */
+
+/* Bayer Matrix Dithering Pattern (4x4) */
+.dither-effect {
+    position: relative;
+}
+
+.dither-effect::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image:
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 2px,
+            rgba(255, 255, 255, 0.03) 2px,
+            rgba(255, 255, 255, 0.03) 4px
+        ),
+        repeating-linear-gradient(
+            90deg,
+            transparent,
+            transparent 2px,
+            rgba(255, 255, 255, 0.03) 2px,
+            rgba(255, 255, 255, 0.03) 4px
+        );
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+/* Dithering Hover Effect */
+.dither-hover {
+    position: relative;
+    overflow: hidden;
+    transition: all var(--transition-base);
+}
+
+.dither-hover::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image:
+        repeating-linear-gradient(
+            45deg,
+            transparent,
+            transparent 2px,
+            rgba(230, 57, 70, 0.1) 2px,
+            rgba(230, 57, 70, 0.1) 4px
+        );
+    opacity: 0;
+    transition: opacity var(--transition-base);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.dither-hover:hover::before {
+    opacity: 1;
+}
+
+/* ============================================
+   SCANLINE EFFECT (Retro Monitor)
+   ============================================ */
+.scanlines {
+    position: relative;
+}
+
+.scanlines::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.15),
+        rgba(0, 0, 0, 0.15) 1px,
+        transparent 1px,
+        transparent 2px
+    );
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* ============================================
+   NOISE TEXTURE (Film Grain)
+   ============================================ */
+.noise-texture {
+    position: relative;
+}
+
+.noise-texture::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.05;
+    pointer-events: none;
+    animation: noise 0.2s steps(10) infinite;
+}
+
+@keyframes noise {
+    0%, 100% { transform: translate(0, 0); }
+    10% { transform: translate(-5%, -5%); }
+    20% { transform: translate(-10%, 5%); }
+    30% { transform: translate(5%, -10%); }
+    40% { transform: translate(-5%, 15%); }
+    50% { transform: translate(-10%, 5%); }
+    60% { transform: translate(15%, 0); }
+    70% { transform: translate(0, 10%); }
+    80% { transform: translate(-15%, 0); }
+    90% { transform: translate(10%, 5%); }
+}
+
+/* ============================================
+   GLITCH EFFECT
+   ============================================ */
+.glitch {
+    position: relative;
+}
+
+.glitch:hover {
+    animation: glitch 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
+}
+
+@keyframes glitch {
+    0%, 100% {
+        transform: translate(0);
+    }
+    20% {
+        transform: translate(-2px, 2px);
+    }
+    40% {
+        transform: translate(-2px, -2px);
+    }
+    60% {
+        transform: translate(2px, 2px);
+    }
+    80% {
+        transform: translate(2px, -2px);
+    }
+}
+
+/* RGB Split Effect */
+.glitch-rgb {
+    position: relative;
+}
+
+.glitch-rgb:hover::before,
+.glitch-rgb:hover::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.glitch-rgb:hover::before {
+    animation: glitch-rgb-before 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
+    color: #ff006e;
+    z-index: -1;
+}
+
+.glitch-rgb:hover::after {
+    animation: glitch-rgb-after 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse both infinite;
+    color: #ffffff;
+    z-index: -2;
+}
+
+@keyframes glitch-rgb-before {
+    0%, 100% {
+        transform: translate(0);
+    }
+    20% {
+        transform: translate(-2px, 0);
+    }
+    40% {
+        transform: translate(2px, 0);
+    }
+    60% {
+        transform: translate(-2px, 0);
+    }
+    80% {
+        transform: translate(2px, 0);
+    }
+}
+
+@keyframes glitch-rgb-after {
+    0%, 100% {
+        transform: translate(0);
+    }
+    20% {
+        transform: translate(2px, 0);
+    }
+    40% {
+        transform: translate(-2px, 0);
+    }
+    60% {
+        transform: translate(2px, 0);
+    }
+    80% {
+        transform: translate(-2px, 0);
+    }
+}
+
+/* ============================================
+   PIXEL SORT EFFECT (Static)
+   ============================================ */
+.pixel-sort {
+    position: relative;
+}
+
+.pixel-sort::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 1px,
+        rgba(255, 255, 255, 0.05) 1px,
+        rgba(255, 255, 255, 0.05) 2px
+    );
+    pointer-events: none;
+}
+
+/* ============================================
+   CHROMATIC ABERRATION
+   ============================================ */
+.chromatic-aberration {
+    position: relative;
+}
+
+.chromatic-aberration:hover {
+    animation: chromatic 0.5s ease-in-out;
+}
+
+@keyframes chromatic {
+    0%, 100% {
+        filter: none;
+    }
+    25% {
+        filter:
+            drop-shadow(2px 0 0 rgba(255, 0, 110, 0.5))
+            drop-shadow(-2px 0 0 rgba(6, 255, 165, 0.5));
+    }
+    75% {
+        filter:
+            drop-shadow(-2px 0 0 rgba(255, 0, 110, 0.5))
+            drop-shadow(2px 0 0 rgba(6, 255, 165, 0.5));
+    }
+}
+
+/* ============================================
+   VHS DISTORTION
+   ============================================ */
+.vhs-effect {
+    position: relative;
+    overflow: hidden;
+}
+
+.vhs-effect::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0) 0px,
+        rgba(0, 0, 0, 0.05) 1px,
+        rgba(0, 0, 0, 0) 2px
+    );
+    pointer-events: none;
+    animation: vhs-lines 8s linear infinite;
+}
+
+@keyframes vhs-lines {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(100%);
+    }
+}
+
+/* ============================================
+   HOLOGRAPHIC EFFECT
+   ============================================ */
+.holographic {
+    position: relative;
+    background: linear-gradient(
+        135deg,
+        var(--color-red) 0%,
+        var(--color-white) 50%,
+        var(--color-red) 100%
+    );
+    background-size: 200% 200%;
+    animation: holographic-shift 3s ease infinite;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+@keyframes holographic-shift {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+/* ============================================
+   RETRO GRID (Tron-style)
+   ============================================ */
+.retro-grid {
+    position: relative;
+    background-image:
+        linear-gradient(0deg, transparent 24%, rgba(230, 57, 70, 0.05) 25%, rgba(230, 57, 70, 0.05) 26%, transparent 27%, transparent 74%, rgba(230, 57, 70, 0.05) 75%, rgba(230, 57, 70, 0.05) 76%, transparent 77%, transparent),
+        linear-gradient(90deg, transparent 24%, rgba(230, 57, 70, 0.05) 25%, rgba(230, 57, 70, 0.05) 26%, transparent 27%, transparent 74%, rgba(230, 57, 70, 0.05) 75%, rgba(230, 57, 70, 0.05) 76%, transparent 77%, transparent);
+    background-size: 50px 50px;
+}
+
+/* ============================================
+   PERSPECTIVE GRID (3D Effect)
+   ============================================ */
+.perspective-grid {
+    perspective: 1000px;
+}
+
+.perspective-grid-inner {
+    transform-style: preserve-3d;
+    transition: transform 0.3s ease;
+}
+
+.perspective-grid:hover .perspective-grid-inner {
+    transform: rotateX(5deg) rotateY(5deg);
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+
+/* Apply dithering to specific elements */
+.apply-dither {
+    filter: contrast(1.1) brightness(0.95);
+}
+
+/* Glow effect (neon) */
+.neon-glow {
+    text-shadow:
+        0 0 10px currentColor,
+        0 0 20px currentColor,
+        0 0 30px currentColor;
+}
+
+/* Flicker animation */
+.flicker {
+    animation: flicker 0.15s infinite;
+}
+
+@keyframes flicker {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.8;
+    }
+}
+
+/* Fade in on scroll (add via JS) */
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}

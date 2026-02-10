@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Product showcase with exploded view animations - Zach Mohr Portfolio">
+    <title>Product Showcase - Zach Mohr</title>
+
+    <!-- Preconnect to Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700;900&family=IBM+Plex+Mono:wght@400;500&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/typography.css">
+    <link rel="stylesheet" href="css/dithering.css">
+
+    <style>
+        /* Product Showcase Specific Styles */
+        .product-showcase {
+            padding: var(--space-2xl) var(--grid-gutter);
+        }
+
+        .product-item {
+            margin-bottom: var(--space-2xl);
+            border-bottom: var(--border-width) solid var(--color-gray-100);
+            padding-bottom: var(--space-2xl);
+        }
+
+        .product-item:last-child {
+            border-bottom: none;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-xl);
+            align-items: center;
+        }
+
+        .product-3d-container {
+            width: 100%;
+            height: 600px;
+            background-color: var(--color-gray-100);
+            border: var(--border-width) solid var(--color-gray-200);
+            position: relative;
+        }
+
+        .product-3d-container canvas {
+            display: block;
+        }
+
+        .product-info h2 {
+            color: var(--color-white);
+            margin-bottom: var(--space-sm);
+        }
+
+        .product-meta {
+            display: flex;
+            gap: var(--space-md);
+            margin-bottom: var(--space-md);
+        }
+
+        .product-meta-item {
+            font-size: 0.875rem;
+            color: var(--color-gray-700);
+        }
+
+        .product-meta-label {
+            color: var(--color-red);
+            font-weight: 500;
+        }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: var(--space-md);
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.75rem;
+            color: var(--color-gray-700);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            background-color: rgba(10, 10, 10, 0.8);
+            padding: var(--space-xs) var(--space-sm);
+            border: 1px solid var(--color-red);
+        }
+
+        @media (max-width: 768px) {
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .product-3d-container {
+                height: 400px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">ZM</a>
+            <ul class="nav-menu">
+                <li><a href="index.html#about" class="nav-link">About</a></li>
+                <li><a href="projects.html" class="nav-link">Projects</a></li>
+                <li><a href="product-showcase.html" class="nav-link active">Product Showcase</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <section class="projects-header">
+        <div class="container">
+            <h1 class="page-title">Product Showcase</h1>
+            <p class="page-subtitle">Interactive 3D exploded views of my product designs. Scroll to trigger animations.</p>
+        </div>
+    </section>
+
+    <!-- Product Showcase Section -->
+    <section class="product-showcase">
+        <div class="container">
+
+            <!-- Product 1: Toilet Paper Holder -->
+            <article class="product-item">
+                <div class="product-grid">
+                    <div class="product-info">
+                        <h2>Patent-Pending Toilet Paper Holder</h2>
+
+                        <div class="product-meta">
+                            <div class="product-meta-item">
+                                <span class="product-meta-label">Status:</span> [Your status]
+                            </div>
+                            <div class="product-meta-item">
+                                <span class="product-meta-label">Year:</span> [Year]
+                            </div>
+                            <div class="product-meta-item">
+                                <span class="product-meta-label">Parts:</span> [# components]
+                            </div>
+                        </div>
+
+                        <p class="about-description">
+                            [Add your actual project description here - what problem does it solve? What was your role? What makes it unique?]
+                        </p>
+
+                        <h3 style="margin-top: var(--space-md); margin-bottom: var(--space-xs); font-size: 1rem;">Key Features:</h3>
+                        <ul style="color: var(--color-gray-700); font-size: 0.875rem; line-height: 1.8; margin-left: var(--space-md);">
+                            <li>• [Feature 1 - be specific and honest]</li>
+                            <li>• [Feature 2]</li>
+                            <li>• [Feature 3]</li>
+                            <li>• [Feature 4]</li>
+                            <li>• [Feature 5]</li>
+                        </ul>
+
+                        <div style="margin-top: var(--space-md);">
+                            <span class="tag">Product Design</span>
+                            <span class="tag">3D Printing</span>
+                            <span class="tag">Manufacturing</span>
+                        </div>
+                    </div>
+
+                    <div class="product-3d-container" id="product-explode-1">
+                        <div class="scroll-hint">Scroll to explode view</div>
+                        <!-- 3D model loads here -->
+                    </div>
+                </div>
+            </article>
+
+            <!-- Product 2: Electric Seat Component -->
+            <article class="product-item">
+                <div class="product-grid" style="grid-template-columns: 1fr 1fr; direction: ltr;">
+                    <div class="product-3d-container" id="product-explode-2">
+                        <div class="scroll-hint">Scroll to explode view</div>
+                        <!-- 3D model loads here -->
+                    </div>
+
+                    <div class="product-info">
+                        <h2>Aircraft Electric Seat Actuator</h2>
+
+                        <div class="product-meta">
+                            <div class="product-meta-item">
+                                <span class="product-meta-label">Status:</span> [Your status]
+                            </div>
+                            <div class="product-meta-item">
+                                <span class="product-meta-label">Year:</span> [Year]
+                            </div>
+                            <div class="product-meta-item">
+                                <span class="product-meta-label">Metric:</span> [Your metric]
+                            </div>
+                        </div>
+
+                        <p class="about-description">
+                            [Add your actual description - what did you actually do? What was the challenge? What was your specific contribution?]
+                        </p>
+
+                        <h3 style="margin-top: var(--space-md); margin-bottom: var(--space-xs); font-size: 1rem;">Engineering Highlights:</h3>
+                        <ul style="color: var(--color-gray-700); font-size: 0.875rem; line-height: 1.8; margin-left: var(--space-md);">
+                            <li>• [Real accomplishment 1]</li>
+                            <li>• [Real accomplishment 2]</li>
+                            <li>• [Real accomplishment 3]</li>
+                            <li>• [Real accomplishment 4]</li>
+                            <li>• [Real accomplishment 5]</li>
+                        </ul>
+
+                        <div style="margin-top: var(--space-md);">
+                            <span class="tag">Innovation</span>
+                            <span class="tag">CAD Design</span>
+                            <span class="tag">Cost Reduction</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Add more products here -->
+
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2 class="cta-title">Interested in These Projects?</h2>
+            <p class="cta-text">I'd love to discuss the engineering and design process behind these products.</p>
+            <div class="cta-buttons">
+                <a href="contact.html" class="btn btn-primary">Get in Touch</a>
+                <a href="projects.html" class="btn btn-secondary">View All Projects</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p class="footer-text">&copy; 2026 Zach Mohr. Built with precision and a bit of retro flair.</p>
+                <div class="footer-links">
+                    <a href="mailto:zmohr026@gmail.com" class="footer-link">Email</a>
+                    <a href="tel:+16059997649" class="footer-link">Phone</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/main.js"></script>
+    <script type="module" src="js/product-explode.js"></script>
+</body>
+</html>
