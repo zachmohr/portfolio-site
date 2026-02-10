@@ -329,6 +329,14 @@ ul, ol {
     color: var(--color-gray-800);
 }
 
+.about-image-photo {
+    width: 100%;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+    border: var(--border-width) solid var(--color-gray-300);
+    display: block;
+}
+
 .about-image-placeholder {
     width: 100%;
     aspect-ratio: 3/4;
