@@ -193,14 +193,14 @@ ul, ol {
     align-items: center;
     padding: var(--space-2xl) var(--grid-gutter);
     position: relative;
-    overflow: hidden;
+    overflow: clip;
 }
 
 .hero-container {
     max-width: var(--grid-max-width);
     width: 100%;
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 1fr 1fr;
     gap: var(--space-xl);
     align-items: center;
 }
@@ -767,10 +767,22 @@ ul, ol {
 
     .hero-container {
         grid-template-columns: 1fr;
+        text-align: center;
     }
 
     .hero-geometric {
-        display: none;
+        order: -1;
+        height: 300px;
+    }
+
+    .hero-title-line,
+    .hero-title-symbol {
+        display: inline;
+    }
+
+    .hero-title-symbol {
+        font-size: 0.5em;
+        margin: 0 var(--space-xs);
     }
 
     .about-grid,

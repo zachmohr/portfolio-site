@@ -2,7 +2,9 @@
 // THREE.JS SCENE - 3D Model with Dithering Shader
 // ============================================
 
-import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.module.js';
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
 
 document.addEventListener('DOMContentLoaded', function() {
     const container = document.getElementById('three-container');
@@ -20,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
         0.1,
         1000
     );
-    camera.position.z = 5;
+    camera.position.z = 7;
 
     const renderer = new THREE.WebGLRenderer({
         antialias: false, // Turn off for more pixelated/retro look
@@ -125,15 +127,6 @@ document.addEventListener('DOMContentLoaded', function() {
         `
     };
 
-    // ============================================
-    // CREATE 3D MODEL
-    // ============================================
-    const geometry = new THREE.TorusKnotGeometry(1.5, 0.5, 128, 32);
-    // Alternative geometries you can try:
-    // const geometry = new THREE.IcosahedronGeometry(2, 1);
-    // const geometry = new THREE.OctahedronGeometry(2, 2);
-    // const geometry = new THREE.TorusGeometry(1.5, 0.6, 32, 64);
-
     const material = new THREE.ShaderMaterial({
         uniforms: ditheringShader.uniforms,
         vertexShader: ditheringShader.vertexShader,
@@ -141,8 +134,40 @@ document.addEventListener('DOMContentLoaded', function() {
         side: THREE.DoubleSide
     });
 
-    const mesh = new THREE.Mesh(geometry, material);
-    scene.add(mesh);
+    // ============================================
+    // LOAD GLB MODEL
+    // ============================================
+    let model = null;
+
+    const dracoLoader = new DRACOLoader();
+    dracoLoader.setDecoderPath('https://cdn.jsdelivr.net/npm/three@0.161.0/examples/jsm/libs/draco/');
+
+    const loader = new GLTFLoader();
+    loader.setDRACOLoader(dracoLoader);
+    loader.load('assets/models/RotoBlackHigh.glb', (gltf) => {
+        model = gltf.scene;
+
+        // Apply dithering shader to all meshes
+        model.traverse((child) => {
+            if (child.isMesh) {
+                child.material = material;
+            }
+        });
+
+        // Auto-fit: center and scale model to fill the view
+        const box = new THREE.Box3().setFromObject(model);
+        const center = box.getCenter(new THREE.Vector3());
+        const size = box.getSize(new THREE.Vector3());
+        model.position.sub(center);
+
+        const maxDim = Math.max(size.x, size.y, size.z);
+        const fov = camera.fov * (Math.PI / 180);
+        const fitDistance = maxDim / (2 * Math.tan(fov / 2));
+        camera.position.z = fitDistance * 1.5;
+        camera.updateProjectionMatrix();
+
+        scene.add(model);
+    });
 
     // ============================================
     // MOUSE INTERACTION
@@ -171,12 +196,14 @@ document.addEventListener('DOMContentLoaded', function() {
         ditheringShader.uniforms.time.value += 0.01;
 
         // Smooth rotation with mouse influence
-        mesh.rotation.x += (targetRotationX - mesh.rotation.x) * 0.05;
-        mesh.rotation.y += (targetRotationY - mesh.rotation.y) * 0.05;
+        if (model) {
+            model.rotation.x += (targetRotationX - model.rotation.x) * 0.05;
+            model.rotation.y += (targetRotationY - model.rotation.y) * 0.05;
 
-        // Continuous slow rotation
-        mesh.rotation.x += 0.002;
-        mesh.rotation.y += 0.003;
+            // Continuous slow rotation
+            model.rotation.x += 0.002;
+            model.rotation.y += 0.003;
+        }
 
         renderer.render(scene, camera);
     }
@@ -202,7 +229,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // CLEANUP
     // ============================================
     window.addEventListener('beforeunload', () => {
-        geometry.dispose();
         material.dispose();
         renderer.dispose();
     });
