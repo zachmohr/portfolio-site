@@ -140,7 +140,8 @@ document.addEventListener('DOMContentLoaded', function() {
     let model = null;
 
     const dracoLoader = new DRACOLoader();
-    dracoLoader.setDecoderPath('https://cdn.jsdelivr.net/npm/three@0.161.0/examples/jsm/libs/draco/');
+    dracoLoader.setDecoderPath('https://cdn.jsdelivr.net/npm/three@0.161.0/examples/jsm/libs/draco/gltf/');
+    dracoLoader.setDecoderConfig({ type: 'js' });
 
     const loader = new GLTFLoader();
     loader.setDRACOLoader(dracoLoader);
