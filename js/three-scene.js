@@ -24,6 +24,15 @@ document.addEventListener('DOMContentLoaded', function() {
     );
     camera.position.z = 7;
 
+    // Pre-check WebGL before handing off to Three.js
+    const testCanvas = document.createElement('canvas');
+    const testGL = testCanvas.getContext('webgl') || testCanvas.getContext('experimental-webgl');
+    if (!testGL || testGL.isContextLost()) {
+        console.warn('WebGL not available or context lost. Skipping 3D scene.');
+        return;
+    }
+    testCanvas.remove();
+
     let renderer;
     try {
         renderer = new THREE.WebGLRenderer({
@@ -32,13 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
             powerPreference: 'low-power'
         });
     } catch (e) {
-        console.warn('WebGL not available:', e.message);
-        return;
-    }
-
-    if (!renderer.getContext()) {
-        console.warn('WebGL context could not be created.');
-        renderer.dispose();
+        console.warn('WebGL renderer failed:', e.message);
         return;
     }
 
