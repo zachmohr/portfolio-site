@@ -24,40 +24,36 @@ document.addEventListener('DOMContentLoaded', function() {
     );
     camera.position.z = 7;
 
-    // Pre-check WebGL before handing off to Three.js
-    const testCanvas = document.createElement('canvas');
-    const testGL = testCanvas.getContext('webgl') || testCanvas.getContext('experimental-webgl');
-    if (!testGL || testGL.isContextLost()) {
-        console.warn('WebGL not available or context lost. Skipping 3D scene.');
-        return;
-    }
-    testCanvas.remove();
+    // Create canvas and pass to Three.js to avoid multiple context creation
+    const canvas = document.createElement('canvas');
+    container.appendChild(canvas);
 
     let renderer;
     try {
         renderer = new THREE.WebGLRenderer({
+            canvas: canvas,
             antialias: false,
             alpha: true,
             powerPreference: 'low-power'
         });
     } catch (e) {
-        console.warn('WebGL renderer failed:', e.message);
+        console.warn('WebGL not available:', e.message);
+        canvas.remove();
         return;
     }
 
     renderer.setSize(container.clientWidth, container.clientHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    container.appendChild(renderer.domElement);
 
     let contextLost = false;
 
-    renderer.domElement.addEventListener('webglcontextlost', (event) => {
+    canvas.addEventListener('webglcontextlost', (event) => {
         event.preventDefault();
         contextLost = true;
         console.warn('WebGL context lost. Waiting for restore...');
     });
 
-    renderer.domElement.addEventListener('webglcontextrestored', () => {
+    canvas.addEventListener('webglcontextrestored', () => {
         contextLost = false;
         console.log('WebGL context restored.');
     });
