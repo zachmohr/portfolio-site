@@ -183,7 +183,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const loader = new GLTFLoader();
     loader.setDRACOLoader(dracoLoader);
-    loader.load('assets/models/RotoBlackHigh.glb', (gltf) => {
+    loader.load('assets/models/RotoBlackOptimized.glb', (gltf) => {
         model = gltf.scene;
 
         // Apply dithering shader to all meshes
@@ -202,7 +202,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const maxDim = Math.max(size.x, size.y, size.z);
         const fov = camera.fov * (Math.PI / 180);
         const fitDistance = maxDim / (2 * Math.tan(fov / 2));
-        camera.position.z = fitDistance * 1.5;
+        camera.position.z = fitDistance * 1.2;
         camera.updateProjectionMatrix();
 
         scene.add(model);
