@@ -24,13 +24,40 @@ document.addEventListener('DOMContentLoaded', function() {
     );
     camera.position.z = 7;
 
-    const renderer = new THREE.WebGLRenderer({
-        antialias: false, // Turn off for more pixelated/retro look
-        alpha: true
-    });
+    let renderer;
+    try {
+        renderer = new THREE.WebGLRenderer({
+            antialias: false,
+            alpha: true,
+            powerPreference: 'low-power'
+        });
+    } catch (e) {
+        console.warn('WebGL not available:', e.message);
+        return;
+    }
+
+    if (!renderer.getContext()) {
+        console.warn('WebGL context could not be created.');
+        renderer.dispose();
+        return;
+    }
+
     renderer.setSize(container.clientWidth, container.clientHeight);
-    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     container.appendChild(renderer.domElement);
+
+    let contextLost = false;
+
+    renderer.domElement.addEventListener('webglcontextlost', (event) => {
+        event.preventDefault();
+        contextLost = true;
+        console.warn('WebGL context lost. Waiting for restore...');
+    });
+
+    renderer.domElement.addEventListener('webglcontextrestored', () => {
+        contextLost = false;
+        console.log('WebGL context restored.');
+    });
 
     // ============================================
     // DITHERING SHADER
@@ -78,18 +105,20 @@ document.addEventListener('DOMContentLoaded', function() {
             varying vec3 vPosition;
             varying vec3 vNormal;
 
-            // Bayer matrix 4x4 for ordered dithering
+            // 2x2 Bayer value: M2 = [[0,2],[3,1]], computed as 3r + 2c - 4rc
+            float m2(float r, float c) {
+                return 3.0 * r + 2.0 * c - 4.0 * r * c;
+            }
+
+            // 4x4 Bayer matrix via recursive decomposition (no array indexing for mobile GPU compatibility)
             float dither4x4(vec2 position, float brightness) {
-                int x = int(mod(position.x, 4.0));
-                int y = int(mod(position.y, 4.0));
-
-                float bayerMatrix[16];
-                bayerMatrix[0] = 0.0; bayerMatrix[1] = 8.0; bayerMatrix[2] = 2.0; bayerMatrix[3] = 10.0;
-                bayerMatrix[4] = 12.0; bayerMatrix[5] = 4.0; bayerMatrix[6] = 14.0; bayerMatrix[7] = 6.0;
-                bayerMatrix[8] = 3.0; bayerMatrix[9] = 11.0; bayerMatrix[10] = 1.0; bayerMatrix[11] = 9.0;
-                bayerMatrix[12] = 15.0; bayerMatrix[13] = 7.0; bayerMatrix[14] = 13.0; bayerMatrix[15] = 5.0;
-
-                float threshold = bayerMatrix[x + y * 4] / 16.0;
+                float fx = floor(mod(position.x, 4.0));
+                float fy = floor(mod(position.y, 4.0));
+                float x0 = mod(fx, 2.0);
+                float x1 = mod(floor(fx * 0.5), 2.0);
+                float y0 = mod(fy, 2.0);
+                float y1 = mod(floor(fy * 0.5), 2.0);
+                float threshold = (4.0 * m2(y0, x0) + m2(y1, x1)) / 16.0;
                 return brightness < threshold ? 0.0 : 1.0;
             }
 
@@ -192,6 +221,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // ============================================
     function animate() {
         requestAnimationFrame(animate);
+
+        if (contextLost) return;
 
         // Update time uniform
         ditheringShader.uniforms.time.value += 0.01;

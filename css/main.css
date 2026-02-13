@@ -428,6 +428,42 @@ ul, ol {
     margin: 0 auto;
 }
 
+/* Coming Soon */
+.coming-soon {
+    padding: var(--space-2xl) var(--grid-gutter);
+    min-height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.coming-soon-content {
+    text-align: center;
+    max-width: 500px;
+}
+
+.coming-soon-icon {
+    font-family: var(--font-mono);
+    font-size: 3rem;
+    color: var(--color-accent);
+    margin-bottom: var(--space-md);
+}
+
+.coming-soon-title {
+    font-family: var(--font-heading);
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    font-weight: 900;
+    color: var(--color-white);
+    margin-bottom: var(--space-sm);
+}
+
+.coming-soon-text {
+    color: var(--color-gray-700);
+    font-size: 1.125rem;
+    line-height: 1.6;
+    margin-bottom: var(--space-lg);
+}
+
 /* Filters */
 .filters {
     padding: var(--space-lg) var(--grid-gutter);
