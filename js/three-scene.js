@@ -33,12 +33,22 @@ document.addEventListener('DOMContentLoaded', function() {
         renderer = new THREE.WebGLRenderer({
             canvas: canvas,
             antialias: false,
-            alpha: true,
-            powerPreference: 'low-power'
+            alpha: true
         });
     } catch (e) {
         console.warn('WebGL not available:', e.message);
         canvas.remove();
+        container.classList.add('webgl-fallback');
+        return;
+    }
+
+    // Verify context is usable
+    const gl = renderer.getContext();
+    if (!gl || gl.isContextLost()) {
+        console.warn('WebGL context not usable.');
+        canvas.remove();
+        renderer.dispose();
+        container.classList.add('webgl-fallback');
         return;
     }
 
