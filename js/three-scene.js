@@ -201,19 +201,70 @@ document.addEventListener('DOMContentLoaded', function() {
     // ============================================
     // MOUSE INTERACTION
     // ============================================
-    let mouseX = 0;
-    let mouseY = 0;
     let targetRotationX = 0;
     let targetRotationY = 0;
 
     container.addEventListener('mousemove', (event) => {
         const rect = container.getBoundingClientRect();
-        mouseX = ((event.clientX - rect.left) / container.clientWidth) * 2 - 1;
-        mouseY = -((event.clientY - rect.top) / container.clientHeight) * 2 + 1;
+        const mouseX = ((event.clientX - rect.left) / container.clientWidth) * 2 - 1;
+        const mouseY = -((event.clientY - rect.top) / container.clientHeight) * 2 + 1;
 
         targetRotationY = mouseX * 0.5;
         targetRotationX = mouseY * 0.5;
     });
+
+    // ============================================
+    // TOUCH INTERACTION
+    // ============================================
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let touchRotationX = 0;
+    let touchRotationY = 0;
+    let initialPinchDist = 0;
+    let initialCameraZ = 0;
+    const minZoom = 0.6; // Closest zoom (multiplier of fitDistance)
+    const maxZoom = 2.5; // Farthest zoom (multiplier of fitDistance)
+
+    container.addEventListener('touchstart', (event) => {
+        if (event.touches.length === 1) {
+            touchStartX = event.touches[0].clientX;
+            touchStartY = event.touches[0].clientY;
+        } else if (event.touches.length === 2) {
+            initialPinchDist = Math.hypot(
+                event.touches[0].clientX - event.touches[1].clientX,
+                event.touches[0].clientY - event.touches[1].clientY
+            );
+            initialCameraZ = camera.position.z;
+        }
+    }, { passive: true });
+
+    container.addEventListener('touchmove', (event) => {
+        event.preventDefault();
+        if (event.touches.length === 1) {
+            const deltaX = event.touches[0].clientX - touchStartX;
+            const deltaY = event.touches[0].clientY - touchStartY;
+
+            touchRotationY += deltaX * 0.005;
+            touchRotationX += deltaY * 0.005;
+
+            targetRotationY = touchRotationY;
+            targetRotationX = touchRotationX;
+
+            touchStartX = event.touches[0].clientX;
+            touchStartY = event.touches[0].clientY;
+        } else if (event.touches.length === 2 && initialPinchDist > 0) {
+            const currentDist = Math.hypot(
+                event.touches[0].clientX - event.touches[1].clientX,
+                event.touches[0].clientY - event.touches[1].clientY
+            );
+            const scale = initialPinchDist / currentDist;
+            const fitDistance = initialCameraZ;
+            camera.position.z = Math.max(
+                fitDistance * minZoom,
+                Math.min(fitDistance * maxZoom, initialCameraZ * scale)
+            );
+        }
+    }, { passive: false });
 
     // ============================================
     // ANIMATION LOOP
@@ -226,14 +277,14 @@ document.addEventListener('DOMContentLoaded', function() {
         // Update time uniform
         ditheringShader.uniforms.time.value += 0.01;
 
-        // Smooth rotation with mouse influence
+        // Smooth rotation with input influence
         if (model) {
             model.rotation.x += (targetRotationX - model.rotation.x) * 0.05;
             model.rotation.y += (targetRotationY - model.rotation.y) * 0.05;
 
-            // Continuous slow rotation
-            model.rotation.x += 0.002;
-            model.rotation.y += 0.003;
+            // Continuous slow rotation (adds to target so touch/mouse can override)
+            targetRotationX += 0.002;
+            targetRotationY += 0.003;
         }
 
         renderer.render(scene, camera);
