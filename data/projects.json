@@ -1,0 +1,175 @@
+{
+    "categories": [
+        { "id": "product-design", "label": "Product Design" },
+        { "id": "furniture", "label": "Furniture" },
+        { "id": "aviation", "label": "Aviation" },
+        { "id": "fabrication", "label": "Fabrication" },
+        { "id": "prototyping", "label": "Prototyping" }
+    ],
+    "projects": [
+        {
+            "id": "gun-cabinet",
+            "type": "log",
+            "title": "Gun Cabinet",
+            "date": "2020-04",
+            "category": "furniture",
+            "tags": ["Woodworking", "Furniture"],
+            "description": "Custom gun cabinet built from pine with raised panel sides, slotted barrel rack, and lower drawers for ammunition and accessories. Finished with a dark walnut stain.",
+            "hero": {
+                "src": "assets/images/projects/gun-cabinet/hero.jpg",
+                "alt": "Finished gun cabinet loaded with rifles"
+            },
+            "video": null,
+            "entries": [
+                {
+                    "src": "assets/images/projects/gun-cabinet/01-unfinished-build.jpg",
+                    "alt": "Unfinished gun cabinet in the workshop before staining"
+                },
+                {
+                    "src": "assets/images/projects/gun-cabinet/02-side-panel-detail.jpg",
+                    "alt": "Close-up of the raised side panel detail after staining"
+                },
+                {
+                    "src": "assets/images/projects/gun-cabinet/03-loaded-angle.jpg",
+                    "alt": "Finished cabinet from a wider angle with rifles loaded"
+                }
+            ]
+        },
+        {
+            "id": "small-desk",
+            "type": "log",
+            "title": "Small Desk",
+            "date": "2020-04",
+            "category": "furniture",
+            "tags": ["Woodworking", "Furniture", "Joinery"],
+            "description": "Custom desk with a painted hardwood frame and stained top. Built to explore traditional woodworking joints including mortise and tenon construction for the base.",
+            "hero": {
+                "src": "assets/images/projects/small-desk/hero.jpg",
+                "alt": "Finished desk with stained top and black painted frame"
+            },
+            "video": null,
+            "entries": [
+                {
+                    "src": "assets/images/projects/small-desk/01-frame-glueup.jpg",
+                    "alt": "Desk base frame clamped during glue-up"
+                },
+                {
+                    "src": "assets/images/projects/small-desk/02-frame-and-top.jpg",
+                    "alt": "Painted frame with unfinished top panel ready for assembly"
+                },
+                {
+                    "src": "assets/images/projects/small-desk/03-assembled.jpg",
+                    "alt": "Assembled desk with top attached to painted frame"
+                }
+            ]
+        },
+        {
+            "id": "napkin-holder",
+            "type": "log",
+            "title": "Napkin Holder",
+            "date": "2020-05",
+            "category": "fabrication",
+            "tags": ["Woodworking", "Blacksmithing", "Brazing"],
+            "description": "Mixed-material napkin holder combining woodworking, blacksmithing, and brazing. The upright was hand-forged and brazed to a crossbar, then captured in the wood tray through blind-drilled holes.",
+            "hero": {
+                "src": "assets/images/projects/napkin-holder/hero.jpg",
+                "alt": "Napkin holder showing wood tray with forged metal crossbar"
+            },
+            "video": null,
+            "entries": [
+                {
+                    "src": "assets/images/projects/napkin-holder/01-top-down.jpg",
+                    "alt": "Top-down view showing the brazed T-joint and forged flat end"
+                }
+            ]
+        },
+        {
+            "id": "black-epoxy-furniture-set",
+            "type": "log",
+            "title": "Black Epoxy Furniture Set",
+            "date": "2020-06",
+            "category": "furniture",
+            "tags": ["Welding", "Epoxy", "Furniture", "Woodworking"],
+            "description": "Matching furniture set designed from the ground up — welded steel bases with epoxy river tops and seats. Designed the bases, did all the welding and painting, then made the seats and table top using the epoxy river technique with black epoxy and natural wood edges.",
+            "hero": {
+                "src": "assets/images/projects/black-epoxy-furniture-set/hero.jpg",
+                "alt": "Matching bar stools with epoxy river seats at a kitchen counter"
+            },
+            "video": null,
+            "entries": [
+                {
+                    "src": "assets/images/projects/black-epoxy-furniture-set/01-stools-workshop.jpg",
+                    "alt": "Bar stools in the workshop with epoxy river seats on welded frames"
+                },
+                {
+                    "src": "assets/images/projects/black-epoxy-furniture-set/02-table-workshop.jpg",
+                    "alt": "Coffee table in the workshop showing epoxy river top on steel frame"
+                },
+                {
+                    "src": "assets/images/projects/black-epoxy-furniture-set/03-table-in-home.jpg",
+                    "alt": "Finished coffee table in the living room"
+                }
+            ]
+        },
+        {
+            "id": "claro-walnut-coffee-table",
+            "type": "log",
+            "title": "Claro Walnut Coffee Table",
+            "date": "2020-07",
+            "category": "furniture",
+            "tags": ["Woodworking", "Brazing", "Welding", "Furniture"],
+            "description": "Coffee table built around a stunning claro walnut cookie slab. The base is an original design — steel rods cut, bent, and brazed together mid-air to form a spider web structure reminiscent of a 3D stained glass window. Same brazed joinery technique from the napkin holder, scaled up.",
+            "hero": {
+                "src": "assets/images/projects/claro-walnut-coffee-table/hero.jpg",
+                "alt": "Claro walnut cookie slab on brazed spider web steel base"
+            },
+            "video": null,
+            "entries": [
+                {
+                    "src": "assets/images/projects/claro-walnut-coffee-table/01-top-angle-workshop.jpg",
+                    "alt": "Top-angle view in the workshop showing the slab grain and base below"
+                },
+                {
+                    "src": "assets/images/projects/claro-walnut-coffee-table/02-grain-detail.jpg",
+                    "alt": "Close-up of the claro walnut grain pattern"
+                },
+                {
+                    "src": "assets/images/projects/claro-walnut-coffee-table/03-in-home.jpg",
+                    "alt": "Finished table in the living room by the stone fireplace"
+                }
+            ]
+        },
+        {
+            "id": "console-table-with-drawers",
+            "type": "log",
+            "title": "Console Table with Drawers",
+            "date": "2020-07",
+            "category": "furniture",
+            "tags": ["Woodworking", "Welding", "Furniture"],
+            "description": "Custom console table for a client combining a welded steel base with a stained wood body and drawers. Designed from a single sketch with dimensions — no CAD model, just built in space. Brought together welding large bases and the technical woodworking of building functional drawers.",
+            "hero": {
+                "src": "assets/images/projects/console-table-with-drawers/hero.jpg",
+                "alt": "Finished console table with stained wood drawers and steel base"
+            },
+            "video": null,
+            "entries": [
+                {
+                    "src": "assets/images/projects/console-table-with-drawers/01-initial-sketch.jpg",
+                    "alt": "Initial design sketch on notebook paper with dimensions"
+                },
+                {
+                    "src": "assets/images/projects/console-table-with-drawers/02-carcass-build.jpg",
+                    "alt": "Unfinished wood carcass and drawer box in the workshop"
+                },
+                {
+                    "src": "assets/images/projects/console-table-with-drawers/03-side-view-with-base.jpg",
+                    "alt": "Side view showing the stained wood body on welded steel base"
+                },
+                {
+                    "src": "assets/images/projects/console-table-with-drawers/04-drawer-open.jpg",
+                    "alt": "Front view with drawer open showing construction and hardware"
+                }
+            ]
+        }
+    ]
+}

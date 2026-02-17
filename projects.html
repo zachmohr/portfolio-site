@@ -64,14 +64,20 @@
         </div>
     </section>
 
-    <!-- Coming Soon -->
-    <section class="coming-soon">
+    <!-- Filters -->
+    <section class="filters">
         <div class="container">
-            <div class="coming-soon-content">
-                <div class="coming-soon-icon">[ ]</div>
-                <h2 class="coming-soon-title">Under Construction</h2>
-                <p class="coming-soon-text">Detailed case studies are on the way. In the meantime, feel free to reach out to discuss my work directly.</p>
-                <a href="contact.html" class="btn btn-primary">Get in Touch</a>
+            <div class="filter-buttons" role="group" aria-label="Filter projects by category">
+                <!-- Rendered dynamically by project-renderer.js -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Grid -->
+    <section class="projects">
+        <div class="container">
+            <div class="projects-grid" role="list">
+                <!-- Rendered dynamically by project-renderer.js -->
             </div>
         </div>
     </section>
@@ -91,5 +97,7 @@
 
     <!-- JavaScript -->
     <script src="js/main.js"></script>
+    <script src="js/project-renderer.js"></script>
+    <script src="js/project-filter.js"></script>
 </body>
 </html>
