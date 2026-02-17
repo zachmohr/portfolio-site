@@ -2,7 +2,7 @@
 // PROJECT FILTER - Projects Page
 // ============================================
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('projectsRendered', function() {
 
     const filterButtons = document.querySelectorAll('.filter-btn');
     const projectCards = document.querySelectorAll('.project-card');

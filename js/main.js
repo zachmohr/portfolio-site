@@ -55,6 +55,15 @@ document.addEventListener('DOMContentLoaded', function() {
         observer.observe(el);
     });
 
+    // Re-observe dynamically rendered project cards
+    document.addEventListener('projectsRendered', function() {
+        const newCards = document.querySelectorAll('.project-card:not(.fade-in)');
+        newCards.forEach(el => {
+            el.classList.add('fade-in');
+            observer.observe(el);
+        });
+    });
+
     // ============================================
     // ACTIVE NAV LINK ON SCROLL
     // ============================================
