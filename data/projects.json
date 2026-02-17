@@ -80,6 +80,10 @@
                 {
                     "src": "assets/images/projects/napkin-holder/01-top-down.jpg",
                     "alt": "Top-down view showing the brazed T-joint and forged flat end"
+                },
+                {
+                    "src": "assets/images/projects/napkin-holder/02-walnut-version.jpg",
+                    "alt": "Walnut version of the napkin holder in use with napkins"
                 }
             ]
         },
@@ -168,6 +172,122 @@
                 {
                     "src": "assets/images/projects/console-table-with-drawers/04-drawer-open.jpg",
                     "alt": "Front view with drawer open showing construction and hardware"
+                }
+            ]
+        },
+        {
+            "id": "toy-storage-shelf",
+            "type": "log",
+            "title": "Toy Storage Shelf",
+            "date": "2020-08",
+            "category": "furniture",
+            "tags": ["Woodworking", "Furniture"],
+            "description": "Custom toy storage shelf with multiple bin sizes, integrated bungee cord sections for large stuffed animals, and color-coded bins. A lesson in designing around different materials and existing objects — every compartment was sized to fit specific bins.",
+            "hero": {
+                "src": "assets/images/projects/toy-storage-shelf/hero.jpg",
+                "alt": "Finished toy storage shelf with colorful bins in different sizes"
+            },
+            "video": null,
+            "entries": [
+                {
+                    "src": "assets/images/projects/toy-storage-shelf/01-compartments.jpg",
+                    "alt": "Top-down view of the compartment layout before bins"
+                }
+            ]
+        },
+        {
+            "id": "pub-table",
+            "type": "log",
+            "title": "Pub Table",
+            "date": "2020-12",
+            "category": "furniture",
+            "tags": ["Woodworking", "Welding", "Epoxy", "Furniture"],
+            "description": "Pub table with a wood slab top filled with black epoxy for the voids and a welded steel base with extreme splayed joint angles. The base was a particularly difficult weld — getting all four legs to meet at compound angles required careful layout and fixture work. Later built a matching side table for the same client using the same X-base concept with a walnut and green epoxy river top.",
+            "hero": {
+                "src": "assets/images/projects/pub-table/hero.jpg",
+                "alt": "Finished pub table in home with epoxy-filled slab top on welded steel base"
+            },
+            "video": null,
+            "entries": [
+                {
+                    "src": "assets/images/projects/pub-table/01-raw-slab-in-mold.jpg",
+                    "alt": "Raw slab in epoxy mold showing voids and cracks before filling"
+                },
+                {
+                    "src": "assets/images/projects/pub-table/02-welded-base.jpg",
+                    "alt": "Welded steel base with splayed legs and compound angle joints"
+                },
+                {
+                    "src": "assets/images/projects/pub-table/03-finished-top.jpg",
+                    "alt": "Finished slab top with black epoxy fills sanded smooth"
+                },
+                {
+                    "src": "assets/images/projects/pub-table/04-grinding-x-base.jpg",
+                    "alt": "Grinding the welded X-base in the workshop with sparks flying"
+                },
+                {
+                    "src": "assets/images/projects/pub-table/05-side-table-front.jpg",
+                    "alt": "Matching side table with walnut and green epoxy river top on X-base"
+                },
+                {
+                    "src": "assets/images/projects/pub-table/06-side-table-top-detail.jpg",
+                    "alt": "Close-up of the walnut and green epoxy river top showing grain detail"
+                },
+                {
+                    "src": "assets/images/projects/pub-table/07-side-table-end-view.jpg",
+                    "alt": "End view of the side table showing the X-base and epoxy river"
+                }
+            ]
+        },
+        {
+            "id": "flag-box",
+            "type": "log",
+            "title": "Memorial Flag Box",
+            "date": "2021-01",
+            "category": "fabrication",
+            "tags": ["Woodworking", "Detail Work"],
+            "description": "Custom memorial flag display box incorporating the recipient's dog tags and bullet casings from their 21-gun salute. Features a triangular flag compartment with custom-cut glass, a channel for the casings and dog tags, and a live-edge spalted panel. Another sketch-to-build project — high detail work for a meaningful purpose.",
+            "hero": {
+                "src": "assets/images/projects/flag-box/hero.jpg",
+                "alt": "Finished memorial flag box with custom glass, bullet casings, and dog tags"
+            },
+            "video": null,
+            "entries": [
+                {
+                    "src": "assets/images/projects/flag-box/01-initial-sketch.jpg",
+                    "alt": "Initial concept sketch in sketchbook"
+                },
+                {
+                    "src": "assets/images/projects/flag-box/02-detail-casings-dogtags.jpg",
+                    "alt": "Close-up of bullet casings and dog tags between flag glass and live-edge panel"
+                }
+            ]
+        },
+        {
+            "id": "brass-wire-joinery-tables",
+            "type": "log",
+            "title": "Brass Wire Joinery Tables",
+            "date": "2021-03",
+            "category": "furniture",
+            "tags": ["Welding", "Woodworking", "Furniture", "Original Design"],
+            "description": "100% original design — my favorite pieces. Invented a technique of bending brass rods into 90-degree corners and packing them into the steel tube construction to create a decorative structural joint. Built the side table first, then loved the technique so much it expanded into a matching console table. Walnut round top on a steel and brass frame.",
+            "hero": {
+                "src": "assets/images/projects/brass-wire-joinery-tables/hero.jpg",
+                "alt": "Finished side table with walnut top and brass wire joinery on steel frame"
+            },
+            "video": null,
+            "entries": [
+                {
+                    "src": "assets/images/projects/brass-wire-joinery-tables/01-frame-workshop.jpg",
+                    "alt": "Steel tube frame in the workshop with brass rods bent around corners"
+                },
+                {
+                    "src": "assets/images/projects/brass-wire-joinery-tables/02-brass-joinery-detail.jpg",
+                    "alt": "Close-up of the brass wire joinery technique — rods packed into the tube at the joint"
+                },
+                {
+                    "src": "assets/images/projects/brass-wire-joinery-tables/03-walnut-top-grain.jpg",
+                    "alt": "Top-down view of the walnut top grain"
                 }
             ]
         }
