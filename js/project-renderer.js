@@ -101,6 +101,8 @@
                     '<h3 class="project-title">' + escapeHtml(project.title) + '</h3>' +
                     '<p class="project-description">' + escapeHtml(project.description) + '</p>' +
                     renderTags(project.tags) +
+                    renderPress(project.press) +
+                    renderPatents(project.patents) +
                     '<button class="project-log-toggle" aria-expanded="false">' +
                         'View Build Log <span class="toggle-indicator">[+]</span>' +
                     '</button>' +
@@ -198,6 +200,38 @@
                 '</div>' +
             '</div>'
         );
+    }
+
+    // ============================================
+    // PRESS LINKS
+    // ============================================
+    function renderPress(press) {
+        if (!press || press.length === 0) return '';
+
+        var html = '<div class="project-press">';
+        press.forEach(function (item) {
+            html += '<a class="press-link" href="' + escapeAttr(item.url) + '" target="_blank" rel="noopener">' +
+                '&#x1F4F0; ' + escapeHtml(item.label) +
+            '</a>';
+        });
+        html += '</div>';
+        return html;
+    }
+
+    // ============================================
+    // PATENTS
+    // ============================================
+    function renderPatents(patents) {
+        if (!patents || patents.length === 0) return '';
+
+        var html = '<div class="project-patents">';
+        patents.forEach(function (item) {
+            html += '<a class="patent-link" href="' + escapeAttr(item.url) + '" target="_blank" rel="noopener">' +
+                '&#x2316; ' + escapeHtml(item.label) +
+            '</a>';
+        });
+        html += '</div>';
+        return html;
     }
 
     // ============================================
