@@ -579,6 +579,53 @@ ul, ol {
     color: var(--color-gray-700);
 }
 
+/* Press Links */
+.project-press {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+    margin-top: var(--space-xs);
+}
+
+.press-link {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+    border: 1px solid var(--color-gray-300);
+    color: var(--color-gray-700);
+    text-decoration: none;
+    transition: border-color 0.15s, color 0.15s;
+}
+
+.press-link:hover {
+    border-color: var(--color-red);
+    color: var(--color-red);
+}
+
+/* Patents */
+.project-patents {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+    margin-top: var(--space-xs);
+}
+
+.patent-link {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+    border: 1px solid var(--color-gray-300);
+    color: var(--color-gray-700);
+    text-decoration: none;
+    font-style: italic;
+    transition: border-color 0.15s, color 0.15s;
+}
+
+.patent-link:hover {
+    border-color: var(--color-red);
+    color: var(--color-red);
+}
+
 /* Project Date */
 .project-date {
     font-family: var(--font-body);
