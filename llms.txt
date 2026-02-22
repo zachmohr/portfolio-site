@@ -1,0 +1,45 @@
+# Zach Mohr — Portfolio
+
+> Mechanical engineer, maker, and designer. BS Mechanical Engineering, South Dakota School of Mines & Technology (2023). MS Innovation Design, Wichita State University (May 2025). Open to opportunities in mechanical/manufacturing engineering, product design, and the outdoor/adventure industry.
+
+## Contact
+- Site: https://zachmohr.work
+- Email: zach@zachmohr.work
+
+## Background
+Zach Mohr is a mechanical engineer and hands-on maker with a broad skillset spanning engineering analysis, manufacturing process development, original furniture design, welding, woodworking, blacksmithing, brazing, and product design. He developed a signature brazed steel rod joinery technique that he has iterated across multiple original furniture pieces. His engineering experience includes aerospace internship work (hydroforming simulation, FEA) and a manufacturing engineering co-op at Bobcat where he supported prototype production of the L35 small articulated loader and optimized a weld production line. He is pursuing a Master's in Innovation Design alongside his professional work, graduating May 2025.
+
+## Education
+- MS Innovation Design — Wichita State University (May 2025)
+- BS Mechanical Engineering, Minor: Business/Entrepreneurship — South Dakota School of Mines & Technology (2023)
+
+## Skills
+Mechanical Engineering, FEA/Simulation, Manufacturing Engineering, FMEA, Standard Work, Lean/Line Balancing, Welding (MIG/TIG), Brazing, Blacksmithing, Woodworking, Lathe Operation, Epoxy River Techniques, CAD, Product Design, Graphic Design, Brand Development, Photography Direction
+
+## Projects (summary)
+- Gun Cabinet (2020) — Custom pine cabinet with raised panels, barrel rack, and drawers
+- Small Desk (2020) — Mortise and tenon hardwood desk
+- Napkin Holder (2020) — Mixed-material piece combining woodworking, blacksmithing, and brazing; origin of the brazed joinery technique
+- Black Epoxy Furniture Set (2020) — Welded steel bases with epoxy river tops; bar stools and coffee table
+- Claro Walnut Coffee Table (2020) — Cookie slab top on original brazed spider-web steel base
+- Console Table with Drawers (2020) — Client piece; welded base, stained wood body, functional drawers; sketch-to-build
+- Toy Storage Shelf (2020) — Custom compartmentalized storage with bungee sections and color-coded bins
+- Pub Table (2020) — Slab top with black epoxy, extreme compound-angle welded base; matching side table
+- Memorial Flag Box (2021) — High-detail display box with dog tags, bullet casings, custom glass, and live-edge panel
+- Brass Wire Joinery Tables (2021) — Original technique: brass rods bent and packed into steel tube joints; side table and console
+- Bobcat Manufacturing Engineering Co-op (2021) — Prototype build support for the Bobcat L35 SAL; wrote initial standard work instructions; participated in FMEA; optimized snowblower weld line via time study and task redistribution
+- Arachno Coffee Table (2022) — Brazed steel lattice base in rectangular grid geometry; lathe-turned wood feet from slab offcuts
+- Slab Mirror (2022) — Birds-eye maple slab ripped and set around mirror glass; structural backer to transfer load off glass
+- Walnut Cookie Slab Table Set (2022) — Matched coffee and end tables; custom router sled jig for flattening; epoxy void fill; welded bases
+- Autonomous RC Boat (2022) — Undergraduate mechatronics project; ultrasonic sensor on servo sweeps field of view to build spatial map for obstacle avoidance
+- Aircraft Rib Wrinkle Prediction (2022) — Aerospace internship; FEA simulation in Altair HyperForm to predict wrinkle formation in hydroformed aluminum aircraft ribs; designed relief cutouts into tooling; validated with physical prototype
+- Arachno Side Table (2022) — Miniaturized Arachno concept as pedestal side table; CAD concepts extend the design language to a nightstand and dresser
+
+## Full project details
+For complete project descriptions see: https://zachmohr.work/llms-full.txt
+
+## Site structure
+- / — Home/landing
+- /projects.html — Full project portfolio with filterable grid and build logs
+- /llms.txt — This file
+- /llms-full.txt — Full project descriptions for AI agents
