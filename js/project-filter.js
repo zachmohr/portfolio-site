@@ -5,11 +5,38 @@
 document.addEventListener('projectsRendered', function() {
 
     const filterButtons = document.querySelectorAll('.filter-btn');
+    const filterButtonsContainer = document.querySelector('.filter-buttons');
     const projectCards = document.querySelectorAll('.project-card');
 
     if (filterButtons.length === 0 || projectCards.length === 0) {
         return; // Exit if not on projects page
     }
+
+    // ============================================
+    // MOBILE FILTER DROPDOWN TOGGLE
+    // ============================================
+    function getActiveLabel() {
+        const active = filterButtonsContainer.querySelector('.filter-btn.active');
+        return active ? active.textContent : 'All';
+    }
+
+    const toggleBtn = document.createElement('button');
+    toggleBtn.className = 'filter-toggle';
+    toggleBtn.setAttribute('aria-expanded', 'false');
+    toggleBtn.setAttribute('aria-controls', 'filter-buttons');
+    toggleBtn.innerHTML =
+        '<span class="filter-toggle-label">Filter: ' + getActiveLabel() + '</span>' +
+        '<span class="filter-toggle-chevron" aria-hidden="true">&#9660;</span>';
+
+    filterButtonsContainer.id = 'filter-buttons';
+    filterButtonsContainer.parentNode.insertBefore(toggleBtn, filterButtonsContainer);
+
+
+
+    toggleBtn.addEventListener('click', function() {
+        const isOpen = filterButtonsContainer.classList.toggle('is-open');
+        toggleBtn.setAttribute('aria-expanded', String(isOpen));
+    });
 
     // ============================================
     // FILTER FUNCTIONALITY
@@ -21,6 +48,11 @@ document.addEventListener('projectsRendered', function() {
             // Update active button
             filterButtons.forEach(btn => btn.classList.remove('active'));
             this.classList.add('active');
+
+            // Update toggle label and close dropdown on mobile
+            toggleBtn.querySelector('.filter-toggle-label').textContent = 'Filter: ' + this.textContent;
+            filterButtonsContainer.classList.remove('is-open');
+            toggleBtn.setAttribute('aria-expanded', 'false');
 
             // Filter projects
             filterProjects(filter);

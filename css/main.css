@@ -485,6 +485,42 @@ ul, ol {
     border-bottom: var(--border-width) solid var(--color-gray-100);
 }
 
+.filter-toggle {
+    display: none;
+    width: 100%;
+    padding: var(--space-xs) var(--space-sm);
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border: var(--border-width) solid var(--color-gray-300);
+    color: var(--color-gray-700);
+    background: none;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.filter-toggle:hover {
+    border-color: var(--color-red);
+    color: var(--color-red);
+}
+
+.filter-toggle:focus-visible {
+    outline: 2px solid var(--color-red);
+    outline-offset: 2px;
+}
+
+.filter-toggle-chevron {
+    font-style: normal;
+    transition: transform var(--transition-fast);
+}
+
+.filter-toggle[aria-expanded="true"] .filter-toggle-chevron {
+    transform: rotate(180deg);
+}
+
 .filter-buttons {
     display: flex;
     justify-content: center;
@@ -1026,6 +1062,42 @@ ul, ol {
 
     .projects-grid {
         grid-template-columns: 1fr;
+        gap: var(--space-md);
+    }
+
+    .projects .container {
+        padding-left: 0.375rem;
+        padding-right: 0.375rem;
+    }
+
+    /* Mobile filter dropdown */
+    .filters {
+        padding: var(--space-sm) var(--grid-gutter);
+    }
+
+    .filter-toggle {
+        display: flex;
+    }
+
+    .filter-buttons {
+        display: none;
+        flex-direction: column;
+        gap: 0;
+        margin-top: 0.375rem;
+    }
+
+    .filter-buttons.is-open {
+        display: flex;
+    }
+
+    .filter-btn {
+        width: 100%;
+        text-align: left;
+        border-top: none;
+    }
+
+    .filter-btn:first-child {
+        border-top: var(--border-width) solid var(--color-gray-300);
     }
 
     .nav-menu {
@@ -1057,13 +1129,5 @@ ul, ol {
 
     .page-title {
         font-size: 2rem;
-    }
-
-    .filter-buttons {
-        flex-direction: column;
-    }
-
-    .filter-btn {
-        width: 100%;
     }
 }
