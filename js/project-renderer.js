@@ -20,6 +20,7 @@
             renderFilterButtons(data.categories, filterContainer);
             renderProjects(data.projects, gridContainer);
             initToggleHandlers(gridContainer);
+            initDescriptionToggleHandlers(gridContainer);
             initVideoHandlers(gridContainer);
             document.dispatchEvent(new CustomEvent('projectsRendered'));
         })
@@ -81,7 +82,7 @@
                 '<div class="project-content">' +
                     '<span class="project-date">' + formatDate(project.date) + '</span>' +
                     '<h3 class="project-title">' + escapeHtml(project.title) + '</h3>' +
-                    '<p class="project-description">' + escapeHtml(project.description) + '</p>' +
+                    renderDescription(project.description) +
                     renderTags(project.tags) +
                     renderTopLevelVideo(project.video) +
                 '</div>' +
@@ -99,7 +100,7 @@
                 '<div class="project-content">' +
                     '<span class="project-date">' + formatDate(project.date) + '</span>' +
                     '<h3 class="project-title">' + escapeHtml(project.title) + '</h3>' +
-                    '<p class="project-description">' + escapeHtml(project.description) + '</p>' +
+                    renderDescription(project.description) +
                     renderTags(project.tags) +
                     renderPress(project.press) +
                     renderPatents(project.patents) +
@@ -246,6 +247,70 @@
         });
         html += '</div>';
         return html;
+    }
+
+    // ============================================
+    // DESCRIPTION EXPAND/COLLAPSE
+    // ============================================
+    function splitDescription(text) {
+        var maxSentences = 3;
+        var re = /[.!?][\"'\)]?(?:[ \n]|$)/g;
+        var count = 0;
+        var cutoff = -1;
+        var match;
+
+        while ((match = re.exec(text)) !== null) {
+            count++;
+            if (count === maxSentences) {
+                cutoff = match.index + match[0].length;
+                break;
+            }
+        }
+
+        var overflow = cutoff === -1 ? '' : text.slice(cutoff).trim();
+
+        if (!overflow) {
+            return { preview: text, overflow: '' };
+        }
+
+        return {
+            preview: text.slice(0, cutoff).trim(),
+            overflow: overflow
+        };
+    }
+
+    function renderDescription(text) {
+        var split = splitDescription(text);
+
+        if (!split.overflow) {
+            return '<p class="project-description">' + escapeHtml(text) + '</p>';
+        }
+
+        return (
+            '<p class="project-description">' +
+                escapeHtml(split.preview) +
+                '<span class="description-extra" hidden> ' + escapeHtml(split.overflow) + '</span>' +
+            '</p>' +
+            '<button class="description-toggle" aria-expanded="false">' +
+                'Read More <span class="toggle-indicator">[+]</span>' +
+            '</button>'
+        );
+    }
+
+    function initDescriptionToggleHandlers(container) {
+        container.addEventListener('click', function (e) {
+            var toggle = e.target.closest('.description-toggle');
+            if (!toggle) return;
+
+            var content = toggle.closest('.project-content');
+            var extra = content.querySelector('.description-extra');
+            var isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+
+            toggle.setAttribute('aria-expanded', String(!isExpanded));
+            extra.hidden = isExpanded;
+            toggle.childNodes[0].nodeValue = isExpanded ? 'Read More ' : 'Read Less ';
+            toggle.querySelector('.toggle-indicator').textContent = isExpanded ? '[+]' : '[-]';
+        });
     }
 
     // ============================================
