@@ -4,7 +4,8 @@
         { "id": "furniture", "label": "Furniture" },
         { "id": "aviation", "label": "Aviation" },
         { "id": "fabrication", "label": "Fabrication" },
-        { "id": "prototyping", "label": "Prototyping" }
+        { "id": "prototyping", "label": "Prototyping" },
+        { "id": "robotics", "label": "Robotics" }
     ],
     "projects": [
         {
@@ -262,6 +263,181 @@
                     "alt": "Close-up of bullet casings and dog tags between flag glass and live-edge panel"
                 }
             ]
+        },
+        {
+            "id": "walnut-coffee-tables",
+            "type": "log",
+            "title": "Walnut Cookie Slab Table Set",
+            "date": "2022-05",
+            "category": "furniture",
+            "tags": ["Woodworking", "Welding", "Epoxy", "Furniture", "Jig Building"],
+            "description": "Matched coffee and end table set built around walnut cookie slabs — cross-sections that preserve the full growth ring and live edge of the tree. The slabs required flattening with a custom-built router sled jig before the natural voids and cracks could be filled with epoxy. Welded steel bases were fabricated for both pieces, giving the organic slab tops a clean industrial counterpoint. The set lives together as a cohesive suite in the client's living room.",
+            "hero": {
+                "src": "assets/images/projects/walnut-coffee-tables/hero.jpg",
+                "alt": "Finished walnut cookie slab coffee table with epoxy-filled voids on welded steel base"
+            },
+            "video": null,
+            "entries": [
+                {
+                    "src": "assets/images/projects/walnut-coffee-tables/01-set-in-room.jpg",
+                    "alt": "Full set in the living room — coffee table and two end tables with matching walnut slabs"
+                },
+                {
+                    "src": "assets/images/projects/walnut-coffee-tables/02-slab-on-jig.jpg",
+                    "alt": "Raw walnut cookie slab on the custom router sled flattening jig in the workshop"
+                },
+                {
+                    "src": "assets/images/projects/walnut-coffee-tables/03-epoxy-filled.jpg",
+                    "alt": "Coffee table slab after epoxy void fill and initial flattening, showing the crack detail"
+                },
+                {
+                    "src": "assets/images/projects/walnut-coffee-tables/04-welded-base.jpg",
+                    "alt": "Welded steel base for the end table upside-down in the workshop"
+                },
+                {
+                    "src": "assets/images/projects/walnut-coffee-tables/05-end-table-in-use.jpg",
+                    "alt": "Finished end table between two leather chairs"
+                },
+                {
+                    "src": "assets/images/projects/walnut-coffee-tables/06-end-table-detail.jpg",
+                    "alt": "Close-up of the walnut end table showing cookie slab grain and live edge"
+                }
+            ]
+        },
+        {
+            "id": "slab-mirror",
+            "type": "log",
+            "title": "Slab Mirror",
+            "date": "2022-05",
+            "category": "furniture",
+            "tags": ["Woodworking", "Furniture", "Original Design"],
+            "description": "Wall mirror built from the same birds-eye maple slab used in the Arachno Coffee Table. The slab was ripped down the center along its natural live edge, and the mirror glass set between the two halves — the void between them becomes the mirror, mimicking the river table concept in a vertical format. A key structural challenge: mirror glass alone can't support the weight of the slabs, so a backer plate was fabricated and the mirror sandwiched between it and the wood, transferring the load through the frame rather than the glass. The result looks like a single continuous slab of wood floating around a mirror.",
+            "hero": {
+                "src": "assets/images/projects/slab-mirror/hero.jpg",
+                "alt": "Finished slab mirror on wall showing birds-eye maple flanking the mirror glass"
+            },
+            "video": null,
+            "entries": [
+                {
+                    "src": "assets/images/projects/slab-mirror/01-slab-layout.jpg",
+                    "alt": "Raw birds-eye maple slab laid out in the workshop before cutting"
+                },
+                {
+                    "src": "assets/images/projects/slab-mirror/02-live-edge-detail.jpg",
+                    "alt": "Close-up of the live edge and burl figuring where the wood meets the mirror glass"
+                }
+            ]
+        },
+        {
+            "id": "autonomous-rc-boat",
+            "type": "log",
+            "title": "Autonomous RC Boat",
+            "date": "2022-05",
+            "category": "robotics",
+            "tags": ["Robotics", "Mechatronics", "Prototyping", "Autonomy", "Sensor Fusion"],
+            "description": "Undergraduate mechatronics project: an RC boat converted into an autonomous obstacle-avoidance platform. The approach was self-derived — looking at the dev kit components available, the idea emerged to mount an ultrasonic sensor on a servo and sweep it across the field of view, building a spatial map of what's ahead. No AI, no LIDAR, no prior framework — just first-principles thinking that happened to reinvent phased-array radar logic from scratch. The boat uses that distance map to steer around obstacles in real time.",
+            "hero": {
+                "src": "assets/images/projects/autonomous-rc-boat/hero.jpg",
+                "alt": "Autonomous RC boat with ultrasonic sensor and electronics enclosure mounted on deck"
+            },
+            "video": null,
+            "entries": [
+                {
+                    "src": "assets/images/projects/autonomous-rc-boat/01-electronics-and-sensor.jpg",
+                    "alt": "RC boat showing ultrasonic sensor on servo mount and transparent electronics enclosure"
+                }
+            ]
+        },
+        {
+            "id": "arachno-side-table",
+            "type": "log",
+            "title": "Arachno Side Table",
+            "date": "2022-10",
+            "category": "furniture",
+            "tags": ["Brazing", "Welding", "Woodworking", "Furniture", "Original Design", "CAD"],
+            "description": "Miniaturization of the Arachno Coffee Table concept into a side table format — same brazed steel rod lattice, scaled down and reworked as a tall pedestal. The lathe-turned wood feet carry over from the coffee table, turned from offcuts of the same slab material. After building the physical piece, the design language was extended in CAD to explore what a full furniture line could look like: a nightstand with a drawer and the arachno lattice as the base structure, and a dresser with the lattice as a plinth and the brazing detail translated into drawer pulls throughout. Neither has been built yet, but the renders show how the joinery technique scales to more complex, functional forms.",
+            "hero": {
+                "src": "assets/images/projects/arachno-side-tables/hero.jpg",
+                "alt": "Arachno side table with ash slab top on brazed steel lattice base"
+            },
+            "video": null,
+            "entries": [
+                {
+                    "src": "assets/images/projects/arachno-side-tables/01-top-grain-detail.jpg",
+                    "alt": "Top-down angled view showing the slab grain and lattice base below"
+                },
+                {
+                    "src": "assets/images/projects/arachno-side-tables/02-turned-foot-detail.jpg",
+                    "alt": "Close-up of the lathe-turned wood foot where the lattice meets the floor"
+                },
+                {
+                    "src": "assets/images/projects/arachno-side-tables/03-concept-side-table.jpg",
+                    "alt": "CAD concept render of an arachno nightstand with drawer and lattice base"
+                },
+                {
+                    "src": "assets/images/projects/arachno-side-tables/04-concept-dresser.jpg",
+                    "alt": "CAD concept render of an arachno dresser with lattice plinth and brazing-detail drawer pulls"
+                }
+            ]
+        },
+        {
+            "id": "arachno-coffee-table",
+            "type": "log",
+            "title": "Arachno Coffee Table",
+            "date": "2022-04",
+            "category": "furniture",
+            "tags": ["Brazing", "Welding", "Woodworking", "Furniture", "Original Design"],
+            "description": "Second-generation application of the brazed steel rod joinery technique developed in the Claro Walnut Coffee Table — this time constrained into a rectangular, grid-like base geometry. Where the original base was organic and radial, the Arachno base imposes order on the chaos: rods cut, bent, and brazed mid-air into a repeating structural lattice. Topped with a walnut slab and epoxy river pour. The feet are custom-turned on the lathe from offcuts of the same top slab, tying the wood and steel together as one cohesive piece.",
+            "hero": {
+                "src": "assets/images/projects/arachno-coffee-table/hero.jpg",
+                "alt": "Finished arachno coffee table with walnut and epoxy top on brazed steel lattice base"
+            },
+            "video": null,
+            "entries": [
+                {
+                    "src": "assets/images/projects/arachno-coffee-table/01-base-fabrication.jpg",
+                    "alt": "Brazed steel lattice base dry-fit with raw walnut top in the workshop"
+                },
+                {
+                    "src": "assets/images/projects/arachno-coffee-table/02-brazing-detail.jpg",
+                    "alt": "Close-up of the brazed rod joints at the base corner showing the lattice geometry"
+                }
+            ]
+        },
+        {
+            "id": "aircraft-rib-hydroforming",
+            "type": "log",
+            "title": "Aircraft Rib Wrinkle Prediction",
+            "date": "2022-06",
+            "category": "aviation",
+            "tags": ["Aerospace", "Simulation", "Manufacturing", "FEA", "Internship"],
+            "description": "Aerospace engineering internship project: predicting and mitigating wrinkle formation in hydroformed aluminum aircraft ribs. Ran forming simulations in Altair HyperForm to predict where wrinkles would initiate, then designed relief cutouts into the tooling to redistribute material flow before those regions collapsed. The physical result — a 3D-printed mandrel with the tuned relief cutouts and a formed aluminum rib — validated the simulation approach.",
+            "hero": {
+                "src": "assets/images/projects/wrinkle-prediction-aircraft-rib-hydroforming/hero.jpg",
+                "alt": "Hydroformed aluminum aircraft rib on 3D-printed tooling showing wrinkle relief cutouts"
+            },
+            "video": null,
+            "entries": [
+                {
+                    "src": "assets/images/projects/wrinkle-prediction-aircraft-rib-hydroforming/01-wrinkle-relief-detail.jpg",
+                    "alt": "Underside of the formed aluminum rib showing the relief cutout geometry on the mandrel"
+                }
+            ]
+        },
+        {
+            "id": "bobcat-manufacturing-coop",
+            "type": "log",
+            "title": "Bobcat Manufacturing Engineering Co-op",
+            "date": "2021-10",
+            "category": "fabrication",
+            "tags": ["Manufacturing", "Assembly", "Process Engineering", "Lean", "Internship"],
+            "description": "Manufacturing engineering co-op at Bobcat. Two main workstreams: prototype build support for the L35 small articulated loader, and weld line optimization for the snowblower attachment line. The L35 work was early-stage — the first production-intent prototype after the initial mule — with no formal tooling yet. Wrote the initial standard work instructions for the L35, documenting every part number, installation method, and torque specification. Worked closely with the design team to ensure the manufactured assembly matched design intent, and participated in FMEA sessions to identify and mitigate assembly failure modes. On the snowblower weld line, conducted time studies across stations, identified cycle time imbalances, and redistributed weld tasks to level the line flow. The L35 has since launched as Bobcat's most powerful small articulated loader.",
+            "hero": {
+                "src": "assets/images/projects/bobcat-manufacturing-engineering-coop/hero.jpg",
+                "alt": "Bobcat L35 small articulated loader — production model"
+            },
+            "video": null,
+            "entries": []
         },
         {
             "id": "brass-wire-joinery-tables",

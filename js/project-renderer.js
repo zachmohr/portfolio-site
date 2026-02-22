@@ -133,7 +133,7 @@
         return (
             '<div class="log-entry">' +
                 '<img src="' + entry.src + '" alt="' + escapeAttr(entry.alt) + '"' +
-                    ' loading="lazy" width="1200" height="750">' +
+                    ' loading="lazy" style="width:100%;height:auto;">' +
                 (entry.caption
                     ? '<p class="log-caption">' + escapeHtml(entry.caption) + '</p>'
                     : '') +
