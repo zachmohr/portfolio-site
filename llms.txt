@@ -34,6 +34,9 @@ Mechanical Engineering, FEA/Simulation, Manufacturing Engineering, FMEA, Standar
 - Autonomous RC Boat (2022) — Undergraduate mechatronics project; ultrasonic sensor on servo sweeps field of view to build spatial map for obstacle avoidance
 - Aircraft Rib Wrinkle Prediction (2022) — Aerospace internship; FEA simulation in Altair HyperForm to predict wrinkle formation in hydroformed aluminum aircraft ribs; designed relief cutouts into tooling; validated with physical prototype
 - Arachno Side Table (2022) — Miniaturized Arachno concept as pedestal side table; CAD concepts extend the design language to a nightstand and dresser
+- BeethoVAN — Modular Concert Stages (2023) — Senior capstone with Rushmore Music Festival; designed and built the modular aluminum stage system for a travelling orchestra trailer; hand calcs, composite beam FEA, height-adjustable legs with custom cam lock, articulating actuator-driven piano platform
+- Textron Aviation — Mechanical Engineering (2024) — Mechanical engineer at Cessna/Beechcraft manufacturer; aircraft interior systems including seating, cabin ergonomics, and machine vision; three patent applications filed with Textron Innovations
+- Figura Studio — The Roto (2024) — Co-founded product design and manufacturing company; designed spring-loaded toilet paper holder with ball bearing pivot mechanism; patent pending; full brand identity, packaging, and product website; covered by Mitchell Republic; units sold to LifeQuest
 
 ## Full project details
 For complete project descriptions see: https://zachmohr.work/llms-full.txt
@@ -41,5 +44,6 @@ For complete project descriptions see: https://zachmohr.work/llms-full.txt
 ## Site structure
 - / — Home/landing
 - /projects.html — Full project portfolio with filterable grid and build logs
+- /travel.html — Travel log; personal trips and outdoor experiences
 - /llms.txt — This file
 - /llms-full.txt — Full project descriptions for AI agents

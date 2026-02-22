@@ -29,7 +29,7 @@ These are known pending items. User uploads assets to `assets/images/projects/[f
 
 ---
 
-## 2. TRAVEL PAGE — Not started
+## 2. TRAVEL PAGE — Done ✓
 
 ### Concept
 - Separate `travel.html` page
@@ -39,17 +39,42 @@ These are known pending items. User uploads assets to `assets/images/projects/[f
 - Layout: trip cards grid → click to expand log (same UX pattern as projects)
 
 ### Implementation plan
-1. Create `data/travels.json` schema (location, date, country, region, tags, hero, entries)
-2. Create `js/travel-renderer.js` mirroring project-renderer.js
-3. Create `travel.html` page
-4. Add nav link to travel page from main nav
+1. ~~Create `data/travels.json` schema (location, date, country, region, tags, hero, entries)~~ ✓
+2. ~~Create `js/travel-renderer.js` mirroring project-renderer.js~~ ✓
+3. ~~Create `travel.html` page~~ ✓
+4. ~~Add nav link to travel page from main nav~~ ✓
 5. Process travel photos via same sips pipeline (resize to max 1200px wide for web — travel galleries
    will have many more images than project logs, so keep file sizes down)
-6. Add travel entries to llms.txt and regenerate llms-full.txt
+6. ~~Add travel entries to llms.txt and regenerate llms-full.txt~~ ✓
 
 ### Image sizing note
 Travel photos should be resized to 1200px wide max at quality 85 (vs project photos at full res).
 Use: `sips -Z 1200 -s format jpeg -s formatOptions 85 input.HEIC --out output.jpg`
+
+### To add a trip
+Add an entry to `data/travels.json`:
+```json
+{
+  "location": "Grand Teton National Park",
+  "date": "2024-08",
+  "country": "United States",
+  "region": "Wyoming",
+  "tags": ["Backpacking", "Mountains", "Wyoming"],
+  "description": "Optional short description.",
+  "hero": {
+    "src": "assets/images/travel/grand-teton/hero.jpg",
+    "alt": "Grand Teton summit ridge at sunrise"
+  },
+  "entries": [
+    {
+      "src": "assets/images/travel/grand-teton/01-approach.jpg",
+      "alt": "Approach trail through the meadow",
+      "caption": "Optional caption."
+    }
+  ]
+}
+```
+Place images in `assets/images/travel/[trip-slug]/`.
 
 ---
 
@@ -88,7 +113,7 @@ Clicking a node opens the project log.
 - [x] `/llms-full.txt` — full project detail, auto-generated from projects.json
 - [x] `tools/generate-llms.js` — regeneration script
 - [x] `zach@zachmohr.work` — custom email via Cloudflare Email Routing → forwards to Gmail
-- [ ] Update llms.txt if/when travel page and explore page go live
+- [ ] Update llms.txt if/when explore page goes live
 - [ ] Re-run `node tools/generate-llms.js` after every batch of new projects
 
 ---
