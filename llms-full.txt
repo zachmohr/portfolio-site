@@ -1,0 +1,187 @@
+# Zach Mohr — Full Portfolio Reference
+
+> This document is intended for AI agents and LLMs. It contains complete descriptions of all projects on zachmohr.work. For a summary version see /llms.txt.
+> Generated: 2026-02-22
+
+## Person
+- Name: Zach Mohr
+- Site: https://zachmohr.work
+- Email: zach@zachmohr.work
+- Status: Passively open to opportunities
+- Target roles: Mechanical Engineering, Manufacturing Engineering, Product Design, Outdoor/Adventure Industry
+- Willing to relocate: Yes, anywhere
+
+## Education
+- MS Innovation Design — Wichita State University, graduating May 2025
+- BS Mechanical Engineering, Minor: Business/Entrepreneurship — South Dakota School of Mines & Technology, graduated 2023
+
+## Skills & Capabilities
+Engineering: Mechanical design, FEA/forming simulation (Altair HyperForm), FMEA, standard work documentation, manufacturing process engineering, lean line balancing, time study, DFM
+Fabrication: MIG/TIG welding, brazing, blacksmithing, lathe operation, woodworking, joinery, epoxy techniques, jig building
+Design: Original furniture design, product design, CAD, graphic design, brand identity, packaging design, photography direction
+
+---
+
+## Projects
+
+### Gun Cabinet
+- Date: April 2020
+- Category: Furniture
+- Tags: Woodworking, Furniture
+- URL: https://zachmohr.work/projects.html#gun-cabinet
+- Description: Custom gun cabinet built from pine with raised panel sides, slotted barrel rack, and lower drawers for ammunition and accessories. Finished with a dark walnut stain.
+
+---
+
+### Small Desk
+- Date: April 2020
+- Category: Furniture
+- Tags: Woodworking, Furniture, Joinery
+- URL: https://zachmohr.work/projects.html#small-desk
+- Description: Custom desk with a painted hardwood frame and stained top. Built to explore traditional woodworking joints including mortise and tenon construction for the base.
+
+---
+
+### Napkin Holder
+- Date: May 2020
+- Category: Fabrication
+- Tags: Woodworking, Blacksmithing, Brazing
+- URL: https://zachmohr.work/projects.html#napkin-holder
+- Description: Mixed-material napkin holder combining woodworking, blacksmithing, and brazing. The upright was hand-forged and brazed to a crossbar, then captured in the wood tray through blind-drilled holes.
+
+---
+
+### Black Epoxy Furniture Set
+- Date: June 2020
+- Category: Furniture
+- Tags: Welding, Epoxy, Furniture, Woodworking
+- URL: https://zachmohr.work/projects.html#black-epoxy-furniture-set
+- Description: Matching furniture set designed from the ground up — welded steel bases with epoxy river tops and seats. Designed the bases, did all the welding and painting, then made the seats and table top using the epoxy river technique with black epoxy and natural wood edges.
+
+---
+
+### Claro Walnut Coffee Table
+- Date: July 2020
+- Category: Furniture
+- Tags: Woodworking, Brazing, Welding, Furniture
+- URL: https://zachmohr.work/projects.html#claro-walnut-coffee-table
+- Description: Coffee table built around a stunning claro walnut cookie slab. The base is an original design — steel rods cut, bent, and brazed together mid-air to form a spider web structure reminiscent of a 3D stained glass window. Same brazed joinery technique from the napkin holder, scaled up.
+
+---
+
+### Console Table with Drawers
+- Date: July 2020
+- Category: Furniture
+- Tags: Woodworking, Welding, Furniture
+- URL: https://zachmohr.work/projects.html#console-table-with-drawers
+- Description: Custom console table for a client combining a welded steel base with a stained wood body and drawers. Designed from a single sketch with dimensions — no CAD model, just built in space. Brought together welding large bases and the technical woodworking of building functional drawers.
+
+---
+
+### Toy Storage Shelf
+- Date: August 2020
+- Category: Furniture
+- Tags: Woodworking, Furniture
+- URL: https://zachmohr.work/projects.html#toy-storage-shelf
+- Description: Custom toy storage shelf with multiple bin sizes, integrated bungee cord sections for large stuffed animals, and color-coded bins. A lesson in designing around different materials and existing objects — every compartment was sized to fit specific bins.
+
+---
+
+### Pub Table
+- Date: December 2020
+- Category: Furniture
+- Tags: Woodworking, Welding, Epoxy, Furniture
+- URL: https://zachmohr.work/projects.html#pub-table
+- Description: Pub table with a wood slab top filled with black epoxy for the voids and a welded steel base with extreme splayed joint angles. The base was a particularly difficult weld — getting all four legs to meet at compound angles required careful layout and fixture work. Later built a matching side table for the same client using the same X-base concept with a walnut and green epoxy river top.
+
+---
+
+### Memorial Flag Box
+- Date: January 2021
+- Category: Fabrication
+- Tags: Woodworking, Detail Work
+- URL: https://zachmohr.work/projects.html#flag-box
+- Description: Custom memorial flag display box incorporating the recipient's dog tags and bullet casings from their 21-gun salute. Features a triangular flag compartment with custom-cut glass, a channel for the casings and dog tags, and a live-edge spalted panel. Another sketch-to-build project — high detail work for a meaningful purpose.
+
+---
+
+### Brass Wire Joinery Tables
+- Date: March 2021
+- Category: Furniture
+- Tags: Welding, Woodworking, Furniture, Original Design
+- URL: https://zachmohr.work/projects.html#brass-wire-joinery-tables
+- Description: 100% original design — my favorite pieces. Invented a technique of bending brass rods into 90-degree corners and packing them into the steel tube construction to create a decorative structural joint. Built the side table first, then loved the technique so much it expanded into a matching console table. Walnut round top on a steel and brass frame.
+
+---
+
+### Bobcat Manufacturing Engineering Co-op
+- Date: October 2021
+- Category: Fabrication
+- Tags: Manufacturing, Assembly, Process Engineering, Lean, Internship
+- URL: https://zachmohr.work/projects.html#bobcat-manufacturing-coop
+- Description: Manufacturing engineering co-op at Bobcat. Two main workstreams: prototype build support for the L35 small articulated loader, and weld line optimization for the snowblower attachment line. The L35 work was early-stage — the first production-intent prototype after the initial mule — with no formal tooling yet. Wrote the initial standard work instructions for the L35, documenting every part number, installation method, and torque specification. Worked closely with the design team to ensure the manufactured assembly matched design intent, and participated in FMEA sessions to identify and mitigate assembly failure modes. On the snowblower weld line, conducted time studies across stations, identified cycle time imbalances, and redistributed weld tasks to level the line flow. The L35 has since launched as Bobcat's most powerful small articulated loader.
+
+---
+
+### Arachno Coffee Table
+- Date: April 2022
+- Category: Furniture
+- Tags: Brazing, Welding, Woodworking, Furniture, Original Design
+- URL: https://zachmohr.work/projects.html#arachno-coffee-table
+- Description: Second-generation application of the brazed steel rod joinery technique developed in the Claro Walnut Coffee Table — this time constrained into a rectangular, grid-like base geometry. Where the original base was organic and radial, the Arachno base imposes order on the chaos: rods cut, bent, and brazed mid-air into a repeating structural lattice. Topped with a walnut slab and epoxy river pour. The feet are custom-turned on the lathe from offcuts of the same top slab, tying the wood and steel together as one cohesive piece.
+
+---
+
+### Walnut Cookie Slab Table Set
+- Date: May 2022
+- Category: Furniture
+- Tags: Woodworking, Welding, Epoxy, Furniture, Jig Building
+- URL: https://zachmohr.work/projects.html#walnut-coffee-tables
+- Description: Matched coffee and end table set built around walnut cookie slabs — cross-sections that preserve the full growth ring and live edge of the tree. The slabs required flattening with a custom-built router sled jig before the natural voids and cracks could be filled with epoxy. Welded steel bases were fabricated for both pieces, giving the organic slab tops a clean industrial counterpoint. The set lives together as a cohesive suite in the client's living room.
+
+---
+
+### Slab Mirror
+- Date: May 2022
+- Category: Furniture
+- Tags: Woodworking, Furniture, Original Design
+- URL: https://zachmohr.work/projects.html#slab-mirror
+- Description: Wall mirror built from the same birds-eye maple slab used in the Arachno Coffee Table. The slab was ripped down the center along its natural live edge, and the mirror glass set between the two halves — the void between them becomes the mirror, mimicking the river table concept in a vertical format. A key structural challenge: mirror glass alone can't support the weight of the slabs, so a backer plate was fabricated and the mirror sandwiched between it and the wood, transferring the load through the frame rather than the glass. The result looks like a single continuous slab of wood floating around a mirror.
+
+---
+
+### Autonomous RC Boat
+- Date: May 2022
+- Category: Robotics
+- Tags: Robotics, Mechatronics, Prototyping, Autonomy, Sensor Fusion
+- URL: https://zachmohr.work/projects.html#autonomous-rc-boat
+- Description: Undergraduate mechatronics project: an RC boat converted into an autonomous obstacle-avoidance platform. The approach was self-derived — looking at the dev kit components available, the idea emerged to mount an ultrasonic sensor on a servo and sweep it across the field of view, building a spatial map of what's ahead. No AI, no LIDAR, no prior framework — just first-principles thinking that happened to reinvent phased-array radar logic from scratch. The boat uses that distance map to steer around obstacles in real time.
+
+---
+
+### Aircraft Rib Wrinkle Prediction
+- Date: June 2022
+- Category: Aviation
+- Tags: Aerospace, Simulation, Manufacturing, FEA, Internship
+- URL: https://zachmohr.work/projects.html#aircraft-rib-hydroforming
+- Description: Aerospace engineering internship project: predicting and mitigating wrinkle formation in hydroformed aluminum aircraft ribs. Ran forming simulations in Altair HyperForm to predict where wrinkles would initiate, then designed relief cutouts into the tooling to redistribute material flow before those regions collapsed. The physical result — a 3D-printed mandrel with the tuned relief cutouts and a formed aluminum rib — validated the simulation approach.
+
+---
+
+### Arachno Side Table
+- Date: October 2022
+- Category: Furniture
+- Tags: Brazing, Welding, Woodworking, Furniture, Original Design, CAD
+- URL: https://zachmohr.work/projects.html#arachno-side-table
+- Description: Miniaturization of the Arachno Coffee Table concept into a side table format — same brazed steel rod lattice, scaled down and reworked as a tall pedestal. The lathe-turned wood feet carry over from the coffee table, turned from offcuts of the same slab material. After building the physical piece, the design language was extended in CAD to explore what a full furniture line could look like: a nightstand with a drawer and the arachno lattice as the base structure, and a dresser with the lattice as a plinth and the brazing detail translated into drawer pulls throughout. Neither has been built yet, but the renders show how the joinery technique scales to more complex, functional forms.
+
+---
+
+## Themes & Connections
+- **Brazed joinery technique**: Originated in the Napkin Holder (2020), scaled to the Claro Walnut Coffee Table, refined into the Arachno series (Coffee Table, Side Table), conceptually extended to a full furniture line in CAD
+- **Sketch-to-build**: Console Table, Memorial Flag Box — designed entirely in the build, no CAD
+- **Epoxy techniques**: Black Epoxy Set, Pub Table, Arachno Coffee Table, Walnut Cookie Slab Set
+- **Lathe work**: Custom feet on Arachno Coffee Table and Side Table, turned from slab offcuts
+- **Client work**: Console Table, Pub Table, Walnut Cookie Slab Set
+- **Engineering internships**: Bobcat (manufacturing), aerospace company (hydroforming simulation)
+- **First-principles problem solving**: Autonomous RC Boat (reinvented phased-array radar logic independently), Slab Mirror (structural load path design)
