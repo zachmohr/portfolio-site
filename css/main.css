@@ -680,6 +680,26 @@ ul, ol {
     display: block;
 }
 
+/* Description Read More Toggle */
+.description-toggle {
+    display: inline-block;
+    margin-bottom: var(--space-sm);
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    color: var(--color-red);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 0.25rem 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+    transition: color var(--transition-fast);
+}
+
+.description-toggle:hover {
+    color: var(--color-red-light);
+}
+
 /* Build Log Toggle */
 .project-log-toggle {
     display: inline-block;
