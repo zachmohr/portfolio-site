@@ -6,6 +6,66 @@
 document.addEventListener('DOMContentLoaded', function() {
 
     // ============================================
+    // ROTATING HERO WORD
+    // ============================================
+    const rotatingWords = [
+        'Engineer',
+        'Designer',
+        'Maker',
+        'Welder',
+        'Woodworker',
+        'Builder',
+        'Inventor',
+        'Fabricator',
+        'Entrepreneur',
+        'Roboticist'
+    ];
+
+    const FADE_DURATION_MS = 400;  // matches CSS transition: opacity 0.4s
+    const ROTATION_INTERVAL_MS = 2500;
+
+    const rotatingWordEl = document.getElementById('rotating-word');
+
+    function fitWordToContainer(el) {
+        el.style.fontSize = ''; // reset inline override, fall back to CSS clamp()
+        void el.offsetWidth; // force reflow at default size
+
+        // el.parentElement.clientWidth can expand with content (CSS Grid min-content blowout),
+        // so constrain against the true viewport width minus the hero section's padding.
+        const heroSection = el.closest('.hero');
+        const paddingInline = heroSection
+            ? parseFloat(getComputedStyle(heroSection).paddingLeft) + parseFloat(getComputedStyle(heroSection).paddingRight)
+            : 0;
+        const available = document.documentElement.clientWidth - paddingInline;
+
+        if (el.scrollWidth > available) {
+            const currentSize = parseFloat(getComputedStyle(el).fontSize);
+            el.style.fontSize = Math.floor(currentSize * (available / el.scrollWidth) * 0.97) + 'px';
+        }
+    }
+
+    if (rotatingWordEl) {
+        let wordIndex = 0;
+
+        fitWordToContainer(rotatingWordEl);
+
+        window.addEventListener('resize', function() {
+            fitWordToContainer(rotatingWordEl);
+        });
+
+        setInterval(function() {
+            wordIndex = (wordIndex + 1) % rotatingWords.length;
+            rotatingWordEl.classList.add('fade-out');
+
+            setTimeout(function() {
+                rotatingWordEl.textContent = rotatingWords[wordIndex];
+                fitWordToContainer(rotatingWordEl);
+                rotatingWordEl.classList.remove('fade-out');
+            }, FADE_DURATION_MS);
+        }, ROTATION_INTERVAL_MS);
+    }
+
+    // ============================================
     // SMOOTH SCROLLING
     // ============================================
     const navLinks = document.querySelectorAll('a[href^="#"]');
