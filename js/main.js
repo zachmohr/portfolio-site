@@ -6,6 +6,41 @@
 document.addEventListener('DOMContentLoaded', function() {
 
     // ============================================
+    // ROTATING HERO WORD
+    // ============================================
+    const rotatingWords = [
+        'Engineer',
+        'Designer',
+        'Maker',
+        'Welder',
+        'Woodworker',
+        'Builder',
+        'Inventor',
+        'Fabricator',
+        'Entrepreneur',
+        'Roboticist'
+    ];
+
+    const FADE_DURATION_MS = 400;  // matches CSS transition: opacity 0.4s
+    const ROTATION_INTERVAL_MS = 2500;
+
+    const rotatingWordEl = document.getElementById('rotating-word');
+
+    if (rotatingWordEl) {
+        let wordIndex = 0;
+
+        setInterval(function() {
+            wordIndex = (wordIndex + 1) % rotatingWords.length;
+            rotatingWordEl.classList.add('fade-out');
+
+            setTimeout(function() {
+                rotatingWordEl.textContent = rotatingWords[wordIndex];
+                rotatingWordEl.classList.remove('fade-out');
+            }, FADE_DURATION_MS);
+        }, ROTATION_INTERVAL_MS);
+    }
+
+    // ============================================
     // SMOOTH SCROLLING
     // ============================================
     const navLinks = document.querySelectorAll('a[href^="#"]');
