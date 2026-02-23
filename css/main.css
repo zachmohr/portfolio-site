@@ -216,7 +216,7 @@ ul, ol {
     line-height: 1;
     letter-spacing: -0.04em;
     margin-bottom: var(--space-md);
-    color: #ffffff;
+    color: var(--color-white);
 }
 
 .rotating-word {
@@ -542,7 +542,7 @@ ul, ol {
 .filter-btn.active {
     border-color: var(--color-red);
     color: var(--color-red);
-    background-color: rgba(230, 57, 70, 0.1);
+    background-color: rgba(37, 99, 235, 0.1);
 }
 
 /* Projects Grid */
