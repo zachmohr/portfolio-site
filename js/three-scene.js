@@ -75,9 +75,9 @@ document.addEventListener('DOMContentLoaded', function() {
         uniforms: {
             time: { value: 0 },
             resolution: { value: new THREE.Vector2(container.clientWidth, container.clientHeight) },
-            color1: { value: new THREE.Color(0xE63946) }, // Red
-            color2: { value: new THREE.Color(0x0A0A0A) }, // Black
-            color3: { value: new THREE.Color(0xF5F5F0) }, // White
+            color1: { value: new THREE.Color(0x2563EB) }, // Blue
+            color2: { value: new THREE.Color(0xFFFFFF) }, // White
+            color3: { value: new THREE.Color(0x0A0A0A) }, // Black
             ditherScale: { value: 8.0 },
             animationSpeed: { value: 0.2 }
         },
@@ -149,11 +149,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Color mixing based on dithering and brightness
                 vec3 finalColor;
                 if (brightness > 0.66) {
-                    finalColor = mix(color1, color3, dithered); // Red to White
+                    finalColor = mix(color1, color3, dithered); // Blue to Black
                 } else if (brightness > 0.33) {
-                    finalColor = mix(color2, color1, dithered); // Black to Red
+                    finalColor = mix(color2, color1, dithered); // White to Blue
                 } else {
-                    finalColor = mix(color2, color2, dithered); // Black
+                    finalColor = mix(color2, color2, dithered); // White
                 }
 
                 // Add edge glow
