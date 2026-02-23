@@ -26,8 +26,32 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const rotatingWordEl = document.getElementById('rotating-word');
 
+    function fitWordToContainer(el) {
+        el.style.fontSize = ''; // reset inline override, fall back to CSS clamp()
+        void el.offsetWidth; // force reflow at default size
+
+        // el.parentElement.clientWidth can expand with content (CSS Grid min-content blowout),
+        // so constrain against the true viewport width minus the hero section's padding.
+        const heroSection = el.closest('.hero');
+        const paddingInline = heroSection
+            ? parseFloat(getComputedStyle(heroSection).paddingLeft) + parseFloat(getComputedStyle(heroSection).paddingRight)
+            : 0;
+        const available = document.documentElement.clientWidth - paddingInline;
+
+        if (el.scrollWidth > available) {
+            const currentSize = parseFloat(getComputedStyle(el).fontSize);
+            el.style.fontSize = Math.floor(currentSize * (available / el.scrollWidth) * 0.97) + 'px';
+        }
+    }
+
     if (rotatingWordEl) {
         let wordIndex = 0;
+
+        fitWordToContainer(rotatingWordEl);
+
+        window.addEventListener('resize', function() {
+            fitWordToContainer(rotatingWordEl);
+        });
 
         setInterval(function() {
             wordIndex = (wordIndex + 1) % rotatingWords.length;
@@ -35,6 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             setTimeout(function() {
                 rotatingWordEl.textContent = rotatingWords[wordIndex];
+                fitWordToContainer(rotatingWordEl);
                 rotatingWordEl.classList.remove('fade-out');
             }, FADE_DURATION_MS);
         }, ROTATION_INTERVAL_MS);
