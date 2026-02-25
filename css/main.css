@@ -1141,3 +1141,104 @@ ul, ol {
         font-size: 2rem;
     }
 }
+
+/* ============================================
+   TRAVEL PAGE
+   ============================================ */
+
+.travel-card {
+    border: var(--border-width) solid var(--color-gray-100);
+    overflow: hidden;
+    transition: border-color var(--transition-base), transform var(--transition-base);
+}
+
+.travel-card:hover {
+    border-color: var(--color-red);
+    transform: translateY(-8px);
+}
+
+.travel-image {
+    position: relative;
+    overflow: hidden;
+}
+
+.travel-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.travel-content {
+    padding: var(--space-md);
+}
+
+.travel-date {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    color: var(--color-red);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    display: block;
+    margin-bottom: 0.25rem;
+}
+
+.travel-title {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: var(--space-xs);
+    color: var(--color-white);
+}
+
+.travel-country {
+    display: inline-block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-gray-700);
+    margin-bottom: var(--space-xs);
+}
+
+.travel-description {
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: var(--color-gray-700);
+    margin-bottom: var(--space-sm);
+}
+
+.travel-log-toggle {
+    display: inline-block;
+    margin-top: var(--space-sm);
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    color: var(--color-red);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 0.25rem 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+    transition: color var(--transition-fast);
+}
+
+.travel-log-toggle:hover {
+    color: var(--color-red-light);
+}
+
+.travel-card--log[style*="grid-column"] {
+    transform: none;
+}
+
+.travel-log {
+    padding: 0 var(--space-md) var(--space-md);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.travels-empty {
+    font-size: 0.875rem;
+    color: var(--color-gray-700);
+    text-align: center;
+    padding: var(--space-lg);
+    grid-column: 1 / -1;
+}
