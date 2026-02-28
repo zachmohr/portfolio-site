@@ -684,6 +684,7 @@
                 {
                     "type": "model",
                     "allowCrossSection": true,
+                    "autoColorize": true,
                     "models": [
                         {
                             "name": "V3",
