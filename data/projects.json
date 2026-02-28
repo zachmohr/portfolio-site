@@ -407,50 +407,13 @@
             ]
         },
         {
-            "id": "figura-studio",
-            "type": "log",
-            "title": "Figura Studio — The Roto",
-            "date": "2024-06",
-            "category": "design",
-            "tags": ["Product Design", "Entrepreneurship", "Patent", "Brand Identity", "Graphic Design", "Manufacturing"],
-            "description": "Figura Studio is a product design and manufacturing company founded on the idea that everyday objects deserve better design. The first product is The Roto — a spring-loaded toilet paper holder that replaces the traditional pop-out bar with pivoting cantilever arms that open and close one-handed. The mechanism uses ball bearings, springs, and rotation stops to receive and suspend a roll without any assembly. Patent pending. Beyond the product itself, all brand identity, packaging design, internal documentation, instructional inserts, coupon cards, and the product website were designed in-house. The Roto has been covered by the Mitchell Republic and units have been purchased by LifeQuest in Mitchell, SD for use in their residential facilities.",
-            "hero": {
-                "src": "assets/images/projects/figura-studio/hero.jpg",
-                "alt": "The Roto toilet paper holder by Figura Studio"
-            },
-            "video": null,
-            "press": [
-                { "label": "Mitchell Republic — Mitchell native brings fresh thinking to a familiar bathroom fixture", "url": "https://www.mitchellrepublic.com/news/local/mitchell-native-brings-fresh-thinking-to-a-familiar-bathroom-fixture" }
-            ],
-            "patents": [
-                { "label": "US20250204729A1 — Rolled Material Dispensing Assembly", "url": "https://patents.google.com/patent/US20250204729A1" }
-            ],
-            "entries": []
-        },
-        {
-            "id": "textron-aviation",
-            "type": "log",
-            "title": "Textron Aviation — Mechanical Engineering",
-            "date": "2024-05",
-            "category": "aviation",
-            "tags": ["Mechanical Engineering", "Aircraft Interiors", "Product Design", "CAD", "Patent"],
-            "description": "Mechanical engineer at Textron Aviation in Wichita, KS — manufacturer of Cessna and Beechcraft aircraft. Working on aircraft interior systems including seating mechanisms, cabin ergonomics, and machine vision integration. Three patent applications filed with Textron Innovations covering an armrest deployment mechanism, a seat recline safety system, and a machine vision system for aircraft cabin monitoring. Patent publication pending.",
-            "hero": {
-                "src": "assets/images/projects/textron-aviation/hero.jpg",
-                "alt": "Cessna Citation aircraft interior cabin"
-            },
-            "video": null,
-            "patents": [],
-            "entries": []
-        },
-        {
             "id": "beethovan-modular-stages",
             "type": "log",
             "title": "BeethoVAN — Modular Concert Stages",
             "date": "2023-04",
             "category": "engineering",
             "tags": ["Mechanical Engineering", "FEA", "Welding", "Fabrication", "Capstone", "Aluminum"],
-            "description": "Senior capstone project at SD Mines in partnership with the Rushmore Music Festival — a travelling orchestra that brings classical music to rural communities across the Northern Great Plains. The team designed and built the BeethoVAN: a fully outfitted cargo trailer serving as a mobile concert hall with indoor/outdoor performance capability, instrument storage, HVAC, solar power, and AV systems. My primary contribution was the modular aluminum stage system. No off-the-shelf stage had the combination of features required, so the stages were designed and built from scratch. Work included determining all structural loads, hand calculations for beam deflection using composite beam theory to account for the wood deck and aluminum frame acting together, and FEA to validate the results. The stages feature height-adjustable legs with a custom-machined cam lock handle to secure them under load — designed for fast setup and teardown in the field. Also designed and welded the articulating piano platform: an actuator-driven frame that stores the grand piano vertically during transport to minimize string detune from road vibration. The BeethoVAN began touring in summer 2023 and has been covered by SD Mines and the Rapid City Journal.",
+            "description": "Senior capstone project at SD Mines in partnership with the Rushmore Music Festival — a travelling orchestra that brings classical music to rural communities across the Northern Great Plains. The team designed and built the BeethoVAN: a fully outfitted cargo trailer serving as a mobile concert hall with indoor/outdoor performance capability, instrument storage, HVAC, solar power, and AV systems. My primary contribution was the modular aluminum stage system. No off-the-shelf stage had the combination of features required, so the stages were designed and built from scratch. Work included determining all structural loads, hand calculations for beam deflection using composite beam theory to account for the wood deck and aluminum frame acting together, and FEA to validate the results. The stages feature height-adjustable legs with cam lock handles fabricated from laminated sheet metal and modified McMaster components — built to be as cheap as possible while still locking securely under load. Also welded and assembled the articulating piano platform: an actuator-driven frame that stores the grand piano vertically during transport to minimize string detune from road vibration. The BeethoVAN began touring in summer 2023 and has been covered by SD Mines and the Rapid City Journal.",
             "hero": {
                 "src": "assets/images/projects/modular-portable-stages/hero.jpg",
                 "alt": "BeethoVAN trailer deployed at the SD Mines design fair with modular stages extended"
