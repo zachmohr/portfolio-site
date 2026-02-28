@@ -389,6 +389,13 @@ function initModelViewer(container) {
                     if (autoColorize) {
                         child.material.color.setHex(colorPalette[meshCount % colorPalette.length]);
                         meshCount++;
+                    } else if (!child.material.map) {
+                        // Prevent white-on-white washouts by defaulting raw uncolored CAD to the site's brand blue
+                        var hsl = {};
+                        child.material.color.getHSL(hsl);
+                        if (hsl.l > 0.6 && hsl.s < 0.2) {
+                            child.material.color.setHex(0x2563EB); // var(--color-red) aka blue accent
+                        }
                     }
 
                     child.material.clippingPlanes = [clippingPlane];
