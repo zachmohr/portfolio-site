@@ -717,6 +717,67 @@
             ]
         },
         {
+            "id": "clinic-in-a-can-modular-walls",
+            "type": "log",
+            "title": "Clinic-in-a-Can Modular Walls",
+            "date": "2025-01",
+            "category": "product-design",
+            "tags": [
+                "Product Design",
+                "Prototyping",
+                "CAD",
+                "3D Printing"
+            ],
+            "description": "Collaborative project designed during Innovation Studio 1 with Clinic-in-a-Can, a local nonprofit that deploys medical clinics in shipping containers to emergency situations globally. The goal was to create a modular wall system to link multiple shipping containers together, forming a reliable, weatherproof seal around the joined perimeter. This proposed solution features interlocking panels with insulated foam interiors sandwiched between a structural wood layer and a durable steel exterior. These segments chain together to secure the open gaps between containers. A scaled 3D-printed prototype was created to demonstrate the geometric interlocking joints, showcased here alongside preliminary concept sketches and the main CAD model.",
+            "hero": {
+                "src": "assets/images/projects/Clinic-in-a-can-modular-walls/IMG_1057.JPG",
+                "alt": "3D printed scaled prototype of the interlocking modular shipping container wall panels"
+            },
+            "video": null,
+            "entries": [
+                {
+                    "type": "sketches",
+                    "caption": "Preliminary concept sketches of the linking panels",
+                    "pages": [
+                        {
+                            "src": "assets/images/projects/Clinic-in-a-can-modular-walls/IMG_3737.JPG",
+                            "alt": "Concept sketch page 1"
+                        },
+                        {
+                            "src": "assets/images/projects/Clinic-in-a-can-modular-walls/IMG_3738.JPG",
+                            "alt": "Concept sketch page 2"
+                        },
+                        {
+                            "src": "assets/images/projects/Clinic-in-a-can-modular-walls/IMG_3739.JPG",
+                            "alt": "Concept sketch page 3"
+                        },
+                        {
+                            "src": "assets/images/projects/Clinic-in-a-can-modular-walls/IMG_3740.JPG",
+                            "alt": "Concept sketch page 4"
+                        }
+                    ]
+                },
+                {
+                    "type": "model",
+                    "src": "assets/images/projects/Clinic-in-a-can-modular-walls/ShippingContainerWall v10.glb",
+                    "caption": "CAD model of the modular wall interlocking segment",
+                    "alt": "3D view of the shipping container wall CAD"
+                },
+                {
+                    "src": "assets/images/projects/Clinic-in-a-can-modular-walls/IMG_1048.JPG",
+                    "alt": "3D printed prototype segment showing the interlocking joint profile"
+                },
+                {
+                    "src": "assets/images/projects/Clinic-in-a-can-modular-walls/IMG_1055.JPG",
+                    "alt": "3D printed prototype segments forming a continuous wall structure"
+                },
+                {
+                    "src": "assets/images/projects/Clinic-in-a-can-modular-walls/IMG_1056.JPG",
+                    "alt": "Detailed view of the joined 3D printed wall segments"
+                }
+            ]
+        },
+        {
             "id": "side-table-home-garden",
             "type": "log",
             "title": "Side Table Home Garden",
