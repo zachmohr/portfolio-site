@@ -76,17 +76,17 @@
     function renderSingleCard(project, lazy) {
         return (
             '<article class="project-card" data-category="' + project.category + '" data-date="' + project.date + '">' +
-                '<div class="project-image">' +
-                    '<img src="' + project.hero.src + '" alt="' + escapeAttr(project.hero.alt) + '"' +
-                        lazy + ' width="1600" height="1000">' +
-                '</div>' +
-                '<div class="project-content">' +
-                    '<span class="project-date">' + formatDate(project.date) + '</span>' +
-                    '<h3 class="project-title">' + escapeHtml(project.title) + '</h3>' +
-                    renderDescription(project.description) +
-                    renderTags(project.tags) +
-                    renderTopLevelVideo(project.video) +
-                '</div>' +
+            '<div class="project-image">' +
+            '<img src="' + project.hero.src + '" alt="' + escapeAttr(project.hero.alt) + '"' +
+            lazy + ' width="1600" height="1000">' +
+            '</div>' +
+            '<div class="project-content">' +
+            '<span class="project-date">' + formatDate(project.date) + '</span>' +
+            '<h3 class="project-title">' + escapeHtml(project.title) + '</h3>' +
+            renderDescription(project.description) +
+            renderTags(project.tags) +
+            renderTopLevelVideo(project.video) +
+            '</div>' +
             '</article>'
         );
     }
@@ -94,24 +94,24 @@
     function renderLogCard(project, lazy) {
         return (
             '<article class="project-card project-card--log" data-category="' + project.category + '" data-date="' + project.date + '">' +
-                '<div class="project-image">' +
-                    '<img src="' + project.hero.src + '" alt="' + escapeAttr(project.hero.alt) + '"' +
-                        lazy + ' width="1600" height="1000">' +
-                '</div>' +
-                '<div class="project-content">' +
-                    '<span class="project-date">' + formatDate(project.date) + '</span>' +
-                    '<h3 class="project-title">' + escapeHtml(project.title) + '</h3>' +
-                    renderDescription(project.description) +
-                    renderTags(project.tags) +
-                    renderPress(project.press) +
-                    renderPatents(project.patents) +
-                    '<button class="project-log-toggle" aria-expanded="false">' +
-                        'View Build Log <span class="toggle-indicator">[+]</span>' +
-                    '</button>' +
-                '</div>' +
-                '<div class="project-log" hidden>' +
-                    renderLogEntries(project.entries) +
-                '</div>' +
+            '<div class="project-image">' +
+            '<img src="' + project.hero.src + '" alt="' + escapeAttr(project.hero.alt) + '"' +
+            lazy + ' width="1600" height="1000">' +
+            '</div>' +
+            '<div class="project-content">' +
+            '<span class="project-date">' + formatDate(project.date) + '</span>' +
+            '<h3 class="project-title">' + escapeHtml(project.title) + '</h3>' +
+            renderDescription(project.description) +
+            renderTags(project.tags) +
+            renderPress(project.press) +
+            renderPatents(project.patents) +
+            '<button class="project-log-toggle" aria-expanded="false">' +
+            'View Build Log <span class="toggle-indicator">[+]</span>' +
+            '</button>' +
+            '</div>' +
+            '<div class="project-log" hidden>' +
+            renderLogEntries(project.entries) +
+            '</div>' +
             '</article>'
         );
     }
@@ -140,19 +140,19 @@
     function renderImageEntry(entry) {
         return (
             '<div class="log-entry">' +
-                '<img src="' + entry.src + '" alt="' + escapeAttr(entry.alt) + '"' +
-                    ' loading="lazy" style="width:100%;height:auto;">' +
-                (entry.caption
-                    ? '<p class="log-caption">' + escapeHtml(entry.caption) + '</p>'
-                    : '') +
+            '<img src="' + entry.src + '" alt="' + escapeAttr(entry.alt) + '"' +
+            ' loading="lazy" style="width:100%;height:auto;">' +
+            (entry.caption
+                ? '<p class="log-caption">' + escapeHtml(entry.caption) + '</p>'
+                : '') +
             '</div>'
         );
     }
 
     function renderVideoEntry(entry) {
         var isEmbed = entry.src.indexOf('youtube') !== -1 ||
-                      entry.src.indexOf('vimeo') !== -1 ||
-                      entry.src.indexOf('embed') !== -1;
+            entry.src.indexOf('vimeo') !== -1 ||
+            entry.src.indexOf('embed') !== -1;
 
         var mediaHtml;
 
@@ -164,29 +164,29 @@
 
             mediaHtml =
                 '<div class="video-wrapper">' +
-                    '<div class="video-placeholder" data-src="' + escapeAttr(entry.src) + '">' +
-                        posterHtml +
-                        '<button class="video-play-btn" aria-label="Play video">&#9654;</button>' +
-                    '</div>' +
+                '<div class="video-placeholder" data-src="' + escapeAttr(entry.src) + '">' +
+                posterHtml +
+                '<button class="video-play-btn" aria-label="Play video">&#9654;</button>' +
+                '</div>' +
                 '</div>';
         } else {
             // Self-hosted video
             mediaHtml =
                 '<div class="video-wrapper">' +
-                    '<video controls preload="none"' +
-                        (entry.poster ? ' poster="' + entry.poster + '"' : '') +
-                        ' width="1200" height="675">' +
-                        '<source src="' + entry.src + '" type="video/mp4">' +
-                    '</video>' +
+                '<video controls preload="none"' +
+                (entry.poster ? ' poster="' + entry.poster + '"' : '') +
+                ' width="1200" height="675">' +
+                '<source src="' + entry.src + '" type="video/mp4">' +
+                '</video>' +
                 '</div>';
         }
 
         return (
             '<div class="log-entry log-entry--video">' +
-                mediaHtml +
-                (entry.caption
-                    ? '<p class="log-caption">' + escapeHtml(entry.caption) + '</p>'
-                    : '') +
+            mediaHtml +
+            (entry.caption
+                ? '<p class="log-caption">' + escapeHtml(entry.caption) + '</p>'
+                : '') +
             '</div>'
         );
     }
@@ -196,12 +196,12 @@
 
         return (
             '<div class="log-entry log-entry--model">' +
-                '<div class="model-wrapper model-viewer-container" data-src="' + escapeAttr(modelSrc) + '"' +
-                    ' role="img" aria-label="' + escapeAttr(entry.alt) + '">' +
-                '</div>' +
-                (entry.caption
-                    ? '<p class="log-caption">' + escapeHtml(entry.caption) + '</p>'
-                    : '') +
+            '<div class="model-wrapper model-viewer-container" data-src="' + escapeAttr(modelSrc) + '"' +
+            ' role="img" aria-label="' + escapeAttr(entry.alt) + '">' +
+            '</div>' +
+            (entry.caption
+                ? '<p class="log-caption">' + escapeHtml(entry.caption) + '</p>'
+                : '') +
             '</div>'
         );
     }
@@ -228,17 +228,17 @@
 
             html +=
                 '<div class="sketch-page' + isActive + '" data-index="' + i + '"' +
-                    ' style="z-index:' + zIndex + ';' +
-                    'transform:rotate(' + rotation.toFixed(2) + 'deg) translate(' + offsetX.toFixed(1) + 'px,' + offsetY.toFixed(1) + 'px);">' +
-                    '<img src="' + page.src + '" alt="' + escapeAttr(page.alt) + '" loading="lazy">' +
+                ' style="z-index:' + zIndex + ';' +
+                'transform:rotate(' + rotation.toFixed(2) + 'deg) translate(' + offsetX.toFixed(1) + 'px,' + offsetY.toFixed(1) + 'px);">' +
+                '<img src="' + page.src + '" alt="' + escapeAttr(page.alt) + '" loading="lazy">' +
                 '</div>';
         });
 
         html += '<div class="sketch-nav">' +
-                    '<button class="sketch-prev" aria-label="Previous sketch">&#8592;</button>' +
-                    '<span class="sketch-counter">1 / ' + pages.length + '</span>' +
-                    '<button class="sketch-next" aria-label="Next sketch">&#8594;</button>' +
-                '</div>';
+            '<button class="sketch-prev" aria-label="Previous sketch">&#8592;</button>' +
+            '<span class="sketch-counter">1 / ' + pages.length + '</span>' +
+            '<button class="sketch-next" aria-label="Next sketch">&#8594;</button>' +
+            '</div>';
         html += '</div></div>';
         return html;
     }
@@ -260,11 +260,11 @@
 
         return (
             '<div class="video-wrapper" style="margin-top: var(--space-sm);">' +
-                '<div class="video-placeholder" data-src="' + escapeAttr(videoUrl) + '">' +
-                    '<div style="width:100%;height:100%;background:var(--color-gray-200);display:flex;align-items:center;justify-content:center;">' +
-                        '<button class="video-play-btn" aria-label="Play video">&#9654;</button>' +
-                    '</div>' +
-                '</div>' +
+            '<div class="video-placeholder" data-src="' + escapeAttr(videoUrl) + '">' +
+            '<div style="width:100%;height:100%;background:var(--color-gray-200);display:flex;align-items:center;justify-content:center;">' +
+            '<button class="video-play-btn" aria-label="Play video">&#9654;</button>' +
+            '</div>' +
+            '</div>' +
             '</div>'
         );
     }
@@ -279,7 +279,7 @@
         press.forEach(function (item) {
             html += '<a class="press-link" href="' + escapeAttr(item.url) + '" target="_blank" rel="noopener">' +
                 '&#x1F4F0; ' + escapeHtml(item.label) +
-            '</a>';
+                '</a>';
         });
         html += '</div>';
         return html;
@@ -295,7 +295,7 @@
         patents.forEach(function (item) {
             html += '<a class="patent-link" href="' + escapeAttr(item.url) + '" target="_blank" rel="noopener">' +
                 '&#x2316; ' + escapeHtml(item.label) +
-            '</a>';
+                '</a>';
         });
         html += '</div>';
         return html;
@@ -354,11 +354,11 @@
 
         return (
             '<p class="project-description">' +
-                escapeHtml(split.preview) +
-                '<span class="description-extra" hidden> ' + escapeHtml(split.overflow) + '</span>' +
+            escapeHtml(split.preview) +
+            '<span class="description-extra" hidden> ' + escapeHtml(split.overflow) + '</span>' +
             '</p>' +
             '<button class="description-toggle" aria-expanded="false">' +
-                'Read More <span class="toggle-indicator">[+]</span>' +
+            'Read More <span class="toggle-indicator">[+]</span>' +
             '</button>'
         );
     }
@@ -384,8 +384,8 @@
     // ============================================
     function initToggleHandlers(container) {
         container.addEventListener('click', function (e) {
-            // Skip if clicking interactive elements inside the card
-            if (e.target.closest('a, button, .description-toggle, .project-log, video, .sketch-nav, .model-controls')) return;
+            // Skip if clicking interactive elements inside the card (except the log toggle itself)
+            if (e.target.closest('a, button:not(.project-log-toggle), .description-toggle, .project-log, video, .sketch-nav, .model-controls')) return;
 
             // Allow clicks anywhere on a log card to toggle the build log
             var card = e.target.closest('.project-card--log');
