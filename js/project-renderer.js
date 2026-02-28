@@ -458,8 +458,7 @@
                 }
             });
 
-            var direction = btn.classList.contains('.sketch-next') ? 1 :
-                            btn.classList.contains('sketch-next') ? 1 : -1;
+            var direction = btn.classList.contains('sketch-next') ? 1 : -1;
             var nextIndex = (currentIndex + direction + total) % total;
 
             // Update active states and z-indexes

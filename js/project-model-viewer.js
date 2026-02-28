@@ -71,35 +71,10 @@ function initModelViewer(container) {
     var canvas = document.createElement('canvas');
     container.appendChild(canvas);
 
-    var glContext = null;
-    try {
-        glContext = canvas.getContext('webgl', {
-            antialias: false,
-            alpha: true,
-            depth: true,
-            stencil: false,
-            preserveDrawingBuffer: false
-        }) || canvas.getContext('experimental-webgl', {
-            antialias: false,
-            alpha: true,
-            depth: true,
-            stencil: false,
-            preserveDrawingBuffer: false
-        });
-    } catch (err) {
-        glContext = null;
-    }
-
-    if (!glContext) {
-        container.textContent = '';
-        return false;
-    }
-
     var renderer;
     try {
         renderer = new THREE.WebGLRenderer({
             canvas: canvas,
-            context: glContext,
             antialias: true,
             alpha: true
         });
