@@ -46,3 +46,4 @@ temp/
 # *.psd
 # assets/images/**/*.jpg
 # assets/images/**/*.png
+.claude/
