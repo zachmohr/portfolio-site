@@ -131,26 +131,31 @@ function initModelViewer(container) {
     var controlsDiv = document.createElement('div');
     controlsDiv.className = 'model-controls';
 
+    var allowCrossSection = container.getAttribute('data-allow-cross-section') === 'true';
+
     var crossSectionBtn = document.createElement('button');
-    crossSectionBtn.className = 'model-btn model-btn--cross-section';
-    crossSectionBtn.textContent = 'Cross Section';
-    crossSectionBtn.setAttribute('aria-pressed', 'false');
-
     var sliderWrap = document.createElement('div');
-    sliderWrap.className = 'model-slider-wrap';
-    sliderWrap.hidden = true;
-
     var slider = document.createElement('input');
-    slider.type = 'range';
-    slider.className = 'model-slider';
-    slider.min = '0';
-    slider.max = '100';
-    slider.value = '100';
-    slider.setAttribute('aria-label', 'Cross section position');
 
-    sliderWrap.appendChild(slider);
-    controlsDiv.appendChild(crossSectionBtn);
-    controlsDiv.appendChild(sliderWrap);
+    if (allowCrossSection) {
+        crossSectionBtn.className = 'model-btn model-btn--cross-section';
+        crossSectionBtn.textContent = 'Cross Section';
+        crossSectionBtn.setAttribute('aria-pressed', 'false');
+
+        sliderWrap.className = 'model-slider-wrap';
+        sliderWrap.hidden = true;
+
+        slider.type = 'range';
+        slider.className = 'model-slider';
+        slider.min = '0';
+        slider.max = '100';
+        slider.value = '100';
+        slider.setAttribute('aria-label', 'Cross section position');
+
+        sliderWrap.appendChild(slider);
+        controlsDiv.appendChild(crossSectionBtn);
+        controlsDiv.appendChild(sliderWrap);
+    }
 
     // Multiple models dropdown
     var modelsData = container.getAttribute('data-models');
@@ -175,17 +180,20 @@ function initModelViewer(container) {
     }
 
     // Axis dropdown
-    var axisSelect = document.createElement('select');
-    axisSelect.className = 'model-select model-axis-select';
-    axisSelect.setAttribute('aria-label', 'Select clipping axis');
-    axisSelect.innerHTML = '<option value="y">Y Axis</option><option value="x">X Axis</option><option value="z">Z Axis</option>';
-    axisSelect.hidden = true;
+    if (allowCrossSection) {
+        var axisSelect = document.createElement('select');
+        axisSelect.className = 'model-select model-axis-select';
+        axisSelect.setAttribute('aria-label', 'Select clipping axis');
+        axisSelect.innerHTML = '<option value="y">Y Axis</option><option value="x">X Axis</option><option value="z">Z Axis</option>';
+        axisSelect.hidden = true;
 
-    axisSelect.addEventListener('change', function () {
-        currentAxis = axisSelect.value;
-        updateClippingForAxis();
-    });
-    topControlsDiv.appendChild(axisSelect);
+        axisSelect.addEventListener('change', function () {
+            currentAxis = axisSelect.value;
+            updateClippingForAxis();
+        });
+        topControlsDiv.appendChild(axisSelect);
+    }
+
     container.appendChild(topControlsDiv);
     container.appendChild(controlsDiv);
 
