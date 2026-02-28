@@ -90,27 +90,49 @@ function initModelViewer(container) {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.localClippingEnabled = true;
     renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.1;
+    renderer.toneMappingExposure = 1.0;
+    // Helps avoid Z-fighting on co-planar CAD parts
+    renderer.logarithmicDepthBuffer = true;
 
     var scene = new THREE.Scene();
     scene.background = new THREE.Color(0xe8eaec);
 
+    // Create a basic environment map for realistic soft reflections without loading an exr/hdr file
+    var pmremGenerator = new THREE.PMREMGenerator(renderer);
+    pmremGenerator.compileEquirectangularShader();
+    // Default Three.js RoomEnvironment is too heavy to bundle, so we simulate a basic studio environment
+    var envScene = new THREE.Scene();
+    envScene.background = new THREE.Color(0xffffff);
+    var light1 = new THREE.DirectionalLight(0xffffff, 5);
+    light1.position.set(0, 10, 0);
+    envScene.add(light1);
+    var light2 = new THREE.DirectionalLight(0xffffff, 2);
+    light2.position.set(10, 0, 10);
+    envScene.add(light2);
+
+    var renderTarget = pmremGenerator.fromScene(envScene);
+    scene.environment = renderTarget.texture;
+
     var camera = new THREE.PerspectiveCamera(45, width / height, 0.01, 100);
     var controls = new OrbitControls(camera, canvas);
     controls.enableDamping = true;
-    controls.dampingFactor = 0.1;
+    controls.dampingFactor = 0.05;
     controls.autoRotate = true;
     controls.autoRotateSpeed = 1.5;
 
     // Sky/ground hemisphere for even base lighting
-    var hemiLight = new THREE.HemisphereLight(0xffffff, 0xb0b8c4, 0.9);
+    var hemiLight = new THREE.HemisphereLight(0xffffff, 0xb0b8c4, 1.2);
     scene.add(hemiLight);
 
     // Key light — upper front-right
-    var keyLight = new THREE.DirectionalLight(0xffffff, 1.8);
+    var keyLight = new THREE.DirectionalLight(0xffffff, 1.5);
     keyLight.position.set(8, 12, 8);
     keyLight.castShadow = true;
+    keyLight.shadow.mapSize.width = 1024;
+    keyLight.shadow.mapSize.height = 1024;
+    keyLight.shadow.bias = -0.0005;
     scene.add(keyLight);
 
     // Fill light — upper back-left
@@ -347,7 +369,22 @@ function initModelViewer(container) {
 
             model.traverse(function (child) {
                 if (child.isMesh && child.material) {
-                    child.material = child.material.clone();
+
+                    // Force standard material for better lighting reaction
+                    if (child.material.isMeshBasicMaterial || child.material.isMeshLambertMaterial || child.material.isMeshPhongMaterial) {
+                        var newMat = new THREE.MeshStandardMaterial();
+                        newMat.color.copy(child.material.color);
+                        if (child.material.map) newMat.map = child.material.map;
+                        child.material.dispose();
+                        child.material = newMat;
+                    } else {
+                        child.material = child.material.clone();
+                    }
+
+                    // Force matte finish and let environment map handle subtle reflections
+                    child.material.roughness = 0.65;
+                    child.material.metalness = 0.1;
+                    child.material.envMapIntensity = 1.0;
 
                     if (autoColorize) {
                         child.material.color.setHex(colorPalette[meshCount % colorPalette.length]);
@@ -357,6 +394,10 @@ function initModelViewer(container) {
                     child.material.clippingPlanes = [clippingPlane];
                     child.material.clipShadows = true;
                     child.material.side = THREE.DoubleSide;
+
+                    // Ensure shadow casting
+                    child.castShadow = true;
+                    child.receiveShadow = true;
                 }
             });
 
