@@ -11,7 +11,11 @@
 
     if (!gridContainer) return;
 
-    fetch(PROJECTS_URL)
+    // Cache-bust the JSON fetch
+    var timestamp = new Date().getTime();
+    var fetchUrl = PROJECTS_URL + '?v=' + timestamp;
+
+    fetch(fetchUrl)
         .then(function (response) {
             if (!response.ok) throw new Error('Failed to load projects');
             return response.json();
