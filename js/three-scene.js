@@ -6,7 +6,7 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const container = document.getElementById('three-container');
 
     if (!container) return;
@@ -179,7 +179,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const dracoLoader = new DRACOLoader();
     dracoLoader.setDecoderPath('https://cdn.jsdelivr.net/npm/three@0.161.0/examples/jsm/libs/draco/gltf/');
-    dracoLoader.setDecoderConfig({ type: 'js' });
+    dracoLoader.setDecoderConfig({ type: 'wasm' });
 
     const loader = new GLTFLoader();
     loader.setDRACOLoader(dracoLoader);

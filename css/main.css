@@ -55,7 +55,9 @@
 /* ============================================
    RESET & BASE STYLES
    ============================================ */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -93,7 +95,8 @@ button {
     background: none;
 }
 
-ul, ol {
+ul,
+ol {
     list-style: none;
 }
 
@@ -266,13 +269,11 @@ ul, ol {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: repeating-linear-gradient(
-        0deg,
-        var(--color-black) 0px,
-        var(--color-black) 2px,
-        var(--color-gray-100) 2px,
-        var(--color-gray-100) 4px
-    );
+    background: repeating-linear-gradient(0deg,
+            var(--color-black) 0px,
+            var(--color-black) 2px,
+            var(--color-gray-100) 2px,
+            var(--color-gray-100) 4px);
     opacity: 0.15;
 }
 
@@ -305,9 +306,12 @@ ul, ol {
 }
 
 @keyframes bounce {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: rotate(45deg) translateY(0);
     }
+
     50% {
         transform: rotate(45deg) translateY(10px);
     }
@@ -835,7 +839,7 @@ ul, ol {
     transition: opacity 0.3s ease, transform 0.3s ease;
     background: var(--color-white);
     box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.15),
-                0 1px 3px rgba(0, 0, 0, 0.1);
+        0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .sketch-page img {
@@ -852,7 +856,7 @@ ul, ol {
 .sketch-page--active {
     opacity: 1;
     box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.2),
-                0 2px 6px rgba(0, 0, 0, 0.12);
+        0 2px 6px rgba(0, 0, 0, 0.12);
 }
 
 .sketch-nav {
@@ -898,7 +902,7 @@ ul, ol {
     padding-bottom: calc(var(--space-lg) + 2rem);
 }
 
-.log-entry--sketches > .log-caption {
+.log-entry--sketches>.log-caption {
     margin-bottom: var(--space-sm);
 }
 
@@ -914,6 +918,9 @@ ul, ol {
 }
 
 .model-wrapper canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100% !important;
     height: 100% !important;
     display: block;

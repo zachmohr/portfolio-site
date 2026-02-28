@@ -11,7 +11,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 // Shared loader instances
 var dracoLoader = new DRACOLoader();
 dracoLoader.setDecoderPath('https://cdn.jsdelivr.net/npm/three@0.161.0/examples/jsm/libs/draco/gltf/');
-dracoLoader.setDecoderConfig({ type: 'js' });
+dracoLoader.setDecoderConfig({ type: 'wasm' });
 
 var gltfLoader = new GLTFLoader();
 gltfLoader.setDRACOLoader(dracoLoader);
@@ -61,6 +61,8 @@ function initModelViewer(container) {
 
     var src = container.getAttribute('data-src');
     if (!src) return false;
+
+    container.innerHTML = '';
 
     var width = container.clientWidth;
     var height = container.clientHeight;
