@@ -490,6 +490,100 @@
             "entries": []
         },
         {
+            "id": "side-table-home-garden",
+            "type": "log",
+            "title": "Side Table Home Garden",
+            "date": "2025-03",
+            "category": "product-design",
+            "tags": ["Prototyping", "IoT", "3D Printing", "Original Design"],
+            "description": "A fully automatic indoor garden disguised as a side table, designed for my Innovation Studio 1 graduate course. The prompt was to make fresh produce more accessible to people in food deserts — rather than adding another appliance to the home, this integrates a garden into existing furniture. The prototype features a soil moisture sensor, grow lights, a peristaltic pump for automated watering, and a camera for machine vision plant monitoring, all connected to the web for remote access. The lid is height-adjustable for easy access to the garden. This was a rapid prototyping class focused on the thinking process over a polished final product.",
+            "hero": {
+                "src": "assets/images/projects/side-table-home-garden/IMG_0793.JPG",
+                "alt": "Side table home garden prototype with lid raised showing grow lights, planter pot, and wood-wrapped bucket form factor"
+            },
+            "video": null,
+            "entries": [
+                {
+                    "src": "assets/images/projects/side-table-home-garden/IMG_0794.JPG",
+                    "alt": "Interior electronics bay beneath the planter showing peristaltic pump, soil moisture sensor wiring, and microcontroller"
+                },
+                {
+                    "type": "video",
+                    "src": "assets/images/projects/side-table-home-garden/IMG_0796.mp4",
+                    "poster": "assets/images/projects/side-table-home-garden/IMG_0796-poster.jpg",
+                    "alt": "Video demonstration of the side table home garden prototype"
+                },
+                {
+                    "type": "model",
+                    "src": "assets/images/projects/side-table-home-garden/bucket-planter-v21.glb",
+                    "alt": "3D model of the bucket planter components",
+                    "caption": "3D model of custom components used to mount electronics and equipment"
+                },
+                {
+                    "type": "sketches",
+                    "caption": "Concept sketches",
+                    "pages": [
+                        {
+                            "src": "assets/images/projects/side-table-home-garden/IMG_3731.JPG",
+                            "alt": "Detailed sketch of the chosen bucket-based side table concept with notes on camera, pump, lighting, and app connectivity"
+                        },
+                        {
+                            "src": "assets/images/projects/side-table-home-garden/IMG_3727.JPG",
+                            "alt": "Sketch page showing the selected concept with improvements — wood exterior, grow lights, watering system, height-adjustable lid, and mushroom growing in the shade below"
+                        },
+                        {
+                            "src": "assets/images/projects/side-table-home-garden/IMG_3725.JPG",
+                            "alt": "First page of concept sketches showing nine initial ideas including bucket planter, stackable boxes, milk crates, adjustable rod system, wall mount grid, and more"
+                        },
+                        {
+                            "src": "assets/images/projects/side-table-home-garden/IMG_3726.JPG",
+                            "alt": "Second page of concept sketches showing ideas 10 through 18 including articulating joints, robot planter, toilet aquaponics, coffee table planter, and recycled bottle hydroponics"
+                        },
+                        {
+                            "src": "assets/images/projects/side-table-home-garden/IMG_3728.JPG",
+                            "alt": "Third page of concept sketches showing ideas 19 through 25 including modular clay pot rack, solar powered lights, window hanging garden, mushroom planter kits, and door hanger kit"
+                        },
+                        {
+                            "src": "assets/images/projects/side-table-home-garden/IMG_3729.JPG",
+                            "alt": "Sketch of a coffee table planter concept with transparent sides showing plants and cubby storage below"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "memory-holder",
+            "type": "log",
+            "title": "Memory Holder",
+            "date": "2024-05",
+            "category": "fabrication",
+            "tags": ["Woodworking", "Brass", "Original Design"],
+            "description": "A wall-mounted walnut display for preserving memories from life's milestones. A string runs through the tray, tensioned by custom-made brass cleats, allowing champagne and wine corks to be drilled and strung up to commemorate special occasions — engagements, weddings, and other celebrations. Photos can be clipped to the string as well. The brass hardware was made specifically for this piece, complementing the warmth of the walnut.",
+            "hero": {
+                "src": "assets/images/projects/memory-holder/IMG_0575.JPG",
+                "alt": "Walnut memory holder with champagne corks strung along a line inside the tray"
+            },
+            "video": null,
+            "entries": [
+                {
+                    "src": "assets/images/projects/memory-holder/IMG_0576.JPG",
+                    "alt": "Close-up of the walnut tray showing brass pin detail and corks with handwritten dates"
+                },
+                {
+                    "src": "assets/images/projects/memory-holder/IMG_0578.JPG",
+                    "alt": "Detail of the custom brass cleat used to tension the string at the top of the display"
+                },
+                {
+                    "src": "assets/images/projects/memory-holder/IMG_0579.JPG",
+                    "alt": "Close-up of the brass cleat with string wrapped around it against the walnut frame"
+                },
+                {
+                    "src": "assets/images/projects/memory-holder/IMG_0581.JPG",
+                    "alt": "Memory holder mounted on the wall with corks hanging from the string"
+                }
+            ]
+        },
+        {
             "id": "brass-wire-joinery-tables",
             "type": "log",
             "title": "Brass Wire Joinery Tables",

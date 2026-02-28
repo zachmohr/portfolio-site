@@ -22,6 +22,7 @@
             initToggleHandlers(gridContainer);
             initDescriptionToggleHandlers(gridContainer);
             initVideoHandlers(gridContainer);
+            initSketchStackHandlers(gridContainer);
             document.dispatchEvent(new CustomEvent('projectsRendered'));
         })
         .catch(function (err) {
@@ -125,6 +126,10 @@
         entries.forEach(function (entry) {
             if (entry.type === 'video') {
                 html += renderVideoEntry(entry);
+            } else if (entry.type === 'model') {
+                html += renderModelEntry(entry);
+            } else if (entry.type === 'sketches') {
+                html += renderSketchesEntry(entry);
             } else {
                 html += renderImageEntry(entry);
             }
@@ -184,6 +189,67 @@
                     : '') +
             '</div>'
         );
+    }
+
+    function renderModelEntry(entry) {
+        var modelSrc = entry.glb || entry.src;
+
+        return (
+            '<div class="log-entry log-entry--model">' +
+                '<div class="model-wrapper model-viewer-container" data-src="' + escapeAttr(modelSrc) + '"' +
+                    ' role="img" aria-label="' + escapeAttr(entry.alt) + '">' +
+                '</div>' +
+                (entry.caption
+                    ? '<p class="log-caption">' + escapeHtml(entry.caption) + '</p>'
+                    : '') +
+            '</div>'
+        );
+    }
+
+    function renderSketchesEntry(entry) {
+        var pages = entry.pages;
+        if (!pages || pages.length === 0) return '';
+
+        // Seed a simple deterministic random per stack so rotations are stable
+        var html = '<div class="log-entry log-entry--sketches">';
+        if (entry.caption) {
+            html += '<p class="log-caption">' + escapeHtml(entry.caption) + '</p>';
+        }
+        html += '<div class="sketch-stack" data-count="' + pages.length + '">';
+
+        pages.forEach(function (page, i) {
+            // Deterministic pseudo-random rotation from -4 to 4 degrees
+            var seed = hashString(page.src);
+            var rotation = ((seed % 900) - 450) / 100; // range roughly -4.5 to 4.5
+            var offsetX = ((seed >> 4) % 600 - 300) / 100; // range roughly -3 to 3 px
+            var offsetY = ((seed >> 8) % 400 - 200) / 100; // range roughly -2 to 2 px
+            var isActive = (i === 0) ? ' sketch-page--active' : '';
+            var zIndex = pages.length - i;
+
+            html +=
+                '<div class="sketch-page' + isActive + '" data-index="' + i + '"' +
+                    ' style="z-index:' + zIndex + ';' +
+                    'transform:rotate(' + rotation.toFixed(2) + 'deg) translate(' + offsetX.toFixed(1) + 'px,' + offsetY.toFixed(1) + 'px);">' +
+                    '<img src="' + page.src + '" alt="' + escapeAttr(page.alt) + '" loading="lazy">' +
+                '</div>';
+        });
+
+        html += '<div class="sketch-nav">' +
+                    '<button class="sketch-prev" aria-label="Previous sketch">&#8592;</button>' +
+                    '<span class="sketch-counter">1 / ' + pages.length + '</span>' +
+                    '<button class="sketch-next" aria-label="Next sketch">&#8594;</button>' +
+                '</div>';
+        html += '</div></div>';
+        return html;
+    }
+
+    function hashString(str) {
+        var hash = 5381;
+        for (var i = 0; i < str.length; i++) {
+            hash = ((hash << 5) + hash) + str.charCodeAt(i);
+            hash = hash & 0x7FFFFFFF; // keep positive
+        }
+        return hash;
     }
 
     // ============================================
@@ -318,11 +384,17 @@
     // ============================================
     function initToggleHandlers(container) {
         container.addEventListener('click', function (e) {
-            var toggle = e.target.closest('.project-log-toggle');
-            if (!toggle) return;
+            // Skip if clicking interactive elements inside the card
+            if (e.target.closest('a, button, .description-toggle, .project-log, video, .sketch-nav, .model-controls')) return;
 
-            var card = toggle.closest('.project-card--log');
+            // Allow clicks anywhere on a log card to toggle the build log
+            var card = e.target.closest('.project-card--log');
+            if (!card) return;
+
+            var toggle = card.querySelector('.project-log-toggle');
             var log = card.querySelector('.project-log');
+            if (!toggle || !log) return;
+
             var isExpanded = toggle.getAttribute('aria-expanded') === 'true';
 
             toggle.setAttribute('aria-expanded', String(!isExpanded));
@@ -363,6 +435,71 @@
 
             wrapper.replaceChild(iframe, placeholder);
         });
+    }
+
+    // ============================================
+    // SKETCH STACK NAVIGATION
+    // ============================================
+    function initSketchStackHandlers(container) {
+        container.addEventListener('click', function (e) {
+            var btn = e.target.closest('.sketch-prev, .sketch-next');
+            if (!btn) return;
+
+            var stack = btn.closest('.sketch-stack');
+            var pages = stack.querySelectorAll('.sketch-page');
+            var counter = stack.querySelector('.sketch-counter');
+            var total = pages.length;
+
+            // Find current active index
+            var currentIndex = 0;
+            pages.forEach(function (page, i) {
+                if (page.classList.contains('sketch-page--active')) {
+                    currentIndex = i;
+                }
+            });
+
+            var direction = btn.classList.contains('.sketch-next') ? 1 :
+                            btn.classList.contains('sketch-next') ? 1 : -1;
+            var nextIndex = (currentIndex + direction + total) % total;
+
+            // Update active states and z-indexes
+            pages.forEach(function (page, i) {
+                page.classList.remove('sketch-page--active');
+                if (i === nextIndex) {
+                    page.classList.add('sketch-page--active');
+                    page.style.zIndex = total + 1;
+                } else {
+                    // Stack order: closer to nextIndex gets higher z
+                    var dist = Math.abs(i - nextIndex);
+                    if (dist > total / 2) dist = total - dist;
+                    page.style.zIndex = total - dist;
+                }
+            });
+
+            counter.textContent = (nextIndex + 1) + ' / ' + total;
+        });
+
+        // Swipe support for touch devices
+        var touchStartX = 0;
+        container.addEventListener('touchstart', function (e) {
+            if (!e.target.closest('.sketch-stack')) return;
+            touchStartX = e.touches[0].clientX;
+        }, { passive: true });
+
+        container.addEventListener('touchend', function (e) {
+            var stack = e.target.closest('.sketch-stack');
+            if (!stack) return;
+
+            var touchEndX = e.changedTouches[0].clientX;
+            var diff = touchStartX - touchEndX;
+
+            if (Math.abs(diff) < 50) return; // minimum swipe distance
+
+            var btn = diff > 0
+                ? stack.querySelector('.sketch-next')
+                : stack.querySelector('.sketch-prev');
+            if (btn) btn.click();
+        }, { passive: true });
     }
 
     // ============================================
