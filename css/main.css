@@ -819,11 +819,14 @@ ol {
     background-color: var(--color-red);
 }
 
-/* Sketch Stack */
 .sketch-stack {
     position: relative;
     width: 100%;
+    /* Modern aspect ratio */
     aspect-ratio: 3 / 4;
+    /* Fallback for older Safari (< iOS 15) */
+    height: 0;
+    padding-bottom: 133.33%;
     margin-bottom: var(--space-sm);
     touch-action: pan-y;
     user-select: none;
