@@ -97,7 +97,7 @@ function initModelViewer(container) {
     renderer.logarithmicDepthBuffer = true;
 
     var scene = new THREE.Scene();
-    scene.background = new THREE.Color(0xe8eaec);
+    scene.background = new THREE.Color(0x2563EB); // Site accent blue for contrast
 
     // Create a basic environment map for realistic soft reflections without loading an exr/hdr file
     var pmremGenerator = new THREE.PMREMGenerator(renderer);
@@ -390,11 +390,11 @@ function initModelViewer(container) {
                         child.material.color.setHex(colorPalette[meshCount % colorPalette.length]);
                         meshCount++;
                     } else if (!child.material.map) {
-                        // Prevent white-on-white washouts by defaulting raw uncolored CAD to the site's brand blue
+                        // Restore raw uncolored CAD to stark white
                         var hsl = {};
                         child.material.color.getHSL(hsl);
                         if (hsl.l > 0.6 && hsl.s < 0.2) {
-                            child.material.color.setHex(0x2563EB); // var(--color-red) aka blue accent
+                            child.material.color.setHex(0xffffff);
                         }
                     }
 
@@ -405,6 +405,16 @@ function initModelViewer(container) {
                     // Ensure shadow casting
                     child.castShadow = true;
                     child.receiveShadow = true;
+
+                    // Add visible edges for crisp 3D outline visibility
+                    var edgeGeom = new THREE.EdgesGeometry(child.geometry, 30);
+                    var edgeMat = new THREE.LineBasicMaterial({
+                        color: 0x000000,
+                        linewidth: 1,
+                        clippingPlanes: [clippingPlane]
+                    });
+                    var edgeMesh = new THREE.LineSegments(edgeGeom, edgeMat);
+                    child.add(edgeMesh);
                 }
             });
 
@@ -412,9 +422,9 @@ function initModelViewer(container) {
                 var helperSize = maxDim * 1.5;
                 var planeGeom = new THREE.PlaneGeometry(helperSize, helperSize);
                 var planeMat = new THREE.MeshBasicMaterial({
-                    color: 0x2563EB,
+                    color: 0xffffff,
                     transparent: true,
-                    opacity: 0.15,
+                    opacity: 0.25,
                     side: THREE.DoubleSide,
                     depthWrite: false
                 });
