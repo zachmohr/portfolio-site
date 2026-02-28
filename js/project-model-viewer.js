@@ -407,7 +407,7 @@ function initModelViewer(container) {
                     child.receiveShadow = true;
 
                     // Add visible edges for crisp 3D outline visibility
-                    var edgeGeom = new THREE.EdgesGeometry(child.geometry, 15);
+                    var edgeGeom = new THREE.EdgesGeometry(child.geometry, 30);
                     var edgeMat = new THREE.LineBasicMaterial({
                         color: 0x000000,
                         linewidth: 1,
