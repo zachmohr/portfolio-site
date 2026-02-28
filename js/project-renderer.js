@@ -196,11 +196,13 @@
     }
 
     function renderModelEntry(entry) {
-        var modelSrc = entry.glb || entry.src;
+        var modelsAttr = entry.models ? escapeAttr(JSON.stringify(entry.models)) : '';
+        var modelSrc = entry.models ? entry.models[0].src : (entry.glb || entry.src);
 
         return (
             '<div class="log-entry log-entry--model">' +
             '<div class="model-wrapper model-viewer-container" data-src="' + escapeAttr(modelSrc) + '"' +
+            (modelsAttr ? ' data-models="' + modelsAttr + '"' : '') +
             ' role="img" aria-label="' + escapeAttr(entry.alt) + '">' +
             '</div>' +
             (entry.caption
@@ -219,21 +221,30 @@
         if (entry.caption) {
             html += '<p class="log-caption">' + escapeHtml(entry.caption) + '</p>';
         }
-        html += '<div class="sketch-stack" data-count="' + pages.length + '">';
+        html += '<div class="sketch-stack' + (entry.layout === 'straight' ? ' sketch-stack--straight' : '') + '" data-count="' + pages.length + '">';
 
         pages.forEach(function (page, i) {
-            // Deterministic pseudo-random rotation from -4 to 4 degrees
-            var seed = hashString(page.src);
-            var rotation = ((seed % 900) - 450) / 100; // range roughly -4.5 to 4.5
-            var offsetX = ((seed >> 4) % 600 - 300) / 100; // range roughly -3 to 3 px
-            var offsetY = ((seed >> 8) % 400 - 200) / 100; // range roughly -2 to 2 px
+            var rotation = 0;
+            var offsetX = 0;
+            var offsetY = 0;
+
+            if (entry.layout !== 'straight') {
+                // Deterministic pseudo-random rotation from -4 to 4 degrees
+                var seed = hashString(page.src);
+                rotation = ((seed % 900) - 450) / 100; // range roughly -4.5 to 4.5
+                offsetX = ((seed >> 4) % 600 - 300) / 100; // range roughly -3 to 3 px
+                offsetY = ((seed >> 8) % 400 - 200) / 100; // range roughly -2 to 2 px
+            }
+
             var isActive = (i === 0) ? ' sketch-page--active' : '';
             var zIndex = pages.length - i;
+            var transformStyle = entry.layout !== 'straight'
+                ? 'transform:rotate(' + rotation.toFixed(2) + 'deg) translate(' + offsetX.toFixed(1) + 'px,' + offsetY.toFixed(1) + 'px);'
+                : '';
 
             html +=
                 '<div class="sketch-page' + isActive + '" data-index="' + i + '"' +
-                ' style="z-index:' + zIndex + ';' +
-                'transform:rotate(' + rotation.toFixed(2) + 'deg) translate(' + offsetX.toFixed(1) + 'px,' + offsetY.toFixed(1) + 'px);">' +
+                ' style="z-index:' + zIndex + ';' + transformStyle + '">' +
                 '<img src="' + page.src + '" alt="' + escapeAttr(page.alt) + '" loading="lazy">' +
                 '</div>';
         });

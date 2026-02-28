@@ -151,12 +151,98 @@ function initModelViewer(container) {
     sliderWrap.appendChild(slider);
     controlsDiv.appendChild(crossSectionBtn);
     controlsDiv.appendChild(sliderWrap);
+
+    // Multiple models dropdown
+    var modelsData = container.getAttribute('data-models');
+    var models = modelsData ? JSON.parse(modelsData) : null;
+
+    var topControlsDiv = document.createElement('div');
+    topControlsDiv.className = 'model-top-controls';
+    if (models) {
+        var modelSelect = document.createElement('select');
+        modelSelect.className = 'model-select';
+        modelSelect.setAttribute('aria-label', 'Select model version');
+        models.forEach(function (m) {
+            var opt = document.createElement('option');
+            opt.value = m.src;
+            opt.textContent = m.name;
+            modelSelect.appendChild(opt);
+        });
+        modelSelect.addEventListener('change', function () {
+            loadModel(this.value);
+        });
+        topControlsDiv.appendChild(modelSelect);
+    }
+
+    // Axis dropdown
+    var axisSelect = document.createElement('select');
+    axisSelect.className = 'model-select model-axis-select';
+    axisSelect.setAttribute('aria-label', 'Select clipping axis');
+    axisSelect.innerHTML = '<option value="y">Y Axis</option><option value="x">X Axis</option><option value="z">Z Axis</option>';
+    axisSelect.hidden = true;
+
+    axisSelect.addEventListener('change', function () {
+        updateClippingForAxis();
+    });
+    topControlsDiv.appendChild(axisSelect);
+    container.appendChild(topControlsDiv);
     container.appendChild(controlsDiv);
+
+    var currentAxis = 'y';
+    var currentModelNode = null;
+    var currentBox = null;
+    var ground = null;
+
+    function updateClippingForAxis() {
+        if (!currentBox) return;
+
+        var axisVec = new THREE.Vector3(0, 0, 0);
+        var planeRot = new THREE.Euler();
+
+        switch (currentAxis) {
+            case 'x':
+                modelBounds.min = currentBox.min.x;
+                modelBounds.max = currentBox.max.x;
+                axisVec.set(-1, 0, 0);
+                planeRot.set(0, Math.PI / 2, 0);
+                break;
+            case 'y':
+                modelBounds.min = currentBox.min.y;
+                modelBounds.max = currentBox.max.y;
+                axisVec.set(0, -1, 0);
+                planeRot.set(Math.PI / 2, 0, 0);
+                break;
+            case 'z':
+                modelBounds.min = currentBox.min.z;
+                modelBounds.max = currentBox.max.z;
+                axisVec.set(0, 0, -1);
+                planeRot.set(0, 0, 0);
+                break;
+        }
+        clippingPlane.normal.copy(axisVec);
+
+        if (planeHelper) {
+            planeHelper.rotation.copy(planeRot);
+        }
+
+        var t = parseInt(slider.value, 10) / 100;
+        var range = modelBounds.max - modelBounds.min;
+        clippingPlane.constant = modelBounds.min + t * range;
+
+        if (planeHelper) {
+            var offset = clippingPlane.constant;
+            planeHelper.position.set(0, 0, 0);
+            if (currentAxis === 'x') planeHelper.position.x = offset;
+            if (currentAxis === 'y') planeHelper.position.y = offset;
+            if (currentAxis === 'z') planeHelper.position.z = offset;
+        }
+    }
 
     crossSectionBtn.addEventListener('click', function () {
         var enabled = crossSectionBtn.getAttribute('aria-pressed') !== 'true';
         crossSectionBtn.setAttribute('aria-pressed', String(enabled));
         sliderWrap.hidden = !enabled;
+        axisSelect.hidden = !enabled;
 
         if (planeHelper) {
             planeHelper.visible = enabled;
@@ -164,7 +250,9 @@ function initModelViewer(container) {
 
         if (!enabled) {
             slider.value = '100';
-            clippingPlane.constant = modelBounds.max + 0.01;
+            if (currentBox) clippingPlane.constant = Math.max(currentBox.max.x, currentBox.max.y, currentBox.max.z) + 0.01;
+        } else {
+            updateClippingForAxis();
         }
     });
 
@@ -174,7 +262,10 @@ function initModelViewer(container) {
         clippingPlane.constant = modelBounds.min + t * range;
 
         if (planeHelper) {
-            planeHelper.position.y = clippingPlane.constant;
+            var offset = clippingPlane.constant;
+            if (currentAxis === 'x') planeHelper.position.x = offset;
+            if (currentAxis === 'y') planeHelper.position.y = offset;
+            if (currentAxis === 'z') planeHelper.position.z = offset;
         }
     });
 
@@ -191,68 +282,99 @@ function initModelViewer(container) {
         contextLost = false;
     });
 
-    gltfLoader.load(src, function (gltf) {
-        var state = viewerStates.get(container);
-        if (!state || state.disposed) return;
+    function loadModel(modelUrl) {
+        var prevNode = currentModelNode;
+        gltfLoader.load(modelUrl, function (gltf) {
+            var state = viewerStates.get(container);
+            if (!state || state.disposed) return;
 
-        var model = gltf.scene;
-        var box = new THREE.Box3().setFromObject(model);
-        var center = box.getCenter(new THREE.Vector3());
-        var size = box.getSize(new THREE.Vector3());
+            if (prevNode) {
+                scene.remove(prevNode);
+                prevNode.traverse(function (child) {
+                    if (child.isMesh) {
+                        if (child.geometry) child.geometry.dispose();
+                        if (child.material) {
+                            if (Array.isArray(child.material)) {
+                                child.material.forEach(m => m.dispose());
+                            } else {
+                                child.material.dispose();
+                            }
+                        }
+                    }
+                });
+            }
 
-        model.position.sub(center);
-        box.setFromObject(model);
-        modelBounds.min = box.min.y;
-        modelBounds.max = box.max.y;
+            var model = gltf.scene;
+            var box = new THREE.Box3().setFromObject(model);
+            var center = box.getCenter(new THREE.Vector3());
+            var size = box.getSize(new THREE.Vector3());
 
-        var maxDim = Math.max(size.x, size.y, size.z);
-        var fov = camera.fov * (Math.PI / 180);
-        var fitDistance = maxDim / (2 * Math.tan(fov / 2));
-        camera.position.set(fitDistance * 0.8, fitDistance * 0.5, fitDistance * 0.8);
-        camera.lookAt(0, 0, 0);
-        controls.target.set(0, 0, 0);
-        controls.update();
+            model.position.sub(center);
+            box.setFromObject(model);
+            currentBox = box;
 
-        clippingPlane.constant = modelBounds.max + 0.01;
+            updateClippingForAxis();
 
-        model.traverse(function (child) {
-            if (child.isMesh && child.material) {
-                child.material = child.material.clone();
-                child.material.clippingPlanes = [clippingPlane];
-                child.material.clipShadows = true;
-                child.material.side = THREE.DoubleSide;
+            var maxDim = Math.max(size.x, size.y, size.z);
+            var fov = camera.fov * (Math.PI / 180);
+            var fitDistance = maxDim / (2 * Math.tan(fov / 2));
+            camera.position.set(fitDistance * 0.8, fitDistance * 0.5, fitDistance * 0.8);
+            camera.lookAt(0, 0, 0);
+            controls.target.set(0, 0, 0);
+            controls.update();
+
+            model.traverse(function (child) {
+                if (child.isMesh && child.material) {
+                    child.material = child.material.clone();
+                    child.material.clippingPlanes = [clippingPlane];
+                    child.material.clipShadows = true;
+                    child.material.side = THREE.DoubleSide;
+                }
+            });
+
+            if (!planeHelper) {
+                var helperSize = maxDim * 1.5;
+                var planeGeom = new THREE.PlaneGeometry(helperSize, helperSize);
+                var planeMat = new THREE.MeshBasicMaterial({
+                    color: 0x2563EB,
+                    transparent: true,
+                    opacity: 0.15,
+                    side: THREE.DoubleSide,
+                    depthWrite: false
+                });
+                planeHelper = new THREE.Mesh(planeGeom, planeMat);
+                planeHelper.visible = crossSectionBtn.getAttribute('aria-pressed') === 'true';
+                scene.add(planeHelper);
+            }
+            updateClippingForAxis();
+
+            if (!ground) {
+                var groundGeom = new THREE.PlaneGeometry(maxDim * 3, maxDim * 3);
+                var groundMat = new THREE.ShadowMaterial({ opacity: 0.15 });
+                ground = new THREE.Mesh(groundGeom, groundMat);
+                ground.rotation.x = -Math.PI / 2;
+                ground.receiveShadow = true;
+                scene.add(ground);
+            }
+            ground.position.y = box.min.y;
+
+            scene.add(model);
+            currentModelNode = model;
+            state.model = model;
+
+            if (crossSectionBtn.getAttribute('aria-pressed') === 'false') {
+                clippingPlane.constant = maxDim + 0.01;
+            }
+        }, undefined, function (err) {
+            console.error('Failed to load model:', err);
+            if (!currentModelNode) {
+                disposeViewer(container);
+                renderFallback(container, 'Failed to load 3D model.');
             }
         });
+    }
 
-        var helperSize = maxDim * 1.2;
-        var planeGeom = new THREE.PlaneGeometry(helperSize, helperSize);
-        var planeMat = new THREE.MeshBasicMaterial({
-            color: 0x2563EB,
-            transparent: true,
-            opacity: 0.15,
-            side: THREE.DoubleSide,
-            depthWrite: false
-        });
-        planeHelper = new THREE.Mesh(planeGeom, planeMat);
-        planeHelper.rotation.x = Math.PI / 2;
-        planeHelper.visible = false;
-        scene.add(planeHelper);
-
-        var groundGeom = new THREE.PlaneGeometry(maxDim * 3, maxDim * 3);
-        var groundMat = new THREE.ShadowMaterial({ opacity: 0.15 });
-        var ground = new THREE.Mesh(groundGeom, groundMat);
-        ground.rotation.x = -Math.PI / 2;
-        ground.position.y = box.min.y;
-        ground.receiveShadow = true;
-        scene.add(ground);
-
-        scene.add(model);
-        state.model = model;
-    }, undefined, function (err) {
-        console.error('Failed to load model:', err);
-        disposeViewer(container);
-        renderFallback(container, 'Failed to load 3D model.');
-    });
+    loadModel(src);
 
     var resizeObserver = new ResizeObserver(function () {
         var current = viewerStates.get(container);
