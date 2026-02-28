@@ -132,6 +132,7 @@ function initModelViewer(container) {
     controlsDiv.className = 'model-controls';
 
     var allowCrossSection = container.getAttribute('data-allow-cross-section') === 'true';
+    var autoColorize = container.getAttribute('data-auto-colorize') === 'true';
 
     var crossSectionBtn = document.createElement('button');
     var sliderWrap = document.createElement('div');
@@ -332,9 +333,27 @@ function initModelViewer(container) {
             controls.target.set(0, 0, 0);
             controls.update();
 
+            var colorPalette = [
+                0x3B82F6, // Blue
+                0xEF4444, // Red
+                0x10B981, // Green
+                0xF59E0B, // Yellow
+                0x8B5CF6, // Purple
+                0xEC4899, // Pink
+                0x14B8A6, // Teal
+                0xF97316  // Orange
+            ];
+            var meshCount = 0;
+
             model.traverse(function (child) {
                 if (child.isMesh && child.material) {
                     child.material = child.material.clone();
+
+                    if (autoColorize) {
+                        child.material.color.setHex(colorPalette[meshCount % colorPalette.length]);
+                        meshCount++;
+                    }
+
                     child.material.clippingPlanes = [clippingPlane];
                     child.material.clipShadows = true;
                     child.material.side = THREE.DoubleSide;
