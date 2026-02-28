@@ -182,6 +182,7 @@ function initModelViewer(container) {
     axisSelect.hidden = true;
 
     axisSelect.addEventListener('change', function () {
+        currentAxis = axisSelect.value;
         updateClippingForAxis();
     });
     topControlsDiv.appendChild(axisSelect);
