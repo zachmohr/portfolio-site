@@ -203,6 +203,7 @@
             '<div class="log-entry log-entry--model">' +
             '<div class="model-wrapper model-viewer-container" data-src="' + escapeAttr(modelSrc) + '"' +
             (modelsAttr ? ' data-models="' + modelsAttr + '"' : '') +
+            (entry.allowCrossSection ? ' data-allow-cross-section="true"' : '') +
             ' role="img" aria-label="' + escapeAttr(entry.alt) + '">' +
             '</div>' +
             (entry.caption
