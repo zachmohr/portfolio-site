@@ -100,7 +100,7 @@ function initModelViewer(container) {
         renderer = new THREE.WebGLRenderer({
             canvas: canvas,
             context: glContext,
-            antialias: false,
+            antialias: true,
             alpha: true
         });
     } catch (err) {
@@ -113,9 +113,11 @@ function initModelViewer(container) {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.localClippingEnabled = true;
     renderer.shadowMap.enabled = true;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.1;
 
     var scene = new THREE.Scene();
-    scene.background = new THREE.Color(0xf0f0f0);
+    scene.background = new THREE.Color(0xe8eaec);
 
     var camera = new THREE.PerspectiveCamera(45, width / height, 0.01, 100);
     var controls = new OrbitControls(camera, canvas);
@@ -124,17 +126,25 @@ function initModelViewer(container) {
     controls.autoRotate = true;
     controls.autoRotateSpeed = 1.5;
 
-    var ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
-    scene.add(ambientLight);
+    // Sky/ground hemisphere for even base lighting
+    var hemiLight = new THREE.HemisphereLight(0xffffff, 0xb0b8c4, 0.9);
+    scene.add(hemiLight);
 
-    var dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
-    dirLight.position.set(5, 10, 7);
-    dirLight.castShadow = true;
-    scene.add(dirLight);
+    // Key light — upper front-right
+    var keyLight = new THREE.DirectionalLight(0xffffff, 1.8);
+    keyLight.position.set(8, 12, 8);
+    keyLight.castShadow = true;
+    scene.add(keyLight);
 
-    var fillLight = new THREE.DirectionalLight(0xffffff, 0.3);
-    fillLight.position.set(-5, 0, -5);
+    // Fill light — upper back-left
+    var fillLight = new THREE.DirectionalLight(0xffffff, 0.6);
+    fillLight.position.set(-8, 6, -4);
     scene.add(fillLight);
+
+    // Rim light — low back for edge separation
+    var rimLight = new THREE.DirectionalLight(0xffffff, 0.35);
+    rimLight.position.set(0, -4, -10);
+    scene.add(rimLight);
 
     var clippingPlane = new THREE.Plane(new THREE.Vector3(0, -1, 0), 0);
     var modelBounds = { min: 0, max: 1 };
