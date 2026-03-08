@@ -6,7 +6,6 @@
     'use strict';
 
     var PROJECTS_URL = 'data/projects.json';
-    var PROJECTS_ROUTE_BASE = '/projects';
     var gridContainer = document.querySelector('.projects-grid');
     var filterContainer = document.querySelector('.filter-buttons');
 
@@ -22,14 +21,12 @@
             return response.json();
         })
         .then(function (data) {
-            assignProjectSlugs(data.projects);
             renderFilterButtons(data.categories, filterContainer);
             renderProjects(data.projects, gridContainer);
             initToggleHandlers(gridContainer);
             initDescriptionToggleHandlers(gridContainer);
             initVideoHandlers(gridContainer);
             initSketchStackHandlers(gridContainer);
-            initProjectRouting(gridContainer);
             document.dispatchEvent(new CustomEvent('projectsRendered'));
         })
         .catch(function (err) {
@@ -81,14 +78,8 @@
     }
 
     function renderSingleCard(project, lazy) {
-        var projectSlug = project._routeSlug || '';
-        var projectAliases = (project._routeAliases || []).join(',');
-
         return (
-            '<article class="project-card" data-category="' + project.category + '" data-date="' + project.date + '"' +
-            ' data-project-slug="' + escapeAttr(projectSlug) + '"' +
-            (projectAliases ? ' data-project-aliases="' + escapeAttr(projectAliases) + '"' : '') +
-            '>' +
+            '<article class="project-card" data-category="' + project.category + '" data-date="' + project.date + '">' +
             '<div class="project-image">' +
             '<img src="' + project.hero.src + '" alt="' + escapeAttr(project.hero.alt) + '"' +
             lazy + ' width="1600" height="1000">' +
@@ -105,14 +96,8 @@
     }
 
     function renderLogCard(project, lazy) {
-        var projectSlug = project._routeSlug || '';
-        var projectAliases = (project._routeAliases || []).join(',');
-
         return (
-            '<article class="project-card project-card--log" data-category="' + project.category + '" data-date="' + project.date + '"' +
-            ' data-project-slug="' + escapeAttr(projectSlug) + '"' +
-            (projectAliases ? ' data-project-aliases="' + escapeAttr(projectAliases) + '"' : '') +
-            '>' +
+            '<article class="project-card project-card--log" data-category="' + project.category + '" data-date="' + project.date + '">' +
             '<div class="project-image">' +
             '<img src="' + project.hero.src + '" alt="' + escapeAttr(project.hero.alt) + '"' +
             lazy + ' width="1600" height="1000">' +
@@ -133,58 +118,6 @@
             '</div>' +
             '</article>'
         );
-    }
-
-    function assignProjectSlugs(projects) {
-        var used = {};
-
-        projects.forEach(function (project) {
-            var baseSlug = slugify(project.slug || project.id || project.title || 'project');
-            var routeSlug = makeUniqueSlug(baseSlug, used);
-            var aliases = [];
-            var aliasMap = {};
-
-            project._routeSlug = routeSlug;
-            used[routeSlug] = true;
-
-            addAlias(aliases, aliasMap, slugify(project.id || ''), routeSlug);
-            addAlias(aliases, aliasMap, slugify(project.title || ''), routeSlug);
-
-            if (Array.isArray(project.slugAliases)) {
-                project.slugAliases.forEach(function (alias) {
-                    addAlias(aliases, aliasMap, slugify(alias), routeSlug);
-                });
-            }
-
-            project._routeAliases = aliases;
-        });
-    }
-
-    function makeUniqueSlug(baseSlug, used) {
-        var slug = baseSlug || 'project';
-        var suffix = 2;
-
-        while (used[slug]) {
-            slug = baseSlug + '-' + suffix;
-            suffix++;
-        }
-
-        return slug;
-    }
-
-    function addAlias(aliases, aliasMap, candidate, canonicalSlug) {
-        if (!candidate || candidate === canonicalSlug || aliasMap[candidate]) return;
-        aliases.push(candidate);
-        aliasMap[candidate] = true;
-    }
-
-    function slugify(value) {
-        return String(value || '')
-            .toLowerCase()
-            .trim()
-            .replace(/&/g, ' and ')
-            .replace(/[^a-z0-9]+/g, '-')
-            .replace(/^-+|-+$/g, '');
     }
 
     // ============================================
@@ -480,140 +413,21 @@
             if (!toggle || !log) return;
 
             var isExpanded = toggle.getAttribute('aria-expanded') === 'true';
-            var willExpand = !isExpanded;
-            setLogCardExpanded(card, willExpand);
-            setProjectPath(card.getAttribute('data-project-slug'), false);
 
-            if (willExpand) {
+            toggle.setAttribute('aria-expanded', String(!isExpanded));
+            log.hidden = isExpanded;
+            toggle.querySelector('.toggle-indicator').textContent = isExpanded ? '[+]' : '[-]';
+
+            if (!isExpanded) {
+                card.style.gridColumn = '1 / -1';
                 // Scroll card into view after expanding
                 setTimeout(function () {
                     card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
                 }, 50);
+            } else {
+                card.style.gridColumn = '';
             }
         });
-    }
-
-    function setLogCardExpanded(card, shouldExpand) {
-        var toggle = card.querySelector('.project-log-toggle');
-        var log = card.querySelector('.project-log');
-        if (!toggle || !log) return;
-
-        toggle.setAttribute('aria-expanded', String(shouldExpand));
-        log.hidden = !shouldExpand;
-
-        var indicator = toggle.querySelector('.toggle-indicator');
-        if (indicator) {
-            indicator.textContent = shouldExpand ? '[-]' : '[+]';
-        }
-
-        if (shouldExpand) {
-            card.style.gridColumn = '1 / -1';
-        } else {
-            card.style.gridColumn = '';
-        }
-    }
-
-    // ============================================
-    // URL ROUTING (deep-linking to projects)
-    // ============================================
-    function initProjectRouting(container) {
-        container.addEventListener('click', function (e) {
-            if (e.target.closest('a, button, .description-toggle, .project-log, video, .sketch-nav, .model-controls')) return;
-
-            var card = e.target.closest('.project-card');
-            if (!card || card.classList.contains('project-card--log')) return;
-
-            setProjectPath(card.getAttribute('data-project-slug'), false);
-        });
-
-        var initialSlug = getProjectSlugFromLocation();
-        if (initialSlug) {
-            var card = focusProjectBySlug(container, initialSlug);
-            if (card) {
-                setProjectPath(card.getAttribute('data-project-slug'), true);
-            }
-        }
-
-        window.addEventListener('popstate', function () {
-            var slug = getProjectSlugFromLocation();
-            if (!slug) {
-                collapseAllLogCards(container);
-                return;
-            }
-            focusProjectBySlug(container, slug);
-        });
-    }
-
-    function getProjectSlugFromLocation() {
-        var path = normalizePath(window.location.pathname);
-        var match = path.match(/^\/projects\/([^\/]+)$/);
-        if (match && match[1]) {
-            return slugify(decodeURIComponent(match[1]));
-        }
-
-        var querySlug = new URLSearchParams(window.location.search).get('project');
-        return querySlug ? slugify(querySlug) : '';
-    }
-
-    function focusProjectBySlug(container, slug) {
-        var card = findProjectCardBySlug(container, slug);
-        if (!card) return null;
-
-        if (card.classList.contains('project-card--log')) {
-            setLogCardExpanded(card, true);
-        }
-
-        // Ensure card is visible if filtering changed it.
-        card.style.display = 'block';
-        card.style.opacity = '1';
-        card.style.transform = 'scale(1)';
-
-        setTimeout(function () {
-            card.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }, 50);
-
-        return card;
-    }
-
-    function findProjectCardBySlug(container, slug) {
-        var cards = container.querySelectorAll('.project-card');
-        for (var i = 0; i < cards.length; i++) {
-            var card = cards[i];
-            var canonical = card.getAttribute('data-project-slug');
-            if (canonical === slug) return card;
-
-            var aliases = card.getAttribute('data-project-aliases');
-            if (!aliases) continue;
-
-            var aliasList = aliases.split(',');
-            for (var j = 0; j < aliasList.length; j++) {
-                if (aliasList[j] === slug) return card;
-            }
-        }
-        return null;
-    }
-
-    function collapseAllLogCards(container) {
-        var logCards = container.querySelectorAll('.project-card--log');
-        for (var i = 0; i < logCards.length; i++) {
-            setLogCardExpanded(logCards[i], false);
-        }
-    }
-
-    function setProjectPath(slug, replace) {
-        if (!slug || !window.history || !window.history.pushState) return;
-
-        var targetPath = PROJECTS_ROUTE_BASE + '/' + encodeURIComponent(slug);
-        if (normalizePath(window.location.pathname) === normalizePath(targetPath)) {
-            return;
-        }
-
-        var method = replace ? 'replaceState' : 'pushState';
-        window.history[method]({ projectSlug: slug }, '', targetPath);
-    }
-
-    function normalizePath(path) {
-        return (path || '').replace(/\/+$/, '') || '/';
     }
 
     // ============================================
