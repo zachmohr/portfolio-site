@@ -251,12 +251,11 @@ ol {
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    background-color: var(--color-gray-200); /* fallback before canvas loads */
+    background-color: transparent;
 }
 
 #three-container {
     width: 100%;
-    height: 100%;
     cursor: grab;
 }
 
