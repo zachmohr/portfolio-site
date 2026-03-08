@@ -789,6 +789,19 @@ ol {
     border: none;
 }
 
+.video-wrapper--self-hosted {
+    aspect-ratio: auto;
+    background-color: var(--color-white);
+}
+
+.video-wrapper--self-hosted video {
+    position: static;
+    display: block;
+    width: 100%;
+    height: auto;
+    background-color: var(--color-white);
+}
+
 .video-placeholder {
     position: relative;
     width: 100%;
@@ -824,6 +837,81 @@ ol {
     background-color: var(--color-red);
 }
 
+.strobe-wrapper {
+    position: relative;
+    width: 100%;
+    border: var(--border-width) solid var(--color-gray-200);
+    background: #e7e7e7;
+    margin-bottom: var(--space-sm);
+    overflow: hidden;
+    isolation: isolate;
+    --strobe-shift: 10px;
+    --strobe-duration: 120ms;
+}
+
+.strobe-base {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.strobe-overlay {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    animation: strobe-slide var(--strobe-duration) linear infinite alternate;
+    will-change: transform;
+}
+
+.strobe-controls {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-sm);
+    margin-bottom: var(--space-sm);
+}
+
+.strobe-control {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    color: var(--color-gray-700);
+    border: var(--border-width) solid var(--color-gray-200);
+    padding: 0.5rem 0.625rem;
+    background: var(--color-white);
+}
+
+.strobe-control input[type="range"] {
+    width: 100%;
+    margin: 0;
+}
+
+.strobe-value {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-gray-800);
+    white-space: nowrap;
+}
+
+@keyframes strobe-slide {
+    from {
+        transform: translateY(calc(var(--strobe-shift) * -1));
+    }
+
+    to {
+        transform: translateY(var(--strobe-shift));
+    }
+}
+
+@media (max-width: 560px) {
+    .strobe-controls {
+        grid-template-columns: 1fr;
+    }
+}
+
 .sketch-stack {
     position: relative;
     width: 100%;
@@ -845,7 +933,7 @@ ol {
     width: 100%;
     height: 100%;
     transition: opacity 0.3s ease, transform 0.3s ease;
-    background: var(--color-white);
+    background: #fff;
     box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.15),
         0 1px 3px rgba(0, 0, 0, 0.1);
 }
@@ -854,6 +942,7 @@ ol {
     width: 100%;
     height: 100%;
     object-fit: contain;
+    background: #fff;
     display: block;
 }
 
