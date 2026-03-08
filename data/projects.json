@@ -1088,6 +1088,121 @@
             ]
         },
         {
+            "id": "lightship-mikros-concept-camper",
+            "slug": "lightship-mikros",
+            "type": "log",
+            "title": "Lightship Mikros Concept Camper",
+            "date": "2026-03",
+            "category": "product-design",
+            "tags": [
+                "Concept Design",
+                "Transportation",
+                "CAD",
+                "3D Modeling",
+                "AR"
+            ],
+            "description": "Conceptual compact camper study completed in March 2026, inspired by the current Lightship RV lineup and its simple utilitarian design language. I wanted to explore that same design DNA in a much smaller form factor, with a focus on highly detailed CAD development and interior packaging decisions. Key features include a fold-out couch/bed system and a telescoping canopy that raises the small camper to full stand-up height. This log keeps the image set intentionally tight so the interactive 3D model can be the centerpiece.",
+            "hero": {
+                "src": "assets/images/projects/lightship-mikros/Lightship Mini v30 Side View.png",
+                "alt": "Lightship Mikros compact camper concept in side profile attached to a tow vehicle"
+            },
+            "video": null,
+            "entries": [
+                {
+                    "src": "assets/images/projects/lightship-mikros/scan-mar-8-2026-lightship-page-01-upright.png",
+                    "alt": "Initial concept sketch for the Lightship Mikros compact camper",
+                    "caption": "Initial idea sketch exploring the compact trailer geometry and proportions."
+                },
+                {
+                    "type": "model",
+                    "src": "assets/images/projects/lightship-mikros/Lightship Mini v35.glb",
+                    "iosSrc": "assets/images/projects/lightship-mikros/Lightship Mini v35.usdz",
+                    "arTitle": "Lightship Mikros Concept Camper",
+                    "alt": "Interactive 3D model of the Lightship Mikros concept camper",
+                    "caption": "Detailed CAD model with mobile AR support."
+                },
+                {
+                    "type": "video",
+                    "src": "assets/images/projects/lightship-mikros/Canopy.mp4",
+                    "sources": [
+                        {
+                            "src": "assets/images/projects/lightship-mikros/Canopy.mp4",
+                            "mimeType": "video/mp4"
+                        },
+                        {
+                            "src": "assets/images/projects/lightship-mikros/Canopy.mov",
+                            "mimeType": "video/quicktime"
+                        }
+                    ],
+                    "caption": "Telescoping canopy animation to full stand-up height.",
+                    "alt": "Animation showing the telescoping canopy extending to full stand-up height"
+                },
+                {
+                    "type": "video",
+                    "src": "assets/images/projects/lightship-mikros/TopDoor.mp4",
+                    "sources": [
+                        {
+                            "src": "assets/images/projects/lightship-mikros/TopDoor.mp4",
+                            "mimeType": "video/mp4"
+                        },
+                        {
+                            "src": "assets/images/projects/lightship-mikros/TopDoor.mov",
+                            "mimeType": "video/quicktime"
+                        }
+                    ],
+                    "caption": "Top door opening animation.",
+                    "alt": "Animation showing the top door opening sequence"
+                },
+                {
+                    "type": "video",
+                    "src": "assets/images/projects/lightship-mikros/RearEntryDoor.mp4",
+                    "sources": [
+                        {
+                            "src": "assets/images/projects/lightship-mikros/RearEntryDoor.mp4",
+                            "mimeType": "video/mp4"
+                        },
+                        {
+                            "src": "assets/images/projects/lightship-mikros/RearEntryDoor.mov",
+                            "mimeType": "video/quicktime"
+                        }
+                    ],
+                    "caption": "Rear entry door opening animation.",
+                    "alt": "Animation showing the rear entry door opening sequence"
+                },
+                {
+                    "type": "video",
+                    "src": "assets/images/projects/lightship-mikros/Bed.mp4",
+                    "sources": [
+                        {
+                            "src": "assets/images/projects/lightship-mikros/Bed.mp4",
+                            "mimeType": "video/mp4"
+                        },
+                        {
+                            "src": "assets/images/projects/lightship-mikros/Bed.mov",
+                            "mimeType": "video/quicktime"
+                        }
+                    ],
+                    "caption": "Fold-out couch/bed transformation animation.",
+                    "alt": "Animation showing the fold-out couch and bed transformation"
+                },
+                {
+                    "src": "assets/images/projects/lightship-mikros/Screenshot 2026-03-08 at 6.24.46 PM.png",
+                    "alt": "Wide interior screenshot of the Lightship Mikros concept camper showing the entry, fold-out couch area, and kitchen layout",
+                    "caption": "Interior overview from the entry showing layout, circulation, and storage."
+                },
+                {
+                    "src": "assets/images/projects/lightship-mikros/Screenshot 2026-03-08 at 6.25.12 PM.png",
+                    "alt": "Interior screenshot focused on the kitchen counter, sink, and overhead storage in the Lightship Mikros concept camper",
+                    "caption": "Kitchen-focused interior view with sink, prep surface, and upper cabinetry."
+                },
+                {
+                    "src": "assets/images/projects/lightship-mikros/Screenshot 2026-03-08 at 6.25.43 PM.png",
+                    "alt": "Interior screenshot from above showing the countertop, sink, and bench storage arrangement in the Lightship Mikros concept camper",
+                    "caption": "Angled interior view highlighting utility surfaces and bench-side storage."
+                }
+            ]
+        },
+        {
             "id": "designer-sheet-metal-furniture",
             "slug": "designer-sheet-metal-furniture",
             "type": "log",
