@@ -11,6 +11,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (!container) return;
 
+    // Defer init until after first layout pass so container has correct dimensions
+    requestAnimationFrame(function init() {
+        if (container.clientHeight === 0) {
+            requestAnimationFrame(init);
+            return;
+        }
+        _init();
+    });
+
+    function _init() {
+
     // ============================================
     // SCENE SETUP
     // ============================================
@@ -24,7 +35,6 @@ document.addEventListener('DOMContentLoaded', function () {
     );
     camera.position.z = 7;
 
-    // Create canvas and pass to Three.js to avoid multiple context creation
     const canvas = document.createElement('canvas');
     container.appendChild(canvas);
 
@@ -33,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function () {
         renderer = new THREE.WebGLRenderer({
             canvas: canvas,
             antialias: false,
-            alpha: true
+            alpha: false
         });
     } catch (e) {
         console.warn('WebGL not available:', e.message);
@@ -42,11 +52,14 @@ document.addEventListener('DOMContentLoaded', function () {
         return;
     }
 
+    // Opaque canvas with background matching the container (#E0E0E0 = gray-200)
+    renderer.setClearColor(0xE0E0E0, 1);
+
     // Verify context is usable
     const gl = renderer.getContext();
     if (!gl || gl.isContextLost()) {
         console.warn('WebGL context not usable.');
-        canvas.remove();
+        renderer.domElement.remove();
         renderer.dispose();
         container.classList.add('webgl-fallback');
         return;
@@ -211,8 +224,8 @@ document.addEventListener('DOMContentLoaded', function () {
     // ============================================
     // MOUSE INTERACTION
     // ============================================
-    let targetRotationX = 0;
-    let targetRotationY = 0;
+    let targetRotationX = 0.6;
+    let targetRotationY = 0.4;
 
     container.addEventListener('mousemove', (event) => {
         const rect = container.getBoundingClientRect();
@@ -220,7 +233,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const mouseY = -((event.clientY - rect.top) / container.clientHeight) * 2 + 1;
 
         targetRotationY = mouseX * 0.5;
-        targetRotationX = mouseY * 0.5;
+        targetRotationX = mouseY * 0.2;
     });
 
     // ============================================
@@ -292,9 +305,9 @@ document.addEventListener('DOMContentLoaded', function () {
             model.rotation.x += (targetRotationX - model.rotation.x) * 0.05;
             model.rotation.y += (targetRotationY - model.rotation.y) * 0.05;
 
-            // Continuous slow rotation (adds to target so touch/mouse can override)
-            targetRotationX += 0.002;
-            targetRotationY += 0.003;
+            // Slow spin — reduced from original to feel grounded
+            targetRotationY += 0.002;
+            targetRotationX += 0.0008;
         }
 
         renderer.render(scene, camera);
@@ -324,4 +337,5 @@ document.addEventListener('DOMContentLoaded', function () {
         material.dispose();
         renderer.dispose();
     });
+    } // end _init
 });

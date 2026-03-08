@@ -18,7 +18,8 @@ document.addEventListener('DOMContentLoaded', function() {
         'Inventor',
         'Fabricator',
         'Entrepreneur',
-        'Roboticist'
+        'Roboticist',
+        'Innovator'
     ];
 
     const FADE_DURATION_MS = 400;  // matches CSS transition: opacity 0.4s
