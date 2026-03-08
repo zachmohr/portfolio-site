@@ -1,7 +1,7 @@
 # Zach Mohr — Full Portfolio Reference
 
 > This document is intended for AI agents and LLMs. It contains complete descriptions of all projects on zachmohr.work. For a summary version see /llms.txt.
-> Generated: 2026-02-22
+> Generated: 2026-03-08
 
 ## Person
 - Name: Zach Mohr
@@ -182,25 +182,70 @@ Design: Original furniture design, product design, CAD, graphic design, brand id
 - Category: Engineering
 - Tags: Mechanical Engineering, FEA, Welding, Fabrication, Capstone, Aluminum
 - URL: https://zachmohr.work/projects.html#beethovan-modular-stages
-- Description: Senior capstone project at SD Mines in partnership with the Rushmore Music Festival — a travelling orchestra that brings classical music to rural communities across the Northern Great Plains. The team designed and built the BeethoVAN: a fully outfitted cargo trailer serving as a mobile concert hall with indoor/outdoor performance capability, instrument storage, HVAC, solar power, and AV systems. My primary contribution was the modular aluminum stage system. No off-the-shelf stage had the combination of features required, so the stages were designed and built from scratch. Work included determining all structural loads, hand calculations for beam deflection using composite beam theory to account for the wood deck and aluminum frame acting together, and FEA to validate the results. The stages feature height-adjustable legs with a custom-machined cam lock handle to secure them under load — designed for fast setup and teardown in the field. Also designed and welded the articulating piano platform: an actuator-driven frame that stores the grand piano vertically during transport to minimize string detune from road vibration. The BeethoVAN began touring in summer 2023 and has been covered by SD Mines and the Rapid City Journal.
+- Description: Senior capstone project at SD Mines in partnership with the Rushmore Music Festival — a travelling orchestra that brings classical music to rural communities across the Northern Great Plains. The team designed and built the BeethoVAN: a fully outfitted cargo trailer serving as a mobile concert hall with indoor/outdoor performance capability, instrument storage, HVAC, solar power, and AV systems. My primary contribution was the modular aluminum stage system. No off-the-shelf stage had the combination of features required, so the stages were designed and built from scratch. Work included determining all structural loads, hand calculations for beam deflection using composite beam theory to account for the wood deck and aluminum frame acting together, and FEA to validate the results. The stages feature height-adjustable legs with cam lock handles fabricated from laminated sheet metal and modified McMaster components — built to be as cheap as possible while still locking securely under load. Also welded and assembled the articulating piano platform: an actuator-driven frame that stores the grand piano vertically during transport to minimize string detune from road vibration. The BeethoVAN began touring in summer 2023 and has been covered by SD Mines and the Rapid City Journal.
 
 ---
 
-### Textron Aviation — Mechanical Engineering
+### Memory Holder
 - Date: May 2024
-- Category: Aviation
-- Tags: Mechanical Engineering, Aircraft Interiors, Product Design, CAD, Patent
-- URL: https://zachmohr.work/projects.html#textron-aviation
-- Description: Mechanical engineer at Textron Aviation in Wichita, KS — manufacturer of Cessna and Beechcraft aircraft. Working on aircraft interior systems including seating mechanisms, cabin ergonomics, and machine vision integration. Three patent applications filed with Textron Innovations covering an armrest deployment mechanism, a seat recline safety system, and a machine vision system for aircraft cabin monitoring. Patent publication pending.
+- Category: Fabrication
+- Tags: Woodworking, Brass, Original Design
+- URL: https://zachmohr.work/projects.html#memory-holder
+- Description: A wall-mounted walnut display for preserving memories from life's milestones. A string runs through the tray, tensioned by custom-made brass cleats, allowing champagne and wine corks to be drilled and strung up to commemorate special occasions — engagements, weddings, and other celebrations. Photos can be clipped to the string as well. The brass hardware was made specifically for this piece, complementing the warmth of the walnut.
 
 ---
 
-### Figura Studio — The Roto
-- Date: June 2024
+### Universal Lid
+- Date: February 2025
+- Category: Product Design
+- Tags: Prototyping, Product Design, 3D Printing, Silicone Casting
+- URL: https://zachmohr.work/projects.html#universal-lid
+- Description: Universal lid designed for various tumblers and water bottles. Stemming from a prompt in Innovation Studio 1 about people losing their lids. Early prototype iterations used 3D printed PLA and TPU for a gasket that squeezed onto the bottle top. The design gained traction, prompting further independent iterations with overcast silicone. The current iteration features a blue silicone lid.
+
+---
+
+### Side Table Home Garden
+- Date: March 2025
+- Category: Product Design
+- Tags: Prototyping, IoT, 3D Printing, Original Design
+- URL: https://zachmohr.work/projects.html#side-table-home-garden
+- Description: A fully automatic indoor garden disguised as a side table, designed for my Innovation Studio 1 graduate course. The prompt was to make fresh produce more accessible to people in food deserts — rather than adding another appliance to the home, this integrates a garden into existing furniture. The prototype features a soil moisture sensor, grow lights, a peristaltic pump for automated watering, and a camera for machine vision plant monitoring, all connected to the web for remote access. The lid is height-adjustable for easy access to the garden. This was a rapid prototyping class focused on the thinking process over a polished final product.
+
+---
+
+### Clinic-in-a-Can Modular Walls
+- Date: April 2025
+- Category: Product Design
+- Tags: Product Design, Prototyping, CAD, 3D Printing
+- URL: https://zachmohr.work/projects.html#clinic-in-a-can-modular-walls
+- Description: Collaborative project designed during Innovation Studio 1 with Clinic-in-a-Can, a local nonprofit that deploys medical clinics in shipping containers to emergency situations globally. The goal was to create a modular wall system to link multiple shipping containers together, forming a reliable, weatherproof seal around the joined perimeter. This proposed solution features interlocking panels with insulated foam interiors sandwiched between a structural wood layer and a durable steel exterior. These segments chain together to secure the open gaps between containers. A scaled 3D-printed prototype was created to demonstrate the geometric interlocking joints, showcased here alongside preliminary concept sketches and the main CAD model.
+
+---
+
+### Roto Toilet Paper Holder
+- Date: April 2025
+- Category: Product Design
+- Tags: Product Design, Patent Pending, Consumer Product, Home Goods, Ongoing
+- URL: https://zachmohr.work/projects.html#roto-toilet-paper-holder
+- Description: Roto is my first consumer product and the first product launch from Figura Studio, my home goods design company. The design focuses on one-handed operation to make toilet paper roll changes faster, cleaner, and more accessible in everyday use. I filed for patent protection in April 2025, and this is an active ongoing program with future material iterations and collaborative versions planned with other creators and brands.
+
+---
+
+### Figura Studio — Brand & E-commerce Build
+- Date: August 2025
 - Category: Design
-- Tags: Product Design, Entrepreneurship, Patent, Brand Identity, Graphic Design, Manufacturing
-- URL: https://zachmohr.work/projects.html#figura-studio
-- Description: Figura Studio is a product design and manufacturing company founded on the idea that everyday objects deserve better design. The first product is The Roto — a spring-loaded toilet paper holder that replaces the traditional pop-out bar with pivoting cantilever arms that open and close one-handed. The mechanism uses ball bearings, springs, and rotation stops to receive and suspend a roll without any assembly. Patent pending. Beyond the product itself, all brand identity, packaging design, internal documentation, instructional inserts, coupon cards, and the product website were designed in-house. The Roto has been covered by the Mitchell Republic and units have been purchased by LifeQuest in Mitchell, SD for use in their residential facilities.
+- Tags: Brand Direction, Shopify Theme, Packaging Design, Content Creation, E-commerce
+- URL: https://zachmohr.work/projects.html#figura-studio-brand-and-ecommerce
+- Description: Figura Studio is my home goods design brand, where I led the full creative and digital direction: brand identity, logo and color system, custom Shopify theme design and implementation, packaging direction, product storytelling, and launch content. It is also the home for turning quick idea sketches into real, manufacturable products. This project captures my design taste and how I translate early concepts into a complete brand and commerce experience.
+
+---
+
+### Designer Sheet Metal Furniture Study
+- Date: September 2025
+- Category: Design
+- Tags: Sheet Metal, Concept Design, Furniture, CAD, AR
+- URL: https://zachmohr.work/projects.html#designer-sheet-metal-furniture
+- Description: A playful September 2025 design exercise: reinterpreting iconic furniture in low-cost sheet metal to make high-design forms feel more approachable. I translated the Charles and Ray Eames lounge chair and the Noguchi coffee table into bend-ready metal concepts to push my sheet metal modeling skills while preserving the spirit of the originals.
 
 ---
 

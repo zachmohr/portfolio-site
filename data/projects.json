@@ -886,7 +886,7 @@
             "slug": "roto-toilet-paper-holder",
             "type": "log",
             "title": "Roto Toilet Paper Holder",
-            "date": "2026-01",
+            "date": "2025-04",
             "category": "product-design",
             "tags": [
                 "Product Design",
@@ -1009,7 +1009,7 @@
             "slug": "figura-studio",
             "type": "log",
             "title": "Figura Studio — Brand & E-commerce Build",
-            "date": "2025-05",
+            "date": "2025-08",
             "category": "design",
             "tags": [
                 "Brand Direction",
@@ -1084,6 +1084,65 @@
                 {
                     "src": "assets/images/projects/figura-studio/hero.png",
                     "alt": "Figura Studio wordmark logo"
+                }
+            ]
+        },
+        {
+            "id": "designer-sheet-metal-furniture",
+            "slug": "designer-sheet-metal-furniture",
+            "type": "log",
+            "title": "Designer Sheet Metal Furniture Study",
+            "date": "2025-09",
+            "category": "design",
+            "tags": [
+                "Sheet Metal",
+                "Concept Design",
+                "Furniture",
+                "CAD",
+                "AR"
+            ],
+            "description": "A playful September 2025 design exercise: reinterpreting iconic furniture in low-cost sheet metal to make high-design forms feel more approachable. I translated the Charles and Ray Eames lounge chair and the Noguchi coffee table into bend-ready metal concepts to push my sheet metal modeling skills while preserving the spirit of the originals.",
+            "hero": {
+                "src": "assets/images/projects/designer-sheet-metal-furniture/eames chair.png",
+                "alt": "Concept render of a Charles and Ray Eames lounge chair reinterpreted in sheet metal"
+            },
+            "video": null,
+            "press": [
+                {
+                    "label": "Original reference: Eames Lounge Chair and Ottoman (Herman Miller)",
+                    "url": "https://www.hermanmiller.com/products/seating/lounge-seating/eames-lounge-chair-and-ottoman/"
+                },
+                {
+                    "label": "Original reference: Noguchi Table (Herman Miller)",
+                    "url": "https://www.hermanmiller.com/products/tables/occasional-tables/noguchi-table/"
+                }
+            ],
+            "entries": [
+                {
+                    "src": "assets/images/projects/designer-sheet-metal-furniture/eames chair.png",
+                    "alt": "Sheet metal concept render inspired by the Charles and Ray Eames lounge chair",
+                    "caption": "Sheet metal reinterpretation of the Eames lounge chair as a conceptual design study."
+                },
+                {
+                    "type": "model",
+                    "src": "assets/images/projects/designer-sheet-metal-furniture/EamesSheetMetal v3.glb",
+                    "iosSrc": "assets/images/projects/designer-sheet-metal-furniture/EamesSheetMetal v3.usdz",
+                    "arTitle": "Sheet Metal Eames Lounge Chair Concept",
+                    "alt": "Interactive 3D model of the sheet metal Eames lounge chair concept",
+                    "caption": "Interactive 3D model with mobile AR support."
+                },
+                {
+                    "src": "assets/images/projects/designer-sheet-metal-furniture/noguchi.png",
+                    "alt": "Sheet metal concept render inspired by the Noguchi coffee table",
+                    "caption": "Sheet metal reinterpretation of the Noguchi coffee table as a conceptual design study."
+                },
+                {
+                    "type": "model",
+                    "src": "assets/images/projects/designer-sheet-metal-furniture/NoguchiSheetMetalCoffeeTable v3.glb",
+                    "iosSrc": "assets/images/projects/designer-sheet-metal-furniture/NoguchiSheetMetalCoffeeTable v3.usdz",
+                    "arTitle": "Sheet Metal Noguchi Coffee Table Concept",
+                    "alt": "Interactive 3D model of the sheet metal Noguchi coffee table concept",
+                    "caption": "Interactive 3D model with mobile AR support."
                 }
             ]
         },

@@ -341,15 +341,33 @@
     function renderModelEntry(entry) {
         var modelsAttr = entry.models ? escapeAttr(JSON.stringify(entry.models)) : '';
         var modelSrc = entry.models ? entry.models[0].src : (entry.glb || entry.src);
+        var modelArSrc = entry.iosSrc || entry.usdz || '';
+        var modelArTitle = entry.arTitle || '';
+        var arEnabled = !!modelArSrc;
+
+        if (!modelArSrc && entry.models && entry.models.length > 0) {
+            modelArSrc = entry.models[0].iosSrc || entry.models[0].usdz || '';
+        }
+        if (modelArSrc) arEnabled = true;
+
+        if (!modelArTitle && entry.models && entry.models.length > 0) {
+            modelArTitle = entry.models[0].arTitle || entry.models[0].name || '';
+        }
 
         return (
             '<div class="log-entry log-entry--model">' +
             '<div class="model-wrapper model-viewer-container" data-src="' + escapeAttr(modelSrc) + '"' +
             (modelsAttr ? ' data-models="' + modelsAttr + '"' : '') +
+            (arEnabled ? ' data-ar-enabled="true"' : '') +
+            (modelArSrc ? ' data-ar-src="' + escapeAttr(modelArSrc) + '"' : '') +
+            (modelArTitle ? ' data-ar-title="' + escapeAttr(modelArTitle) + '"' : '') +
             (entry.allowCrossSection ? ' data-allow-cross-section="true"' : '') +
             (entry.autoColorize ? ' data-auto-colorize="true"' : '') +
             ' role="img" aria-label="' + escapeAttr(entry.alt) + '">' +
             '</div>' +
+            (arEnabled
+                ? '<a class="model-ar-link" hidden href="#" aria-label="Open model in augmented reality">Open in AR</a>'
+                : '') +
             (entry.caption
                 ? '<p class="log-caption">' + escapeHtml(entry.caption) + '</p>'
                 : '') +

@@ -19,6 +19,43 @@ gltfLoader.setDRACOLoader(dracoLoader);
 var viewerStates = new WeakMap();
 var activeContainers = new Set();
 
+function detectArPlatform() {
+    var ua = navigator.userAgent || '';
+    var isIOS = /iPad|iPhone|iPod/.test(ua) ||
+        (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    var isAndroid = /Android/i.test(ua);
+
+    return {
+        isIOS: isIOS,
+        isAndroid: isAndroid,
+        isMobile: isIOS || isAndroid
+    };
+}
+
+function toAbsoluteUrl(url) {
+    if (!url) return '';
+    try {
+        return new URL(url, document.baseURI).href;
+    } catch (err) {
+        return '';
+    }
+}
+
+function buildSceneViewerIntent(glbUrl, title) {
+    var params = 'file=' + encodeURIComponent(glbUrl) + '&mode=ar_preferred';
+    if (title) {
+        params += '&title=' + encodeURIComponent(title);
+    }
+
+    return (
+        'intent://arvr.google.com/scene-viewer/1.0?' +
+        params +
+        '#Intent;scheme=https;package=com.google.android.googlequicksearchbox;action=android.intent.action.VIEW;' +
+        'S.browser_fallback_url=' + encodeURIComponent(glbUrl) +
+        ';end;'
+    );
+}
+
 function renderFallback(container, message) {
     container.textContent = '';
     var fallback = document.createElement('p');
@@ -155,10 +192,46 @@ function initModelViewer(container) {
 
     var allowCrossSection = container.getAttribute('data-allow-cross-section') === 'true';
     var autoColorize = container.getAttribute('data-auto-colorize') === 'true';
+    var arEnabled = container.getAttribute('data-ar-enabled') === 'true';
+    var singleModelArSrc = container.getAttribute('data-ar-src') || '';
+    var singleModelArTitle = container.getAttribute('data-ar-title') || '';
+    var arPlatform = detectArPlatform();
+    var arEntry = container.parentElement;
+    var arLink = arEntry ? arEntry.querySelector('.model-ar-link') : null;
+    var quickLookProxy = null;
+
+    if (arEntry && arPlatform.isIOS) {
+        quickLookProxy = arEntry.querySelector('.model-ar-quicklook-proxy');
+        if (!quickLookProxy && arLink) {
+            quickLookProxy = document.createElement('a');
+            quickLookProxy.className = 'model-ar-quicklook-proxy';
+            quickLookProxy.hidden = true;
+            quickLookProxy.setAttribute('rel', 'ar');
+            quickLookProxy.setAttribute('aria-hidden', 'true');
+            quickLookProxy.tabIndex = -1;
+
+            var proxyImg = document.createElement('img');
+            proxyImg.alt = '';
+            proxyImg.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==';
+            quickLookProxy.appendChild(proxyImg);
+
+            arLink.insertAdjacentElement('afterend', quickLookProxy);
+        }
+
+        if (arLink && !arLink.getAttribute('data-quicklook-bound')) {
+            arLink.addEventListener('click', function (event) {
+                if (!quickLookProxy || !quickLookProxy.getAttribute('href')) return;
+                event.preventDefault();
+                quickLookProxy.click();
+            });
+            arLink.setAttribute('data-quicklook-bound', 'true');
+        }
+    }
 
     var crossSectionBtn = document.createElement('button');
     var sliderWrap = document.createElement('div');
     var slider = document.createElement('input');
+    var axisSelect = null;
 
     if (allowCrossSection) {
         crossSectionBtn.className = 'model-btn model-btn--cross-section';
@@ -182,12 +255,21 @@ function initModelViewer(container) {
 
     // Multiple models dropdown
     var modelsData = container.getAttribute('data-models');
-    var models = modelsData ? JSON.parse(modelsData) : null;
+    var models = null;
+    if (modelsData) {
+        try {
+            models = JSON.parse(modelsData);
+        } catch (err) {
+            console.warn('Invalid model metadata on container:', err && err.message ? err.message : err);
+            models = null;
+        }
+    }
 
     var topControlsDiv = document.createElement('div');
     topControlsDiv.className = 'model-top-controls';
+    var modelSelect = null;
     if (models) {
-        var modelSelect = document.createElement('select');
+        modelSelect = document.createElement('select');
         modelSelect.className = 'model-select';
         modelSelect.setAttribute('aria-label', 'Select model version');
         models.forEach(function (m) {
@@ -198,13 +280,14 @@ function initModelViewer(container) {
         });
         modelSelect.addEventListener('change', function () {
             loadModel(this.value);
+            updateArLink(this.value);
         });
         topControlsDiv.appendChild(modelSelect);
     }
 
     // Axis dropdown
     if (allowCrossSection) {
-        var axisSelect = document.createElement('select');
+        axisSelect = document.createElement('select');
         axisSelect.className = 'model-select model-axis-select';
         axisSelect.setAttribute('aria-label', 'Select clipping axis');
         axisSelect.innerHTML = '<option value="y">Y Axis</option><option value="x">X Axis</option><option value="z">Z Axis</option>';
@@ -225,8 +308,69 @@ function initModelViewer(container) {
     var currentBox = null;
     var ground = null;
 
+    function getModelMeta(modelUrl) {
+        if (!models || !models.length) return null;
+
+        for (var i = 0; i < models.length; i++) {
+            if (models[i].src === modelUrl) return models[i];
+        }
+        return null;
+    }
+
+    function updateArLink(modelUrl) {
+        if (!arLink) return;
+        if (!arEnabled || !arPlatform.isMobile) {
+            arLink.hidden = true;
+            arLink.removeAttribute('href');
+            arLink.removeAttribute('target');
+            arLink.removeAttribute('rel');
+            if (quickLookProxy) quickLookProxy.removeAttribute('href');
+            return;
+        }
+
+        var meta = getModelMeta(modelUrl);
+        var iosSrc = meta ? (meta.iosSrc || meta.usdz || '') : singleModelArSrc;
+        var arTitle = meta ? (meta.arTitle || meta.name || '') : singleModelArTitle;
+
+        if (!arTitle) {
+            arTitle = container.getAttribute('aria-label') || '3D model';
+        }
+
+        var absoluteModelUrl = toAbsoluteUrl(modelUrl);
+        var absoluteIosUrl = toAbsoluteUrl(iosSrc);
+
+        if (arPlatform.isIOS && absoluteIosUrl) {
+            arLink.href = absoluteIosUrl;
+            arLink.setAttribute('rel', 'ar');
+            arLink.removeAttribute('target');
+            arLink.hidden = false;
+            if (quickLookProxy) quickLookProxy.href = absoluteIosUrl;
+            return;
+        }
+
+        if (arPlatform.isAndroid && absoluteModelUrl) {
+            arLink.href = buildSceneViewerIntent(absoluteModelUrl, arTitle);
+            arLink.setAttribute('rel', 'noopener');
+            arLink.setAttribute('target', '_blank');
+            arLink.hidden = false;
+            return;
+        }
+
+        arLink.hidden = true;
+        arLink.removeAttribute('href');
+        arLink.removeAttribute('target');
+        arLink.removeAttribute('rel');
+        if (quickLookProxy) quickLookProxy.removeAttribute('href');
+    }
+
     function updateClippingForAxis() {
         if (!currentBox) return;
+
+        if (!allowCrossSection) {
+            clippingPlane.normal.set(0, -1, 0);
+            clippingPlane.constant = currentBox.max.y + 0.01;
+            return;
+        }
 
         var axisVec = new THREE.Vector3(0, 0, 0);
         var planeRot = new THREE.Euler();
@@ -270,36 +414,38 @@ function initModelViewer(container) {
         }
     }
 
-    crossSectionBtn.addEventListener('click', function () {
-        var enabled = crossSectionBtn.getAttribute('aria-pressed') !== 'true';
-        crossSectionBtn.setAttribute('aria-pressed', String(enabled));
-        sliderWrap.hidden = !enabled;
-        axisSelect.hidden = !enabled;
+    if (allowCrossSection) {
+        crossSectionBtn.addEventListener('click', function () {
+            var enabled = crossSectionBtn.getAttribute('aria-pressed') !== 'true';
+            crossSectionBtn.setAttribute('aria-pressed', String(enabled));
+            sliderWrap.hidden = !enabled;
+            if (axisSelect) axisSelect.hidden = !enabled;
 
-        if (planeHelper) {
-            planeHelper.visible = enabled;
-        }
+            if (planeHelper) {
+                planeHelper.visible = enabled;
+            }
 
-        if (!enabled) {
-            slider.value = '100';
-            if (currentBox) clippingPlane.constant = Math.max(currentBox.max.x, currentBox.max.y, currentBox.max.z) + 0.01;
-        } else {
-            updateClippingForAxis();
-        }
-    });
+            if (!enabled) {
+                slider.value = '100';
+                if (currentBox) clippingPlane.constant = Math.max(currentBox.max.x, currentBox.max.y, currentBox.max.z) + 0.01;
+            } else {
+                updateClippingForAxis();
+            }
+        });
 
-    slider.addEventListener('input', function () {
-        var t = parseInt(slider.value, 10) / 100;
-        var range = modelBounds.max - modelBounds.min;
-        clippingPlane.constant = modelBounds.min + t * range;
+        slider.addEventListener('input', function () {
+            var t = parseInt(slider.value, 10) / 100;
+            var range = modelBounds.max - modelBounds.min;
+            clippingPlane.constant = modelBounds.min + t * range;
 
-        if (planeHelper) {
-            var offset = clippingPlane.constant;
-            if (currentAxis === 'x') planeHelper.position.x = offset;
-            if (currentAxis === 'y') planeHelper.position.y = offset;
-            if (currentAxis === 'z') planeHelper.position.z = offset;
-        }
-    });
+            if (planeHelper) {
+                var offset = clippingPlane.constant;
+                if (currentAxis === 'x') planeHelper.position.x = offset;
+                if (currentAxis === 'y') planeHelper.position.y = offset;
+                if (currentAxis === 'z') planeHelper.position.z = offset;
+            }
+        });
+    }
 
     canvas.addEventListener('pointerdown', function () {
         controls.autoRotate = false;
@@ -461,6 +607,7 @@ function initModelViewer(container) {
     }
 
     loadModel(src);
+    updateArLink(src);
 
     var resizeObserver = new ResizeObserver(function () {
         var current = viewerStates.get(container);
