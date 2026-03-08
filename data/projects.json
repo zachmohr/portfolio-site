@@ -882,6 +882,212 @@
             ]
         },
         {
+            "id": "roto-toilet-paper-holder",
+            "slug": "roto-toilet-paper-holder",
+            "type": "log",
+            "title": "Roto Toilet Paper Holder",
+            "date": "2026-01",
+            "category": "product-design",
+            "tags": [
+                "Product Design",
+                "Patent Pending",
+                "Consumer Product",
+                "Home Goods",
+                "Ongoing"
+            ],
+            "description": "Roto is my first consumer product and the first product launch from Figura Studio, my home goods design company. The design focuses on one-handed operation to make toilet paper roll changes faster, cleaner, and more accessible in everyday use. I filed for patent protection in April 2025, and this is an active ongoing program with future material iterations and collaborative versions planned with other creators and brands.",
+            "hero": {
+                "src": "assets/images/projects/Roto-tp-holder/HSS00052.JPEG",
+                "alt": "Roto toilet paper holder prototype mounted on wall"
+            },
+            "video": null,
+            "press": [
+                {
+                    "label": "House Digest — One-hand toilet paper holder feature",
+                    "url": "https://www.housedigest.com/2076064/genius-invention-accessory-one-hand-toilet-paper-holder/"
+                },
+                {
+                    "label": "Mitchell Republic — Mitchell native brings fresh thinking to a familiar bathroom fixture",
+                    "url": "https://www.mitchellrepublic.com/news/local/mitchell-native-brings-fresh-thinking-to-a-familiar-bathroom-fixture"
+                }
+            ],
+            "entries": [
+                {
+                    "src": "assets/images/projects/Roto-tp-holder/IMG_2658.jpg",
+                    "alt": "Original Notes app finger sketch for a one-way toilet paper holder concept"
+                },
+                {
+                    "type": "sketches",
+                    "caption": "Early concept sketch pages showing mechanism exploration and form development.",
+                    "pages": [
+                        {
+                            "src": "assets/images/projects/Roto-tp-holder/scan-mar-8-2026-page-01.jpg",
+                            "alt": "Concept sketch page 1 with early one-way holder geometry and mechanism notes"
+                        },
+                        {
+                            "src": "assets/images/projects/Roto-tp-holder/scan-mar-8-2026-page-02.jpg",
+                            "alt": "Concept sketch page 2 comparing alternate side-profile and top-view configurations"
+                        },
+                        {
+                            "src": "assets/images/projects/Roto-tp-holder/scan-mar-8-2026-page-03.jpg",
+                            "alt": "Concept sketch page 3 exploring curved arm geometry and spool interface"
+                        }
+                    ]
+                },
+                {
+                    "type": "video",
+                    "src": "assets/images/projects/Roto-tp-holder/ToiletPaperHolder-V2.mp4",
+                    "aspectRatio": "960 / 380",
+                    "sources": [
+                        {
+                            "src": "assets/images/projects/Roto-tp-holder/ToiletPaperHolder V2 v4-2.MOV",
+                            "mimeType": "video/quicktime"
+                        },
+                        {
+                            "src": "assets/images/projects/Roto-tp-holder/ToiletPaperHolder-V2.mp4",
+                            "mimeType": "video/mp4"
+                        }
+                    ],
+                    "poster": "assets/images/projects/Roto-tp-holder/ToiletPaperHolder-V2-still.jpg",
+                    "caption": "Early CAD concept animation of the square, fully 3D-printed direction.",
+                    "alt": "Early CAD concept animation for Roto toilet paper holder"
+                },
+                {
+                    "type": "video",
+                    "src": "assets/images/projects/Roto-tp-holder/filtered-ED37.mp4",
+                    "aspectRatio": "9 / 16",
+                    "sources": [
+                        {
+                            "src": "assets/images/projects/Roto-tp-holder/filtered-ED37F84D-2BE0-4516-B0BB-90EF7F476810.MOV",
+                            "mimeType": "video/quicktime"
+                        },
+                        {
+                            "src": "assets/images/projects/Roto-tp-holder/filtered-ED37.mp4",
+                            "mimeType": "video/mp4"
+                        }
+                    ],
+                    "poster": "assets/images/projects/Roto-tp-holder/filtered-ED37-still.jpg",
+                    "caption": "Early square 3D-printed prototype installed for one-handed usability testing.",
+                    "alt": "Early square Roto prototype test video"
+                },
+                {
+                    "type": "video",
+                    "src": "assets/images/projects/Roto-tp-holder/34c302f5.mp4",
+                    "aspectRatio": "9 / 16",
+                    "sources": [
+                        {
+                            "src": "assets/images/projects/Roto-tp-holder/34c302f5353b41c886ed5ea0df8029ac.MOV",
+                            "mimeType": "video/quicktime"
+                        },
+                        {
+                            "src": "assets/images/projects/Roto-tp-holder/34c302f5.mp4",
+                            "mimeType": "video/mp4"
+                        }
+                    ],
+                    "poster": "assets/images/projects/Roto-tp-holder/34c302f5-still.jpg",
+                    "caption": "Refined prototype demonstration in a real bathroom context.",
+                    "alt": "Refined Roto prototype demo video"
+                },
+                {
+                    "src": "assets/images/projects/Roto-tp-holder/IMG_3518.JPG",
+                    "alt": "Roto toilet paper holder on wall showing front and side profile"
+                },
+                {
+                    "src": "assets/images/projects/Roto-tp-holder/IMG_3520.JPG",
+                    "alt": "Close-up view of Roto toilet paper holder geometry and finish"
+                },
+                {
+                    "type": "model",
+                    "src": "assets/images/projects/Roto-tp-holder/RotoBlackOptimized.glb",
+                    "caption": "Roto Toilet Paper Holder",
+                    "alt": "Roto Toilet Paper Holder"
+                }
+            ]
+        },
+        {
+            "id": "figura-studio-brand-and-ecommerce",
+            "slug": "figura-studio",
+            "type": "log",
+            "title": "Figura Studio — Brand & E-commerce Build",
+            "date": "2025-05",
+            "category": "design",
+            "tags": [
+                "Brand Direction",
+                "Shopify Theme",
+                "Packaging Design",
+                "Content Creation",
+                "E-commerce"
+            ],
+            "description": "Figura Studio is my home goods design brand, where I led the full creative and digital direction: brand identity, logo and color system, custom Shopify theme design and implementation, packaging direction, product storytelling, and launch content. It is also the home for turning quick idea sketches into real, manufacturable products. This project captures my design taste and how I translate early concepts into a complete brand and commerce experience.",
+            "hero": {
+                "src": "assets/images/projects/figura-studio/web/site-home-screenshot.png",
+                "alt": "Screenshot of Figura Studio homepage featuring the Roto hero banner"
+            },
+            "video": null,
+            "press": [
+                {
+                    "label": "Figura Studio — Live Website",
+                    "url": "https://figurastudio.com/"
+                },
+                {
+                    "label": "Roto Installation Guide (PDF)",
+                    "url": "assets/images/projects/figura-studio/docs/RotoInstallGuide.pdf"
+                }
+            ],
+            "entries": [
+                {
+                    "src": "assets/images/projects/figura-studio/web/site-home-screenshot.png",
+                    "alt": "Screenshot of Figura Studio homepage featuring the Roto hero banner",
+                    "caption": "Live homepage screenshot from figurastudio.com."
+                },
+                {
+                    "src": "assets/images/projects/figura-studio/web/site-product-screenshot.png",
+                    "alt": "Screenshot of Figura Studio product detail page for the Roto toilet paper holder",
+                    "caption": "Live product page screenshot from the custom Shopify build."
+                },
+                {
+                    "type": "strobe",
+                    "base": "assets/images/projects/figura-studio/strobe/roto-strobe-base-page-4.png",
+                    "overlay": "assets/images/projects/figura-studio/strobe/roto-strobe-overlay-page-6.png",
+                    "aspectRatio": "1804 / 2425",
+                    "shiftPx": 22,
+                    "durationMs": 2000,
+                    "amplitudeMin": 6,
+                    "amplitudeMax": 42,
+                    "frequencyMin": 0.05,
+                    "frequencyMax": 2.5,
+                    "frequencyCenter": 0.25,
+                    "frequencyDefault": 0.25,
+                    "caption": "Stroboscopic packaging concept: black stripes on a clear outer sleeve create motion as the product is pulled from the box during unboxing.",
+                    "alt": "Stroboscopic Roto package effect with moving stripe overlay"
+                },
+                {
+                    "src": "assets/images/projects/figura-studio/web/site-terracotta-horizontal.png",
+                    "alt": "Figura Studio website product image showing the terracotta Roto mounted in a bathroom scene",
+                    "caption": "Website image direction balancing product clarity with bold color context."
+                },
+                {
+                    "src": "assets/images/projects/figura-studio/web/site-matte-blue.png",
+                    "alt": "Figura Studio product render of the matte blue Roto holder",
+                    "caption": "Shopify product media asset for color variant storytelling."
+                },
+                {
+                    "src": "assets/images/projects/figura-studio/docs/RotoInstallGuide-page-01.jpg",
+                    "alt": "Page from the Roto installation guide showing step-by-step instructions and custom illustrations",
+                    "caption": "Installation guide layout demonstrating instruction writing and technical visual communication."
+                },
+                {
+                    "src": "assets/images/projects/figura-studio/packaging/roto-packaging-prototype.jpg",
+                    "alt": "Early Figura Studio Roto packaging prototypes with logo, product mark, and one-handed changer messaging",
+                    "caption": "Early packaging prototypes and brand system application on physical boxes."
+                },
+                {
+                    "src": "assets/images/projects/figura-studio/hero.png",
+                    "alt": "Figura Studio wordmark logo"
+                }
+            ]
+        },
+        {
             "id": "brass-wire-joinery-tables",
             "type": "log",
             "title": "Brass Wire Joinery Tables",

@@ -28,6 +28,7 @@
             initToggleHandlers(gridContainer);
             initDescriptionToggleHandlers(gridContainer);
             initVideoHandlers(gridContainer);
+            initStrobeHandlers(gridContainer);
             initSketchStackHandlers(gridContainer);
             initProjectRouting(gridContainer);
             document.dispatchEvent(new CustomEvent('projectsRendered'));
@@ -197,6 +198,8 @@
         entries.forEach(function (entry) {
             if (entry.type === 'video') {
                 html += renderVideoEntry(entry);
+            } else if (entry.type === 'strobe') {
+                html += renderStrobeEntry(entry);
             } else if (entry.type === 'model') {
                 html += renderModelEntry(entry);
             } else if (entry.type === 'sketches') {
@@ -221,9 +224,11 @@
     }
 
     function renderVideoEntry(entry) {
-        var isEmbed = entry.src.indexOf('youtube') !== -1 ||
-            entry.src.indexOf('vimeo') !== -1 ||
-            entry.src.indexOf('embed') !== -1;
+        var primarySrc = entry.src || '';
+        var isEmbed = primarySrc.indexOf('youtube') !== -1 ||
+            primarySrc.indexOf('vimeo') !== -1 ||
+            primarySrc.indexOf('embed') !== -1;
+        var wrapperStyle = getVideoAspectStyle(entry.aspectRatio);
 
         var mediaHtml;
 
@@ -234,20 +239,22 @@
                 : '<div style="width:100%;height:100%;background:var(--color-gray-200);"></div>';
 
             mediaHtml =
-                '<div class="video-wrapper">' +
-                '<div class="video-placeholder" data-src="' + escapeAttr(entry.src) + '">' +
+                '<div class="video-wrapper"' + wrapperStyle + '>' +
+                '<div class="video-placeholder" data-src="' + escapeAttr(primarySrc) + '">' +
                 posterHtml +
                 '<button class="video-play-btn" aria-label="Play video">&#9654;</button>' +
                 '</div>' +
                 '</div>';
         } else {
             // Self-hosted video
+            var sourcesHtml = renderVideoSources(entry);
             mediaHtml =
-                '<div class="video-wrapper">' +
-                '<video controls preload="none"' +
-                (entry.poster ? ' poster="' + entry.poster + '"' : '') +
-                ' width="1200" height="675">' +
-                '<source src="' + entry.src + '" type="video/mp4">' +
+                '<div class="video-wrapper video-wrapper--self-hosted"' + wrapperStyle + '>' +
+                '<video controls preload="metadata" playsinline webkit-playsinline' +
+                (entry.poster ? ' poster="' + escapeAttr(entry.poster) + '"' : '') +
+                (entry.alt ? ' aria-label="' + escapeAttr(entry.alt) + '"' : '') + '>' +
+                sourcesHtml +
+                'Your browser does not support the video tag.' +
                 '</video>' +
                 '</div>';
         }
@@ -255,6 +262,75 @@
         return (
             '<div class="log-entry log-entry--video">' +
             mediaHtml +
+            (entry.caption
+                ? '<p class="log-caption">' + escapeHtml(entry.caption) + '</p>'
+                : '') +
+            '</div>'
+        );
+    }
+
+    function renderStrobeEntry(entry) {
+        if (!entry.base || !entry.overlay) return '';
+
+        var ratio = normalizeAspectRatio(entry.aspectRatio);
+        var shiftPx = parseFloat(entry.shiftPx);
+        if (!isFinite(shiftPx) || shiftPx <= 0) shiftPx = 10;
+        shiftPx = Math.round(shiftPx);
+
+        var durationMs = parseInt(entry.durationMs, 10);
+        if (!isFinite(durationMs) || durationMs <= 0) durationMs = 120;
+        durationMs = Math.round(durationMs);
+
+        var amplitudeMin = parseInt(entry.amplitudeMin, 10);
+        if (!isFinite(amplitudeMin)) amplitudeMin = 4;
+        var amplitudeMax = parseInt(entry.amplitudeMax, 10);
+        if (!isFinite(amplitudeMax)) amplitudeMax = 40;
+        if (amplitudeMax <= amplitudeMin) amplitudeMax = amplitudeMin + 1;
+        shiftPx = Math.max(amplitudeMin, Math.min(amplitudeMax, shiftPx));
+
+        var frequencyMin = parseFloat(entry.frequencyMin);
+        if (!isFinite(frequencyMin) || frequencyMin <= 0) frequencyMin = 0.4;
+        var frequencyMax = parseFloat(entry.frequencyMax);
+        if (!isFinite(frequencyMax) || frequencyMax <= frequencyMin) frequencyMax = 3.0;
+        var frequencyHz = parseFloat(entry.frequencyDefault);
+        if (!isFinite(frequencyHz) || frequencyHz <= 0) {
+            frequencyHz = durationToFrequency(durationMs);
+        }
+        frequencyHz = Math.max(frequencyMin, Math.min(frequencyMax, frequencyHz));
+
+        var frequencyCenter = parseFloat(entry.frequencyCenter);
+        if (!isFinite(frequencyCenter) || frequencyCenter <= frequencyMin || frequencyCenter >= frequencyMax) {
+            frequencyCenter = frequencyHz;
+        }
+        durationMs = frequencyToDuration(frequencyHz);
+        var frequencySliderPos = frequencyToSliderPosition(frequencyHz, frequencyMin, frequencyCenter, frequencyMax);
+
+        var style = '--strobe-shift:' + shiftPx + 'px;--strobe-duration:' + durationMs + 'ms;';
+        if (ratio) style += 'aspect-ratio:' + ratio + ';';
+
+        return (
+            '<div class="log-entry log-entry--strobe">' +
+            '<div class="strobe-wrapper" style="' + escapeAttr(style) + '"' +
+            (entry.alt ? ' role="img" aria-label="' + escapeAttr(entry.alt) + '"' : '') +
+            '>' +
+            '<img class="strobe-base" src="' + escapeAttr(entry.base) + '" alt="" aria-hidden="true" loading="lazy">' +
+            '<img class="strobe-overlay" src="' + escapeAttr(entry.overlay) + '" alt="" aria-hidden="true" loading="lazy">' +
+            '</div>' +
+            '<div class="strobe-controls" aria-label="Strobe animation controls">' +
+            '<label class="strobe-control">' +
+            '<span>Amplitude</span>' +
+            '<input class="strobe-amplitude" type="range" min="' + amplitudeMin + '" max="' + amplitudeMax + '" step="1" value="' + shiftPx + '">' +
+            '<span class="strobe-value strobe-amplitude-value">' + shiftPx + 'px</span>' +
+            '</label>' +
+            '<label class="strobe-control">' +
+            '<span>Frequency</span>' +
+            '<input class="strobe-frequency" type="range" min="0" max="100" step="1" value="' + Math.round(frequencySliderPos) + '"' +
+            ' data-frequency-min="' + escapeAttr(frequencyMin.toFixed(2)) + '"' +
+            ' data-frequency-max="' + escapeAttr(frequencyMax.toFixed(2)) + '"' +
+            ' data-frequency-center="' + escapeAttr(frequencyCenter.toFixed(2)) + '">' +
+            '<span class="strobe-value strobe-frequency-value">' + formatFrequency(frequencyHz) + '</span>' +
+            '</label>' +
+            '</div>' +
             (entry.caption
                 ? '<p class="log-caption">' + escapeHtml(entry.caption) + '</p>'
                 : '') +
@@ -469,7 +545,7 @@
     function initToggleHandlers(container) {
         container.addEventListener('click', function (e) {
             // Skip if clicking interactive elements inside the card (except the log toggle itself)
-            if (e.target.closest('a, button:not(.project-log-toggle), .description-toggle, .project-log, video, .sketch-nav, .model-controls')) return;
+            if (e.target.closest('a, button:not(.project-log-toggle), input, .description-toggle, .project-log, video, .sketch-nav, .model-controls, .strobe-controls')) return;
 
             // Allow clicks anywhere on a log card to toggle the build log
             var card = e.target.closest('.project-card--log');
@@ -518,7 +594,7 @@
     // ============================================
     function initProjectRouting(container) {
         container.addEventListener('click', function (e) {
-            if (e.target.closest('a, button, .description-toggle, .project-log, video, .sketch-nav, .model-controls')) return;
+            if (e.target.closest('a, button, input, .description-toggle, .project-log, video, .sketch-nav, .model-controls, .strobe-controls')) return;
 
             var card = e.target.closest('.project-card');
             if (!card || card.classList.contains('project-card--log')) return;
@@ -638,6 +714,165 @@
 
             wrapper.replaceChild(iframe, placeholder);
         });
+
+        var videos = container.querySelectorAll('.video-wrapper--self-hosted video');
+        for (var i = 0; i < videos.length; i++) {
+            bindVideoAspectRatio(videos[i]);
+        }
+    }
+
+    function initStrobeHandlers(container) {
+        container.addEventListener('input', function (e) {
+            var amplitudeInput = e.target.closest('.strobe-amplitude');
+            if (amplitudeInput) {
+                var ampControl = amplitudeInput.closest('.strobe-control');
+                var ampWrapper = amplitudeInput.closest('.log-entry--strobe');
+                if (!ampControl || !ampWrapper) return;
+
+                var amp = parseInt(amplitudeInput.value, 10);
+                if (!isFinite(amp)) return;
+
+                var strobeBox = ampWrapper.querySelector('.strobe-wrapper');
+                if (strobeBox) {
+                    strobeBox.style.setProperty('--strobe-shift', amp + 'px');
+                }
+
+                var ampValue = ampControl.querySelector('.strobe-amplitude-value');
+                if (ampValue) ampValue.textContent = amp + 'px';
+                return;
+            }
+
+            var frequencyInput = e.target.closest('.strobe-frequency');
+            if (frequencyInput) {
+                var freqControl = frequencyInput.closest('.strobe-control');
+                var freqWrapper = frequencyInput.closest('.log-entry--strobe');
+                if (!freqControl || !freqWrapper) return;
+
+                var sliderPos = parseFloat(frequencyInput.value);
+                if (!isFinite(sliderPos)) return;
+
+                var freqMin = parseFloat(frequencyInput.getAttribute('data-frequency-min'));
+                var freqMax = parseFloat(frequencyInput.getAttribute('data-frequency-max'));
+                var freqCenter = parseFloat(frequencyInput.getAttribute('data-frequency-center'));
+                if (!isFinite(freqMin) || freqMin <= 0) freqMin = 0.25;
+                if (!isFinite(freqMax) || freqMax <= freqMin) freqMax = freqMin + 1;
+                if (!isFinite(freqCenter) || freqCenter <= freqMin || freqCenter >= freqMax) {
+                    freqCenter = (freqMin + freqMax) / 2;
+                }
+
+                var freq = sliderPositionToFrequency(sliderPos, freqMin, freqCenter, freqMax);
+
+                var duration = frequencyToDuration(freq);
+                var strobeTarget = freqWrapper.querySelector('.strobe-wrapper');
+                if (strobeTarget) {
+                    strobeTarget.style.setProperty('--strobe-duration', duration + 'ms');
+                }
+
+                var freqValue = freqControl.querySelector('.strobe-frequency-value');
+                if (freqValue) freqValue.textContent = formatFrequency(freq);
+            }
+        });
+    }
+
+    function bindVideoAspectRatio(video) {
+        if (!video) return;
+
+        var applyAspect = function () {
+            var wrapper = video.parentElement;
+            if (!wrapper) return;
+            if (!video.videoWidth || !video.videoHeight) return;
+            wrapper.style.aspectRatio = video.videoWidth + ' / ' + video.videoHeight;
+        };
+
+        if (video.readyState >= 1) {
+            applyAspect();
+        } else {
+            video.addEventListener('loadedmetadata', applyAspect, { once: true });
+        }
+    }
+
+    function renderVideoSources(entry) {
+        var sources = [];
+        if (Array.isArray(entry.sources) && entry.sources.length > 0) {
+            sources = entry.sources;
+        } else if (entry.src) {
+            sources = [{ src: entry.src, mimeType: entry.mimeType }];
+        }
+
+        var html = '';
+        for (var i = 0; i < sources.length; i++) {
+            var source = sources[i];
+            if (!source || !source.src) continue;
+            var mimeType = source.mimeType || source.type || getVideoMimeType(source.src);
+            html += '<source src="' + escapeAttr(source.src) + '"' +
+                (mimeType ? ' type="' + escapeAttr(mimeType) + '"' : '') +
+                '>';
+        }
+        return html;
+    }
+
+    function getVideoMimeType(src) {
+        var cleanSrc = String(src).split('?')[0].toLowerCase();
+        if (cleanSrc.endsWith('.mov')) return 'video/quicktime';
+        if (cleanSrc.endsWith('.webm')) return 'video/webm';
+        if (cleanSrc.endsWith('.ogv') || cleanSrc.endsWith('.ogg')) return 'video/ogg';
+        return 'video/mp4';
+    }
+
+    function getVideoAspectStyle(aspectRatio) {
+        var normalized = normalizeAspectRatio(aspectRatio);
+        return normalized ? ' style="aspect-ratio:' + normalized + ';"' : '';
+    }
+
+    function normalizeAspectRatio(value) {
+        if (typeof value === 'number' && isFinite(value) && value > 0) {
+            return String(value);
+        }
+
+        if (typeof value !== 'string') return '';
+
+        var trimmed = value.trim();
+        if (/^\d+(\.\d+)?$/.test(trimmed)) {
+            return trimmed;
+        }
+
+        var parts = trimmed.match(/^(\d+(?:\.\d+)?)\s*\/\s*(\d+(?:\.\d+)?)$/);
+        if (!parts) return '';
+
+        if (parseFloat(parts[1]) <= 0 || parseFloat(parts[2]) <= 0) return '';
+        return parts[1] + ' / ' + parts[2];
+    }
+
+    function durationToFrequency(durationMs) {
+        if (!isFinite(durationMs) || durationMs <= 0) return 1;
+        return 500 / durationMs;
+    }
+
+    function frequencyToDuration(frequencyHz) {
+        if (!isFinite(frequencyHz) || frequencyHz <= 0) return 120;
+        return Math.round(500 / frequencyHz);
+    }
+
+    function formatFrequency(freq) {
+        return freq.toFixed(2) + ' Hz';
+    }
+
+    function frequencyToSliderPosition(freq, minFreq, centerFreq, maxFreq) {
+        var clampedFreq = Math.max(minFreq, Math.min(maxFreq, freq));
+        if (clampedFreq <= centerFreq) {
+            if (centerFreq === minFreq) return 50;
+            return ((clampedFreq - minFreq) / (centerFreq - minFreq)) * 50;
+        }
+        if (maxFreq === centerFreq) return 50;
+        return 50 + ((clampedFreq - centerFreq) / (maxFreq - centerFreq)) * 50;
+    }
+
+    function sliderPositionToFrequency(sliderPos, minFreq, centerFreq, maxFreq) {
+        var clampedPos = Math.max(0, Math.min(100, sliderPos));
+        if (clampedPos <= 50) {
+            return minFreq + (centerFreq - minFreq) * (clampedPos / 50);
+        }
+        return centerFreq + (maxFreq - centerFreq) * ((clampedPos - 50) / 50);
     }
 
     // ============================================
@@ -724,6 +959,12 @@
     }
 
     function escapeAttr(str) {
-        return str.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/'/g, '&#39;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        if (str === null || str === undefined) return '';
+        return String(str)
+            .replace(/&/g, '&amp;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;');
     }
 })();
