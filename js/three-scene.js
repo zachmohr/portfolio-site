@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Defer init until after first layout pass so container has correct dimensions
     requestAnimationFrame(function init() {
-        if (container.clientHeight === 0) {
+        if (container.clientWidth === 0 || container.clientHeight === 0) {
             requestAnimationFrame(init);
             return;
         }
@@ -52,8 +52,9 @@ document.addEventListener('DOMContentLoaded', function () {
         return;
     }
 
-    // Opaque canvas with background matching the container (#E0E0E0 = gray-200)
-    renderer.setClearColor(0xE0E0E0, 1);
+    // Opaque canvas with background matching the page to avoid a visible box.
+    const pageBackground = getComputedStyle(document.body).backgroundColor || '#ffffff';
+    renderer.setClearColor(pageBackground, 1);
 
     // Verify context is usable
     const gl = renderer.getContext();
