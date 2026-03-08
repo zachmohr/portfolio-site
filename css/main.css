@@ -192,24 +192,27 @@ ol {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
-    padding: var(--space-2xl) var(--grid-gutter);
+    padding: calc(60px + var(--space-lg)) var(--grid-gutter) var(--space-2xl);
     position: relative;
-    overflow: clip;
+    overflow: hidden;
 }
 
 .hero-container {
     max-width: var(--grid-max-width);
     width: 100%;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-xl);
+    display: flex;
+    flex-direction: column;
     align-items: center;
+    gap: var(--space-md);
 }
 
 .hero-content {
     z-index: 2;
+    text-align: center;
+    width: 100%;
+    margin-bottom: calc(var(--space-lg) + 60px);
 }
 
 .hero-title {
@@ -242,10 +245,13 @@ ol {
 .hero-geometric {
     position: relative;
     width: 100%;
-    height: 500px;
+    max-width: 680px;
+    height: clamp(380px, 45vh, 520px);
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
+    background-color: var(--color-gray-200); /* fallback before canvas loads */
 }
 
 #three-container {
@@ -1027,6 +1033,46 @@ ol {
 /* ============================================
    CONTACT PAGE
    ============================================ */
+.contact-simple {
+    min-height: calc(100vh - 60px);
+    display: flex;
+    align-items: center;
+    padding: calc(60px + var(--space-2xl)) var(--grid-gutter) var(--space-2xl);
+}
+
+.contact-simple .container {
+    text-align: center;
+}
+
+.contact-simple-text {
+    font-size: 1.125rem;
+    color: var(--color-gray-700);
+    max-width: 480px;
+    margin: 0 auto var(--space-lg);
+}
+
+.contact-simple-actions {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-md);
+    flex-wrap: wrap;
+    margin-bottom: var(--space-lg);
+}
+
+.contact-simple-details {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-xl);
+    flex-wrap: wrap;
+}
+
+.contact-simple-details p {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    color: var(--color-gray-700);
+    letter-spacing: 0.05em;
+}
+
 .contact-content {
     padding: var(--space-2xl) var(--grid-gutter);
 }
@@ -1261,14 +1307,8 @@ ol {
         --grid-gutter: 1.5rem;
     }
 
-    .hero-container {
-        grid-template-columns: 1fr;
-        text-align: center;
-    }
-
     .hero-geometric {
-        order: -1;
-        height: 400px;
+        height: 300px;
     }
 
     .hero-title {
