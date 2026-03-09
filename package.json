@@ -5,7 +5,8 @@
   "main": "index.html",
   "scripts": {
     "dev": "echo 'Open index.html in your browser or use Live Server'",
-    "deploy": "echo 'Push to GitHub and deploy via Cloudflare Pages'"
+    "deploy": "echo 'Push to GitHub and deploy via Cloudflare Pages'",
+    "generate:projects": "node scripts/generate-static-project-pages.js"
   },
   "repository": {
     "type": "git",

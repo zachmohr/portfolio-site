@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <base href="/">
+  <meta name="description" content="Final master&#39;s project started in January 2026 and documented publicly through my &quot;Day X building real life WALL-E&quot; posts. The goal is an autonomous small-trash collection robot that can roam open spaces, pick up litter, store it onboard, and eventually return to a disposal point">
+  <meta name="robots" content="index,follow">
+  <title>Real-Life WALL-E Robot + SPAN Robotics | Zach Mohr</title>
+
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://zachmohr.work/projects/span-robotics-wall-e">
+  <meta property="og:title" content="Real-Life WALL-E Robot + SPAN Robotics">
+  <meta property="og:description" content="Final master&#39;s project started in January 2026 and documented publicly through my &quot;Day X building real life WALL-E&quot; posts. The goal is an autonomous small-trash collection robot that can roam open spaces, pick up litter, store it onboard, and eventually return to a disposal point">
+  <meta property="og:image" content="https://zachmohr.work/assets/images/projects/span-robotics-wall-e/ScreenshotsDayXWallE/Screenshot%202026-03-08%20at%206.54.18%E2%80%AFPM.png">
+
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://zachmohr.work/projects/span-robotics-wall-e">
+  <meta property="twitter:title" content="Real-Life WALL-E Robot + SPAN Robotics">
+  <meta property="twitter:description" content="Final master&#39;s project started in January 2026 and documented publicly through my &quot;Day X building real life WALL-E&quot; posts. The goal is an autonomous small-trash collection robot that can roam open spaces, pick up litter, store it onboard, and eventually return to a disposal point">
+  <meta property="twitter:image" content="https://zachmohr.work/assets/images/projects/span-robotics-wall-e/ScreenshotsDayXWallE/Screenshot%202026-03-08%20at%206.54.18%E2%80%AFPM.png">
+
+  <link rel="canonical" href="https://zachmohr.work/projects/span-robotics-wall-e">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700;900&family=IBM+Plex+Mono:wght@400;500&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/main.css?v=7">
+  <link rel="stylesheet" href="css/typography.css?v=5">
+  <link rel="stylesheet" href="css/dithering.css?v=5">
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "name": "Real-Life WALL-E Robot + SPAN Robotics",
+  "description": "Final master's project started in January 2026 and documented publicly through my \"Day X building real life WALL-E\" posts. The goal is an autonomous small-trash collection robot that can roam open spaces, pick up litter, store it onboard, and eventually return to a disposal point. Development moved through fast hardware/software iterations: simplifying arm kinematics from a stepper/CNC baseline to servo actuation, building a three.js web control interface that streams joint targets to an ESP32, designing and printing a compact chassis with custom bevel-gear drive, integrating PS5 teleoperation, packaging electronics around a Jetson Orin Nano, and training a YOLO segmentation model on the TACO dataset to estimate grasp centroids. This project became the technical foundation for SPAN Robotics and its broader clean-space system concept.",
+  "url": "https://zachmohr.work/projects/span-robotics-wall-e",
+  "image": "https://zachmohr.work/assets/images/projects/span-robotics-wall-e/ScreenshotsDayXWallE/Screenshot%202026-03-08%20at%206.54.18%E2%80%AFPM.png",
+  "author": {
+    "@type": "Person",
+    "name": "Zach Mohr",
+    "url": "https://zachmohr.work"
+  },
+  "datePublished": "2026-01-01"
+}
+  </script>
+</head>
+<body>
+  <nav class="nav">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">ZM</a>
+      <ul class="nav-menu">
+        <li><a href="index.html#about" class="nav-link">About</a></li>
+        <li><a href="/projects" class="nav-link active">Projects</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="projects-header" style="padding-bottom: var(--space-md);">
+    <div class="container">
+      <h1 class="page-title">Real-Life WALL-E Robot + SPAN Robotics</h1>
+      <p class="page-subtitle"><a href="/projects" style="color: var(--color-red);">Back to all projects</a></p>
+    </div>
+  </section>
+
+  
+<section class="projects" style="padding-top: var(--space-lg);">
+  <div class="container">
+    <div class="projects-grid" style="grid-template-columns: minmax(0, 1fr);">
+      <article class="project-card project-card--log" data-category="robotics" data-date="2026-01" style="grid-column: 1 / -1; cursor: default;">
+        <div class="project-image">
+          <img src="assets/images/projects/span-robotics-wall-e/ScreenshotsDayXWallE/Screenshot%202026-03-08%20at%206.54.18%E2%80%AFPM.png" alt="Day 8 post showing the robot completing its first manual trash pickup test" width="1600" height="1000" fetchpriority="high">
+        </div>
+        <div class="project-content">
+          <span class="project-date">January 2026</span>
+          <h1 class="project-title">Real-Life WALL-E Robot + SPAN Robotics</h1>
+          <p class="project-description">Final master&#39;s project started in January 2026 and documented publicly through my &quot;Day X building real life WALL-E&quot; posts. The goal is an autonomous small-trash collection robot that can roam open spaces, pick up litter, store it onboard, and eventually return to a disposal point. Development moved through fast hardware/software iterations: simplifying arm kinematics from a stepper/CNC baseline to servo actuation, building a three.js web control interface that streams joint targets to an ESP32, designing and printing a compact chassis with custom bevel-gear drive, integrating PS5 teleoperation, packaging electronics around a Jetson Orin Nano, and training a YOLO segmentation model on the TACO dataset to estimate grasp centroids. This project became the technical foundation for SPAN Robotics and its broader clean-space system concept.</p>
+          
+<div class="project-tags">
+  <span class="tag">Robotics</span>
+  <span class="tag">Autonomous Systems</span>
+  <span class="tag">Computer Vision</span>
+  <span class="tag">Rapid Prototyping</span>
+  <span class="tag">AR</span>
+</div>
+          
+<div class="project-press">
+  <a class="press-link" href="https://spanrobotics.io/" target="_blank" rel="noopener">&#x1F4F0; SPAN Robotics</a>
+  <a class="press-link" href="https://x.com/mohr_zachary" target="_blank" rel="noopener">&#x1F4F0; Build log posts on X (@mohr_zachary)</a>
+</div>
+          
+        </div>
+        <div class="project-log">
+          
+<div class="log-entry log-entry--model">
+  <div class="model-wrapper model-viewer-container" data-src="assets/images/projects/span-robotics-wall-e/WALLE%20v23.glb" data-ar-enabled="true" data-ar-src="assets/images/projects/span-robotics-wall-e/WALLE%20v23.usdz" data-ar-title="Real-Life WALL-E Robot" role="img" aria-label="Interactive 3D model of the WALL-E inspired autonomous litter collection robot"></div>
+  <a class="model-ar-link" hidden href="#" aria-label="Open model in augmented reality">Open in AR</a>
+  <p class="log-caption">Current CAD model with interactive 3D viewing and mobile AR support.</p>
+</div>
+
+<div class="log-entry">
+  <img src="assets/images/projects/span-robotics-wall-e/ScreenshotsDayXWallE/Screenshot%202026-03-08%20at%206.55.30%E2%80%AFPM.png" alt="Day 1 post outlining project intent and early CAD baseline for the robot arm" loading="lazy" decoding="async">
+  <p class="log-caption">Day 1 (Jan 30): project goal and initial architecture, including the pivot from complex stepper/CNC controls toward a simpler servo-based arm.</p>
+</div>
+
+<div class="log-entry">
+  <img src="assets/images/projects/span-robotics-wall-e/ScreenshotsDayXWallE/Screenshot%202026-03-08%20at%206.55.22%E2%80%AFPM.png" alt="Day 2 post showing three.js arm simulator controlling a physical prototype" loading="lazy" decoding="async">
+  <p class="log-caption">Day 2 (Jan 31): three.js web interface drives arm kinematics and streams joint values to the ESP32 over serial.</p>
+</div>
+
+<div class="log-entry">
+  <img src="assets/images/projects/span-robotics-wall-e/ScreenshotsDayXWallE/Screenshot%202026-03-08%20at%206.55.12%E2%80%AFPM.png" alt="Day 3 post showing chassis CAD with revised steering architecture" loading="lazy" decoding="async">
+  <p class="log-caption">Day 3 (Feb 1): chassis redesign pivoted to a single front wheel approach for tighter steering and better internal packaging.</p>
+</div>
+
+<div class="log-entry">
+  <img src="assets/images/projects/span-robotics-wall-e/ScreenshotsDayXWallE/Screenshot%202026-03-08%20at%206.55.02%E2%80%AFPM.png" alt="Combined Day 4 and Day 5 post showing printed chassis parts, bevel gears, and electronics planning" loading="lazy" decoding="async">
+  <p class="log-caption">Days 4-5 (Feb 3-4): printed chassis components, integrated custom bevel gearing, and planned electronics packaging around Jetson Orin Nano plus microcontroller control.</p>
+</div>
+
+<div class="log-entry">
+  <img src="assets/images/projects/span-robotics-wall-e/ScreenshotsDayXWallE/Screenshot%202026-03-08%20at%206.54.47%E2%80%AFPM.png" alt="Day 6 post showing first chassis drive tests with PS5 controller" loading="lazy" decoding="async">
+  <p class="log-caption">Day 6 (Feb 6): first successful chassis control test with PS5 teleoperation through ESP32.</p>
+</div>
+
+<div class="log-entry">
+  <img src="assets/images/projects/span-robotics-wall-e/ScreenshotsDayXWallE/Screenshot%202026-03-08%20at%206.54.35%E2%80%AFPM.png" alt="Day 7 post documenting power and wiring debugging during integration" loading="lazy" decoding="async">
+  <p class="log-caption">Day 7 (Feb 9): resolved servo power brownouts by rerouting servo 5V supply to a regulated rail and planning a dedicated 12V-to-5V board.</p>
+</div>
+
+<div class="log-entry">
+  <img src="assets/images/projects/span-robotics-wall-e/ScreenshotsDayXWallE/Screenshot%202026-03-08%20at%206.54.18%E2%80%AFPM.png" alt="Day 8 post showing first successful manual trash pickup" loading="lazy" decoding="async">
+  <p class="log-caption">Day 8 (Feb 17): first successful trash pickup during manual operation, validating end-to-end mechanical feasibility.</p>
+</div>
+
+<div class="log-entry">
+  <img src="assets/images/projects/span-robotics-wall-e/ScreenshotsDayXWallE/Screenshot%202026-03-08%20at%206.54.03%E2%80%AFPM.png" alt="Day 9 post showing real-time trash segmentation and detection output" loading="lazy" decoding="async">
+  <p class="log-caption">Day 9 (Feb 19): computer vision milestone using YOLO segmentation trained on TACO to detect trash regions and compute grasp-point centroids.</p>
+</div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <p class="footer-text">&copy; 2026 Zach Mohr. Built with precision and a bit of retro flair.</p>
+        <div class="footer-links">
+          <a href="mailto:zmohr026@gmail.com" class="footer-link">Email</a>
+          <a href="tel:+16059997649" class="footer-link">Phone</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script async src="https://ga.jspm.io/npm:es-module-shims@1.10.1/dist/es-module-shims.js"></script>
+  <script type="importmap">
+  {
+      "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.module.js",
+          "three/examples/jsm/": "https://cdn.jsdelivr.net/npm/three@0.161.0/examples/jsm/"
+      }
+  }
+  </script>
+
+  <script src="js/main.js?v=6"></script>
+  <script type="module" src="js/project-model-viewer.js?v=22"></script>
+</body>
+</html>
