@@ -9,6 +9,7 @@
     var PROJECTS_ROUTE_BASE = '/projects';
     var gridContainer = document.querySelector('.projects-grid');
     var filterContainer = document.querySelector('.filter-buttons');
+    var deferredImageObserver = null;
 
     if (!gridContainer) return;
 
@@ -25,6 +26,7 @@
             assignProjectSlugs(data.projects);
             renderFilterButtons(data.categories, filterContainer);
             renderProjects(data.projects, gridContainer);
+            initDeferredLogImages(gridContainer);
             initToggleHandlers(gridContainer);
             initDescriptionToggleHandlers(gridContainer);
             initVideoHandlers(gridContainer);
@@ -214,8 +216,10 @@
     function renderImageEntry(entry) {
         return (
             '<div class="log-entry">' +
-            '<img src="' + entry.src + '" alt="' + escapeAttr(entry.alt) + '"' +
-            ' loading="lazy" style="width:100%;height:auto;">' +
+            '<img class="log-image--deferred" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="' +
+            ' data-src="' + escapeAttr(entry.src) + '"' +
+            ' alt="' + escapeAttr(entry.alt) + '"' +
+            ' loading="lazy" decoding="async" fetchpriority="low" style="width:100%;height:auto;">' +
             (entry.caption
                 ? '<p class="log-caption">' + escapeHtml(entry.caption) + '</p>'
                 : '') +
@@ -602,9 +606,59 @@
 
         if (shouldExpand) {
             card.style.gridColumn = '1 / -1';
+            // Prime the first images in expanded logs for quicker perceived load.
+            preloadDeferredImages(card, 2);
+            initDeferredLogImages(card);
         } else {
             card.style.gridColumn = '';
         }
+    }
+
+    function initDeferredLogImages(container) {
+        var images = container.querySelectorAll('img.log-image--deferred[data-src]');
+        if (!images.length) return;
+
+        if ('IntersectionObserver' in window) {
+            if (!deferredImageObserver) {
+                deferredImageObserver = new IntersectionObserver(function (entries, observer) {
+                    entries.forEach(function (entry) {
+                        if (!entry.isIntersecting) return;
+                        loadDeferredImage(entry.target);
+                        observer.unobserve(entry.target);
+                    });
+                }, {
+                    rootMargin: '300px 0px',
+                    threshold: 0.01
+                });
+            }
+
+            images.forEach(function (img) {
+                deferredImageObserver.observe(img);
+            });
+            return;
+        }
+
+        // Fallback for older browsers.
+        images.forEach(loadDeferredImage);
+    }
+
+    function preloadDeferredImages(container, limit) {
+        var images = container.querySelectorAll('img.log-image--deferred[data-src]');
+        if (!images.length) return;
+
+        var count = Math.max(0, parseInt(limit, 10) || 0);
+        for (var i = 0; i < images.length && i < count; i++) {
+            loadDeferredImage(images[i]);
+            if (deferredImageObserver) deferredImageObserver.unobserve(images[i]);
+        }
+    }
+
+    function loadDeferredImage(img) {
+        if (!img) return;
+        var src = img.getAttribute('data-src');
+        if (!src) return;
+        img.src = src;
+        img.removeAttribute('data-src');
     }
 
     // ============================================
