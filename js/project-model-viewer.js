@@ -690,6 +690,32 @@ function syncCardViewers(card) {
     });
 }
 
+function initVisibleModelViewers(scope) {
+    var root = scope && scope.querySelectorAll ? scope : document;
+    var containers = root.querySelectorAll('.model-viewer-container');
+    if (!containers.length) return;
+
+    containers.forEach(function (container) {
+        if (viewerStates.has(container)) return;
+
+        var card = container.closest('.project-card--log');
+        var log = card ? card.querySelector('.project-log') : null;
+        if (log && log.hidden) return;
+
+        if (initModelViewer(container)) {
+            container.removeAttribute('data-viewer-failures');
+            return;
+        }
+
+        var failures = parseInt(container.getAttribute('data-viewer-failures') || '0', 10) + 1;
+        container.setAttribute('data-viewer-failures', String(failures));
+
+        if (failures >= 3) {
+            renderFallback(container, '3D viewer is unavailable on this browser/device.');
+        }
+    });
+}
+
 // Handle expand/collapse clicks from project cards
 document.addEventListener('click', function (event) {
     var card = event.target.closest('.project-card--log');
@@ -699,6 +725,20 @@ document.addEventListener('click', function (event) {
         syncCardViewers(card);
     }, 320);
 });
+
+function scheduleVisibleViewerInit() {
+    setTimeout(function () {
+        initVisibleModelViewers(document);
+    }, 80);
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', scheduleVisibleViewerInit, { once: true });
+} else {
+    scheduleVisibleViewerInit();
+}
+
+document.addEventListener('projectsRendered', scheduleVisibleViewerInit);
 
 // Dispose viewer if its card is removed from DOM
 var cleanupObserver = new MutationObserver(function () {
