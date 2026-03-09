@@ -1203,6 +1203,87 @@
             ]
         },
         {
+            "id": "span-robotics-wall-e",
+            "slug": "span-robotics-wall-e",
+            "type": "log",
+            "title": "Real-Life WALL-E Robot + SPAN Robotics",
+            "date": "2026-01",
+            "category": "robotics",
+            "tags": [
+                "Robotics",
+                "Autonomous Systems",
+                "Computer Vision",
+                "Rapid Prototyping",
+                "AR"
+            ],
+            "description": "Final master's project started in January 2026 and documented publicly through my \"Day X building real life WALL-E\" posts. The goal is an autonomous small-trash collection robot that can roam open spaces, pick up litter, store it onboard, and eventually return to a disposal point. Development moved through fast hardware/software iterations: simplifying arm kinematics from a stepper/CNC baseline to servo actuation, building a three.js web control interface that streams joint targets to an ESP32, designing and printing a compact chassis with custom bevel-gear drive, integrating PS5 teleoperation, packaging electronics around a Jetson Orin Nano, and training a YOLO segmentation model on the TACO dataset to estimate grasp centroids. This project became the technical foundation for SPAN Robotics and its broader clean-space system concept.",
+            "hero": {
+                "src": "assets/images/projects/span-robotics-wall-e/ScreenshotsDayXWallE/Screenshot 2026-03-08 at 6.54.18 PM.png",
+                "alt": "Day 8 post showing the robot completing its first manual trash pickup test"
+            },
+            "video": null,
+            "press": [
+                {
+                    "label": "SPAN Robotics",
+                    "url": "https://spanrobotics.io/"
+                },
+                {
+                    "label": "Build log posts on X (@mohr_zachary)",
+                    "url": "https://x.com/mohr_zachary"
+                }
+            ],
+            "entries": [
+                {
+                    "type": "model",
+                    "src": "assets/images/projects/span-robotics-wall-e/WALLE v23.glb",
+                    "iosSrc": "assets/images/projects/span-robotics-wall-e/WALLE v23.usdz",
+                    "arTitle": "Real-Life WALL-E Robot",
+                    "alt": "Interactive 3D model of the WALL-E inspired autonomous litter collection robot",
+                    "caption": "Current CAD model with interactive 3D viewing and mobile AR support."
+                },
+                {
+                    "src": "assets/images/projects/span-robotics-wall-e/ScreenshotsDayXWallE/Screenshot 2026-03-08 at 6.55.30 PM.png",
+                    "alt": "Day 1 post outlining project intent and early CAD baseline for the robot arm",
+                    "caption": "Day 1 (Jan 30): project goal and initial architecture, including the pivot from complex stepper/CNC controls toward a simpler servo-based arm."
+                },
+                {
+                    "src": "assets/images/projects/span-robotics-wall-e/ScreenshotsDayXWallE/Screenshot 2026-03-08 at 6.55.22 PM.png",
+                    "alt": "Day 2 post showing three.js arm simulator controlling a physical prototype",
+                    "caption": "Day 2 (Jan 31): three.js web interface drives arm kinematics and streams joint values to the ESP32 over serial."
+                },
+                {
+                    "src": "assets/images/projects/span-robotics-wall-e/ScreenshotsDayXWallE/Screenshot 2026-03-08 at 6.55.12 PM.png",
+                    "alt": "Day 3 post showing chassis CAD with revised steering architecture",
+                    "caption": "Day 3 (Feb 1): chassis redesign pivoted to a single front wheel approach for tighter steering and better internal packaging."
+                },
+                {
+                    "src": "assets/images/projects/span-robotics-wall-e/ScreenshotsDayXWallE/Screenshot 2026-03-08 at 6.55.02 PM.png",
+                    "alt": "Combined Day 4 and Day 5 post showing printed chassis parts, bevel gears, and electronics planning",
+                    "caption": "Days 4-5 (Feb 3-4): printed chassis components, integrated custom bevel gearing, and planned electronics packaging around Jetson Orin Nano plus microcontroller control."
+                },
+                {
+                    "src": "assets/images/projects/span-robotics-wall-e/ScreenshotsDayXWallE/Screenshot 2026-03-08 at 6.54.47 PM.png",
+                    "alt": "Day 6 post showing first chassis drive tests with PS5 controller",
+                    "caption": "Day 6 (Feb 6): first successful chassis control test with PS5 teleoperation through ESP32."
+                },
+                {
+                    "src": "assets/images/projects/span-robotics-wall-e/ScreenshotsDayXWallE/Screenshot 2026-03-08 at 6.54.35 PM.png",
+                    "alt": "Day 7 post documenting power and wiring debugging during integration",
+                    "caption": "Day 7 (Feb 9): resolved servo power brownouts by rerouting servo 5V supply to a regulated rail and planning a dedicated 12V-to-5V board."
+                },
+                {
+                    "src": "assets/images/projects/span-robotics-wall-e/ScreenshotsDayXWallE/Screenshot 2026-03-08 at 6.54.18 PM.png",
+                    "alt": "Day 8 post showing first successful manual trash pickup",
+                    "caption": "Day 8 (Feb 17): first successful trash pickup during manual operation, validating end-to-end mechanical feasibility."
+                },
+                {
+                    "src": "assets/images/projects/span-robotics-wall-e/ScreenshotsDayXWallE/Screenshot 2026-03-08 at 6.54.03 PM.png",
+                    "alt": "Day 9 post showing real-time trash segmentation and detection output",
+                    "caption": "Day 9 (Feb 19): computer vision milestone using YOLO segmentation trained on TACO to detect trash regions and compute grasp-point centroids."
+                }
+            ]
+        },
+        {
             "id": "designer-sheet-metal-furniture",
             "slug": "designer-sheet-metal-furniture",
             "type": "log",
