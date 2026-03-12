@@ -361,6 +361,35 @@ ol {
     display: block;
 }
 
+/* ---- Three.js dithered portrait container ---- */
+.about-portrait-container {
+    width: 100%;
+    aspect-ratio: 3/4;
+    border: var(--border-width) solid var(--color-gray-300);
+    display: block;
+    position: relative;
+    overflow: hidden;
+    cursor: grab;
+}
+
+.about-portrait-container:active {
+    cursor: grabbing;
+}
+
+.about-portrait-container canvas {
+    width: 100% !important;
+    height: 100% !important;
+    display: block;
+}
+
+/* Fallback when WebGL is unavailable: show raw headshot */
+.about-portrait-container.webgl-fallback {
+    background-image: url('../assets/images/profile/headshot.png');
+    background-size: cover;
+    background-position: center top;
+    cursor: default;
+}
+
 .about-image-placeholder {
     width: 100%;
     aspect-ratio: 3/4;
