@@ -197,7 +197,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const loader = new GLTFLoader();
     loader.setDRACOLoader(dracoLoader);
-    loader.load('assets/models/RotoBlackOptimized.glb', (gltf) => {
+    loader.load('assets/models/WALL-E 2 v30.glb', (gltf) => {
         model = gltf.scene;
 
         // Apply dithering shader to all meshes

@@ -1216,7 +1216,7 @@
                 "Rapid Prototyping",
                 "AR"
             ],
-            "description": "Final master's project started in January 2026 and documented publicly through my \"Day X building real life WALL-E\" posts. The goal is an autonomous small-trash collection robot that can roam open spaces, pick up litter, store it onboard, and eventually return to a disposal point. Development moved through fast hardware/software iterations: simplifying arm kinematics from a stepper/CNC baseline to servo actuation, building a three.js web control interface that streams joint targets to an ESP32, designing and printing a compact chassis with custom bevel-gear drive, integrating PS5 teleoperation, packaging electronics around a Jetson Orin Nano, and training a YOLO segmentation model on the TACO dataset to estimate grasp centroids. This project became the technical foundation for SPAN Robotics and its broader clean-space system concept.",
+            "description": "Autonomous litter-collection robot built from scratch—custom 3D-printed chassis, servo-driven arm, Jetson Orin Nano vision stack, and PS5 teleoperation. Documented publicly as the \"Day X building real life WALL-E\" series and now the foundation of SPAN Robotics.",
             "hero": {
                 "src": "assets/images/projects/span-robotics-wall-e/IMG_3960.JPG",
                 "alt": "Finished WALL-E robot showing the complete assembled chassis, arm, and collection bin"
@@ -1235,11 +1235,20 @@
             "entries": [
                 {
                     "type": "model",
-                    "src": "assets/images/projects/span-robotics-wall-e/WALLE v23.glb",
-                    "iosSrc": "assets/images/projects/span-robotics-wall-e/WALLE v23.usdz",
+                    "models": [
+                        {
+                            "name": "V0",
+                            "src": "assets/images/projects/span-robotics-wall-e/WALLE v23.glb"
+                        },
+                        {
+                            "name": "V1",
+                            "src": "assets/images/projects/span-robotics-wall-e/WALL-E 2 v30.glb"
+                        }
+                    ],
+                    "iosSrc": "assets/images/projects/span-robotics-wall-e/WALL-E 2 v30.usdz",
                     "arTitle": "Real-Life WALL-E Robot",
                     "alt": "Interactive 3D model of the WALL-E inspired autonomous litter collection robot",
-                    "caption": "Current CAD model with interactive 3D viewing and mobile AR support."
+                    "caption": "3D models of the robot: V0 (initial prototype) and V1 (current build)."
                 },
                 {
                     "src": "assets/images/projects/span-robotics-wall-e/ScreenshotsDayXWallE/Screenshot 2026-03-08 at 6.55.30 PM.png",
