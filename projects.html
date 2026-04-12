@@ -79,6 +79,42 @@
         </div>
     </section>
 
+    <!-- Skill Constellation -->
+    <section class="skill-constellation" aria-labelledby="skill-constellation-title">
+        <div class="container">
+            <div class="skill-constellation__header">
+                <h2 id="skill-constellation-title" class="section-title">Skill Constellation</h2>
+                <p class="skill-constellation__intro">A 3D mind map of projects, topics, and inferred skills. Drag to
+                    orbit, scroll to zoom, and click a node to lock focus.</p>
+            </div>
+
+            <div class="skill-constellation__controls" role="group" aria-label="Skill constellation controls">
+                <button class="skill-graph-btn" data-action="toggle-sim">Pause Motion</button>
+                <button class="skill-graph-btn" data-action="reset-view">Reset View</button>
+                <button class="skill-graph-btn" data-action="clear-selection">Clear Selection</button>
+                <p class="skill-constellation__active-filter">Topic Filter: <span id="skillGraphActiveFilter">All</span>
+                </p>
+            </div>
+
+            <div class="skill-constellation__layout">
+                <div class="skill-constellation__canvas-wrap">
+                    <div id="skillGraphCanvas" class="skill-graph-canvas" role="img"
+                        aria-label="Three-dimensional skill constellation graph"></div>
+                    <div class="skill-constellation__legend" aria-hidden="true">
+                        <span class="legend-pill legend-pill--project">Project</span>
+                        <span class="legend-pill legend-pill--topic">Topic</span>
+                        <span class="legend-pill legend-pill--skill">Inferred Skill</span>
+                    </div>
+                </div>
+                <aside class="skill-constellation__panel" id="skillGraphPanel" aria-live="polite">
+                    <h3 class="skill-panel__title">Hover a node</h3>
+                    <p class="skill-panel__meta">Node details and top connections appear here.</p>
+                    <ul class="skill-panel__connections" id="skillGraphConnections"></ul>
+                </aside>
+            </div>
+        </div>
+    </section>
+
     <!-- Projects Grid -->
     <section class="projects">
         <div class="container">
@@ -116,6 +152,7 @@
     <script src="js/main.js?v=6"></script>
     <script src="js/project-renderer.js?v=9"></script>
     <script src="js/project-filter.js?v=6"></script>
+    <script type="module" src="js/project-skill-graph.js?v=1"></script>
     <script type="module" src="js/project-model-viewer.js?v=22"></script>
 </body>
 

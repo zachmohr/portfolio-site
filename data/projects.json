@@ -1207,7 +1207,7 @@
             "slug": "span-robotics-wall-e",
             "type": "log",
             "title": "Real-Life WALL-E Robot + SPAN Robotics",
-            "date": "2026-01",
+            "date": "Ongoing",
             "category": "robotics",
             "tags": [
                 "Robotics",
@@ -1218,8 +1218,8 @@
             ],
             "description": "Final master's project started in January 2026 and documented publicly through my \"Day X building real life WALL-E\" posts. The goal is an autonomous small-trash collection robot that can roam open spaces, pick up litter, store it onboard, and eventually return to a disposal point. Development moved through fast hardware/software iterations: simplifying arm kinematics from a stepper/CNC baseline to servo actuation, building a three.js web control interface that streams joint targets to an ESP32, designing and printing a compact chassis with custom bevel-gear drive, integrating PS5 teleoperation, packaging electronics around a Jetson Orin Nano, and training a YOLO segmentation model on the TACO dataset to estimate grasp centroids. This project became the technical foundation for SPAN Robotics and its broader clean-space system concept.",
             "hero": {
-                "src": "assets/images/projects/span-robotics-wall-e/ScreenshotsDayXWallE/Screenshot 2026-03-08 at 6.54.18 PM.png",
-                "alt": "Day 8 post showing the robot completing its first manual trash pickup test"
+                "src": "assets/images/projects/span-robotics-wall-e/IMG_3960.JPG",
+                "alt": "Finished WALL-E robot showing the complete assembled chassis, arm, and collection bin"
             },
             "video": null,
             "press": [
@@ -1280,6 +1280,16 @@
                     "src": "assets/images/projects/span-robotics-wall-e/ScreenshotsDayXWallE/Screenshot 2026-03-08 at 6.54.03 PM.png",
                     "alt": "Day 9 post showing real-time trash segmentation and detection output",
                     "caption": "Day 9 (Feb 19): computer vision milestone using YOLO segmentation trained on TACO to detect trash regions and compute grasp-point centroids."
+                },
+                {
+                    "src": "assets/images/projects/span-robotics-wall-e/IMG_3958.JPG",
+                    "alt": "Finished WALL-E robot front view showing the arm, chassis, and collection bin",
+                    "caption": "Finished build: front view of the completed robot with arm, custom bevel-gear drivetrain, and onboard collection bin."
+                },
+                {
+                    "src": "assets/images/projects/span-robotics-wall-e/IMG_3960.JPG",
+                    "alt": "Finished WALL-E robot side profile showing the full assembled platform",
+                    "caption": "Finished build: side profile of the fully assembled autonomous litter collection robot."
                 }
             ]
         },
