@@ -579,6 +579,9 @@ function initModelViewer(container) {
             var fitDistance = maxDim / (2 * Math.tan(fov / 2));
             camera.position.set(fitDistance * 0.8, fitDistance * 0.5, fitDistance * 0.8);
             camera.lookAt(0, 0, 0);
+            camera.far = fitDistance * 10;
+            camera.near = fitDistance * 0.001;
+            camera.updateProjectionMatrix();
             controls.target.set(0, 0, 0);
             controls.update();
 
@@ -634,14 +637,17 @@ function initModelViewer(container) {
                     child.receiveShadow = true;
 
                     // Add visible edges for crisp 3D outline visibility
-                    var edgeGeom = new THREE.EdgesGeometry(child.geometry, 30);
-                    var edgeMat = new THREE.LineBasicMaterial({
-                        color: 0x000000,
-                        linewidth: 1,
-                        clippingPlanes: [clippingPlane]
-                    });
-                    var edgeMesh = new THREE.LineSegments(edgeGeom, edgeMat);
-                    child.add(edgeMesh);
+                    // Skip for large meshes (>200k verts) to avoid hanging the browser
+                    if (child.geometry.attributes.position.count < 200000) {
+                        var edgeGeom = new THREE.EdgesGeometry(child.geometry, 30);
+                        var edgeMat = new THREE.LineBasicMaterial({
+                            color: 0x000000,
+                            linewidth: 1,
+                            clippingPlanes: [clippingPlane]
+                        });
+                        var edgeMesh = new THREE.LineSegments(edgeGeom, edgeMat);
+                        child.add(edgeMesh);
+                    }
                 }
             });
 
