@@ -14,6 +14,23 @@
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/typography.css">
     <link rel="stylesheet" href="css/dithering.css">
+    <style>
+        .pdf-viewer { margin-top: var(--space-lg); }
+        .pdf-page {
+            display: block;
+            margin: 0 auto var(--space-sm);
+            max-width: 100%;
+            border: var(--border-width) solid var(--color-gray-200);
+            background: var(--color-white);
+        }
+        .pdf-loading {
+            text-align: center;
+            padding: var(--space-xl) 0;
+            color: var(--color-gray-700);
+            font-family: var(--font-body);
+            font-size: 0.875rem;
+        }
+    </style>
 </head>
 <body>
     <nav class="nav">
@@ -32,10 +49,10 @@
             <h1 class="page-title">Portfolio</h1>
             <p class="contact-simple-text">A selection of product design and engineering work including prototyping, CAD, and concept development.</p>
             <div class="contact-simple-actions" style="margin-top: var(--space-md);">
-                <a href="Zach_Mohr_Portfolio_2026.pdf" target="_blank" class="btn btn-primary">View Portfolio (PDF)</a>
+                <a href="Zach_Mohr_Portfolio.pdf" target="_blank" class="btn btn-primary">Download Portfolio (PDF)</a>
             </div>
-            <div style="margin-top: var(--space-lg); border: var(--border-width) solid var(--color-gray-200); background: var(--color-white); min-height: 80vh;">
-                <iframe src="Zach_Mohr_Portfolio_2026.pdf" width="100%" style="height: 80vh; border: none;" title="Zach Mohr Portfolio PDF"></iframe>
+            <div class="pdf-viewer" id="pdfViewer">
+                <p class="pdf-loading">Loading portfolio&hellip;</p>
             </div>
         </div>
     </section>
@@ -53,5 +70,39 @@
     </footer>
 
     <script src="js/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.min.mjs" type="module"></script>
+    <script type="module">
+        import { GlobalWorkerOptions, getDocument } from 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.min.mjs';
+        GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.worker.min.mjs';
+
+        var container = document.getElementById('pdfViewer');
+        var pdfUrl = 'Zach_Mohr_Portfolio.pdf';
+        var scale = 2;
+
+        getDocument(pdfUrl).promise.then(function (pdf) {
+            container.innerHTML = '';
+            var renderChain = Promise.resolve();
+            for (var i = 1; i <= pdf.numPages; i++) {
+                (function (pageNum) {
+                    renderChain = renderChain.then(function () {
+                        return pdf.getPage(pageNum).then(function (page) {
+                            var viewport = page.getViewport({ scale: scale });
+                            var canvas = document.createElement('canvas');
+                            canvas.className = 'pdf-page';
+                            canvas.width = viewport.width;
+                            canvas.height = viewport.height;
+                            container.appendChild(canvas);
+                            return page.render({
+                                canvasContext: canvas.getContext('2d'),
+                                viewport: viewport
+                            }).promise;
+                        });
+                    });
+                })(i);
+            }
+        }).catch(function (err) {
+            container.innerHTML = '<p class="pdf-loading">Could not load PDF. <a href="' + pdfUrl + '" target="_blank" style="color: var(--color-red);">Download it directly</a>.</p>';
+        });
+    </script>
 </body>
 </html>
