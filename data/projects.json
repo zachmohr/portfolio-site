@@ -1237,12 +1237,12 @@
                     "type": "model",
                     "models": [
                         {
-                            "name": "V0",
-                            "src": "assets/images/projects/span-robotics-wall-e/WALLE v23.glb"
-                        },
-                        {
                             "name": "V1",
                             "src": "assets/images/projects/span-robotics-wall-e/WALL-E 2 v30.glb"
+                        },
+                        {
+                            "name": "V0",
+                            "src": "assets/images/projects/span-robotics-wall-e/WALLE v23.glb"
                         }
                     ],
                     "iosSrc": "assets/images/projects/span-robotics-wall-e/WALL-E 2 v30.usdz",
