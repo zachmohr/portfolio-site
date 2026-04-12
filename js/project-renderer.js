@@ -507,29 +507,18 @@
     // DESCRIPTION EXPAND/COLLAPSE
     // ============================================
     function splitDescription(text) {
-        var maxSentences = 3;
-        var re = /[.!?][\"'\)]?(?:[ \n]|$)/g;
-        var count = 0;
-        var cutoff = -1;
-        var match;
-
-        while ((match = re.exec(text)) !== null) {
-            count++;
-            if (count === maxSentences) {
-                cutoff = match.index + match[0].length;
-                break;
-            }
-        }
-
-        var overflow = cutoff === -1 ? '' : text.slice(cutoff).trim();
-
-        if (!overflow) {
+        var maxChars = 200;
+        if (text.length <= maxChars) {
             return { preview: text, overflow: '' };
         }
 
+        // Find the last space before the limit so we don't cut mid-word
+        var cutoff = text.lastIndexOf(' ', maxChars);
+        if (cutoff === -1) cutoff = maxChars;
+
         return {
             preview: text.slice(0, cutoff).trim(),
-            overflow: overflow
+            overflow: text.slice(cutoff).trim()
         };
     }
 
@@ -543,7 +532,7 @@
         return (
             '<p class="project-description">' +
             escapeHtml(split.preview) +
-            '<span class="description-extra" hidden> ' + escapeHtml(split.overflow) + '</span>' +
+            '&hellip;<span class="description-extra" hidden> ' + escapeHtml(split.overflow) + '</span>' +
             '</p>' +
             '<button class="description-toggle" aria-expanded="false">' +
             'Read More <span class="toggle-indicator">[+]</span>' +
