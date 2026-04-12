@@ -89,6 +89,9 @@
 
         return (
             '<article class="project-card" data-category="' + project.category + '" data-date="' + project.date + '"' +
+            ' data-project-id="' + escapeAttr(project.id || '') + '"' +
+            ' data-project-title="' + escapeAttr(project.title || '') + '"' +
+            ' data-project-type="' + escapeAttr(project.type || 'single') + '"' +
             ' data-project-slug="' + escapeAttr(projectSlug) + '"' +
             (projectAliases ? ' data-project-aliases="' + escapeAttr(projectAliases) + '"' : '') +
             '>' +
@@ -113,6 +116,9 @@
 
         return (
             '<article class="project-card project-card--log" data-category="' + project.category + '" data-date="' + project.date + '"' +
+            ' data-project-id="' + escapeAttr(project.id || '') + '"' +
+            ' data-project-title="' + escapeAttr(project.title || '') + '"' +
+            ' data-project-type="' + escapeAttr(project.type || 'log') + '"' +
             ' data-project-slug="' + escapeAttr(projectSlug) + '"' +
             (projectAliases ? ' data-project-aliases="' + escapeAttr(projectAliases) + '"' : '') +
             '>' +
@@ -581,6 +587,9 @@
             var willExpand = !isExpanded;
             setLogCardExpanded(card, willExpand);
             setProjectPath(card.getAttribute('data-project-slug'), false);
+            if (willExpand) {
+                trackProjectOpen(card, 'build_log_expand');
+            }
 
             if (willExpand) {
                 // Scroll card into view after expanding
@@ -672,6 +681,7 @@
             if (!card || card.classList.contains('project-card--log')) return;
 
             setProjectPath(card.getAttribute('data-project-slug'), false);
+            trackProjectOpen(card, 'card_open');
         });
 
         var initialSlug = getProjectSlugFromLocation();
@@ -758,6 +768,34 @@
 
         var method = replace ? 'replaceState' : 'pushState';
         window.history[method]({ projectSlug: slug }, '', targetPath);
+    }
+
+    function trackProjectOpen(card, source) {
+        if (!card) return;
+
+        var projectSlug = card.getAttribute('data-project-slug') || '';
+        var eventPayload = {
+            project_id: card.getAttribute('data-project-id') || '',
+            project_title: card.getAttribute('data-project-title') || '',
+            project_slug: projectSlug,
+            project_category: card.getAttribute('data-category') || '',
+            project_type: card.getAttribute('data-project-type') || '',
+            open_source: source || 'unknown',
+            page_path: window.location.pathname,
+            target_path: projectSlug ? (PROJECTS_ROUTE_BASE + '/' + projectSlug) : ''
+        };
+
+        trackAnalyticsEvent('project_open', eventPayload);
+    }
+
+    function trackAnalyticsEvent(eventName, params) {
+        if (!eventName || typeof window === 'undefined' || typeof window.gtag !== 'function') return;
+
+        try {
+            window.gtag('event', eventName, params || {});
+        } catch (err) {
+            // Keep analytics failures from impacting UX.
+        }
     }
 
     function normalizePath(path) {
@@ -1015,6 +1053,7 @@
     // UTILITIES
     // ============================================
     function formatDate(dateStr) {
+        if (dateStr === 'Ongoing') return 'Ongoing';
         var parts = dateStr.split('-');
         var months = [
             'January', 'February', 'March', 'April', 'May', 'June',

@@ -19,6 +19,16 @@ gltfLoader.setDRACOLoader(dracoLoader);
 var viewerStates = new WeakMap();
 var activeContainers = new Set();
 
+function trackAnalyticsEvent(eventName, params) {
+    if (!eventName || typeof window === 'undefined' || typeof window.gtag !== 'function') return;
+
+    try {
+        window.gtag('event', eventName, params || {});
+    } catch (err) {
+        // Avoid breaking core interactions if analytics fails.
+    }
+}
+
 function detectArPlatform() {
     var ua = navigator.userAgent || '';
     var isIOS = /iPad|iPhone|iPod/.test(ua) ||
@@ -279,8 +289,14 @@ function initModelViewer(container) {
             modelSelect.appendChild(opt);
         });
         modelSelect.addEventListener('change', function () {
+            var previousModel = currentModelUrl || src || '';
             loadModel(this.value);
             updateArLink(this.value);
+            trackViewerEvent('project_3d_model_switch', {
+                previous_model_src: previousModel,
+                next_model_src: this.value || '',
+                next_model_name: getModelMeta(this.value) ? (getModelMeta(this.value).name || '') : ''
+            });
         });
         topControlsDiv.appendChild(modelSelect);
     }
@@ -296,6 +312,9 @@ function initModelViewer(container) {
         axisSelect.addEventListener('change', function () {
             currentAxis = axisSelect.value;
             updateClippingForAxis();
+            trackViewerEvent('project_3d_cross_section_axis_change', {
+                cross_section_axis: currentAxis
+            });
         });
         topControlsDiv.appendChild(axisSelect);
     }
@@ -307,6 +326,10 @@ function initModelViewer(container) {
     var currentModelNode = null;
     var currentBox = null;
     var ground = null;
+    var currentModelUrl = src;
+    var hasTrackedViewerLoad = false;
+    var hasTrackedViewerInteract = false;
+    var card = container.closest('.project-card');
 
     function getModelMeta(modelUrl) {
         if (!models || !models.length) return null;
@@ -315,6 +338,30 @@ function initModelViewer(container) {
             if (models[i].src === modelUrl) return models[i];
         }
         return null;
+    }
+
+    function getArPlatformLabel() {
+        return arPlatform.isIOS ? 'ios' : (arPlatform.isAndroid ? 'android' : 'other');
+    }
+
+    function trackViewerEvent(eventName, extra) {
+        var payload = {
+            project_id: card ? (card.getAttribute('data-project-id') || '') : '',
+            project_title: card ? (card.getAttribute('data-project-title') || '') : '',
+            project_slug: card ? (card.getAttribute('data-project-slug') || '') : '',
+            project_category: card ? (card.getAttribute('data-category') || '') : '',
+            project_type: card ? (card.getAttribute('data-project-type') || '') : '',
+            ar_platform: getArPlatformLabel(),
+            model_src: currentModelUrl || src || ''
+        };
+
+        if (extra) {
+            Object.keys(extra).forEach(function (key) {
+                payload[key] = extra[key];
+            });
+        }
+
+        trackAnalyticsEvent(eventName, payload);
     }
 
     function updateArLink(modelUrl) {
@@ -361,6 +408,29 @@ function initModelViewer(container) {
         arLink.removeAttribute('target');
         arLink.removeAttribute('rel');
         if (quickLookProxy) quickLookProxy.removeAttribute('href');
+    }
+
+    function bindArAnalytics() {
+        if (!arLink || arLink.getAttribute('data-analytics-bound') === 'true') return;
+
+        arLink.addEventListener('click', function () {
+            var activeModel = currentModelUrl || src || '';
+            var activeMeta = getModelMeta(activeModel);
+
+            trackAnalyticsEvent('project_ar_open', {
+                project_id: card ? (card.getAttribute('data-project-id') || '') : '',
+                project_title: card ? (card.getAttribute('data-project-title') || '') : '',
+                project_slug: card ? (card.getAttribute('data-project-slug') || '') : '',
+                project_category: card ? (card.getAttribute('data-category') || '') : '',
+                project_type: card ? (card.getAttribute('data-project-type') || '') : '',
+                ar_platform: getArPlatformLabel(),
+                model_src: activeModel,
+                model_name: activeMeta ? (activeMeta.name || '') : '',
+                ar_href: arLink.href || ''
+            });
+        });
+
+        arLink.setAttribute('data-analytics-bound', 'true');
     }
 
     function updateClippingForAxis() {
@@ -420,6 +490,10 @@ function initModelViewer(container) {
             crossSectionBtn.setAttribute('aria-pressed', String(enabled));
             sliderWrap.hidden = !enabled;
             if (axisSelect) axisSelect.hidden = !enabled;
+            trackViewerEvent('project_3d_cross_section_toggle', {
+                cross_section_enabled: enabled,
+                cross_section_axis: currentAxis
+            });
 
             if (planeHelper) {
                 planeHelper.visible = enabled;
@@ -448,6 +522,12 @@ function initModelViewer(container) {
     }
 
     canvas.addEventListener('pointerdown', function () {
+        if (!hasTrackedViewerInteract) {
+            hasTrackedViewerInteract = true;
+            trackViewerEvent('project_3d_viewer_interact', {
+                interaction_type: 'pointerdown'
+            });
+        }
         controls.autoRotate = false;
     });
 
@@ -461,6 +541,7 @@ function initModelViewer(container) {
     });
 
     function loadModel(modelUrl) {
+        currentModelUrl = modelUrl;
         var prevNode = currentModelNode;
         gltfLoader.load(modelUrl, function (gltf) {
             var state = viewerStates.get(container);
@@ -594,6 +675,14 @@ function initModelViewer(container) {
             currentModelNode = model;
             state.model = model;
 
+            if (!hasTrackedViewerLoad) {
+                hasTrackedViewerLoad = true;
+                trackViewerEvent('project_3d_viewer_load', {
+                    model_name: getModelMeta(modelUrl) ? (getModelMeta(modelUrl).name || '') : '',
+                    cross_section_available: allowCrossSection
+                });
+            }
+
             if (crossSectionBtn.getAttribute('aria-pressed') === 'false') {
                 clippingPlane.constant = maxDim + 0.01;
             }
@@ -608,6 +697,7 @@ function initModelViewer(container) {
 
     loadModel(src);
     updateArLink(src);
+    bindArAnalytics();
 
     var resizeObserver = new ResizeObserver(function () {
         var current = viewerStates.get(container);
