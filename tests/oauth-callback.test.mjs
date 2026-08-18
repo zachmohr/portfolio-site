@@ -23,6 +23,7 @@ test('callback exchanges the GitHub code and returns the Decap success message',
   const html = await response.text();
 
   assert.equal(response.status, 200);
+  assert.match(html, /window\.opener\.postMessage\("authorizing:github","\*"\)/);
   assert.match(html, /authorization:github:success/);
   assert.match(html, /github-token/);
   assert.equal(tokenRequest.url, 'https://github.com/login/oauth/access_token');

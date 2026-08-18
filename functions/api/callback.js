@@ -1,6 +1,6 @@
 function renderResult(origin, status, payload) {
   const message = `authorization:github:${status}:${JSON.stringify(payload)}`;
-  return `<!doctype html><html><head><meta charset="utf-8"><title>GitHub authorization</title></head><body><p>Finishing authorization…</p><script>if(window.opener){window.opener.postMessage(${JSON.stringify(message)}, ${JSON.stringify(origin)});window.close();}</script></body></html>`;
+  return `<!doctype html><html><head><meta charset="utf-8"><title>GitHub authorization</title></head><body><p>Finishing authorization…</p><script>if(window.opener){const receiveMessage=(event)=>{if(event.origin!==${JSON.stringify(origin)}||event.data!=="authorizing:github")return;window.removeEventListener("message",receiveMessage);window.opener.postMessage(${JSON.stringify(message)},event.origin);};window.addEventListener("message",receiveMessage);window.opener.postMessage("authorizing:github","*");}</script></body></html>`;
 }
 
 function readCookies(header) {
