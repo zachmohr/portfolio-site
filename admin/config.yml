@@ -1,0 +1,50 @@
+backend:
+  name: github
+  repo: zachmohr/portfolio-site
+  branch: main
+  base_url: https://zachmohr.work
+  auth_endpoint: api/auth
+  squash_merges: true
+  commit_messages:
+    create: 'Create: {{slug}}'
+    update: 'Update: {{slug}}'
+    delete: 'Delete: {{slug}}'
+    uploadMedia: 'Upload: {{path}}'
+    deleteMedia: 'Delete: {{path}}'
+
+publish_mode: editorial_workflow
+site_url: https://zachmohr.work
+display_url: https://zachmohr.work
+media_folder: assets/writing
+public_folder: /assets/writing
+
+collections:
+  - name: writing
+    label: Writing
+    label_singular: Thought
+    description: Notes and essays. Start with the body; everything else can wait.
+    folder: content/writing
+    create: true
+    delete: true
+    extension: md
+    format: frontmatter
+    slug: '{{slug}}'
+    identifier_field: title
+    summary: '{{title}} — {{type}}'
+    sortable_fields: [date, updated, title, type]
+    view_filters:
+      - { label: Notes, field: type, pattern: note }
+      - { label: Essays, field: type, pattern: essay }
+      - { label: Featured, field: featured, pattern: true }
+    fields:
+      - { label: Thought, name: body, widget: markdown, required: false, hint: Start here. You can save a draft with only this text. }
+      - { label: Title, name: title, widget: string, required: false, default: Untitled thought }
+      - { label: Type, name: type, widget: select, options: [note, essay], default: note }
+      - { label: Published, name: published, widget: boolean, default: true, hint: Editorial Workflow keeps drafts off main until you publish. Turn this off to keep a merged entry private. }
+      - { label: Date, name: date, widget: datetime, required: false, date_format: YYYY-MM-DD, time_format: false }
+      - { label: Updated, name: updated, widget: datetime, required: false, date_format: YYYY-MM-DD, time_format: false }
+      - { label: Description, name: description, widget: text, required: false }
+      - { label: Tags, name: tags, widget: list, required: false, allow_add: true }
+      - { label: Cover image, name: cover_image, widget: image, required: false }
+      - { label: Featured, name: featured, widget: boolean, default: false, required: false }
+      - { label: Permanent slug, name: slug, widget: string, required: false, hint: Optional. Once published, avoid changing this URL. }

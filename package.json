@@ -4,13 +4,17 @@
   "description": "Portfolio website for Zach Mohr - Mechanical Engineer, Product Designer, Maker",
   "main": "index.html",
   "scripts": {
-    "dev": "echo 'Open index.html in your browser or use Live Server'",
+    "build": "npm run generate:writing",
+    "dev": "npm run build && concurrently --kill-others --names cms,site \"BIND_HOST=127.0.0.1 ORIGIN=http://localhost:8788 decap-server\" \"wrangler pages dev . --port 8788\"",
     "deploy": "echo 'Push to GitHub and deploy via Cloudflare Pages'",
-    "generate:projects": "node scripts/generate-static-project-pages.js"
+    "generate:projects": "node scripts/generate-static-project-pages.js",
+    "generate:all": "npm run generate:projects && npm run generate:writing",
+    "generate:writing": "node scripts/generate-writing.mjs",
+    "test": "node --test tests/*.test.mjs"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/YOUR_USERNAME/portfolio.git"
+    "url": "git+https://github.com/zachmohr/portfolio-site.git"
   },
   "keywords": [
     "portfolio",
@@ -21,5 +25,14 @@
   ],
   "author": "Zach Mohr <zmohr026@gmail.com>",
   "license": "UNLICENSED",
-  "private": true
+  "private": true,
+  "dependencies": {
+    "gray-matter": "^4.0.3",
+    "marked": "^18.0.9"
+  },
+  "devDependencies": {
+    "concurrently": "^10.0.5",
+    "decap-server": "^3.10.0",
+    "wrangler": "^4.123.0"
+  }
 }
