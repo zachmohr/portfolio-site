@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Writing Admin — Zach Mohr</title>
+</head>
+<body>
+  <script>window.CMS_MANUAL_INIT = true;</script>
+  <script src="https://unpkg.com/decap-cms@3.8.4/dist/decap-cms.js"></script>
+  <script>
+    const isLocal = ['localhost', '127.0.0.1'].includes(location.hostname);
+    CMS.init({
+      config: isLocal ? { local_backend: true, publish_mode: 'simple' } : {},
+    });
+
+    // Keep the fast-capture path focused on writing instead of metadata.
+    const focusEditor = new MutationObserver(() => {
+      const editor = document.querySelector('[contenteditable="true"], textarea');
+      if (editor && location.hash.includes('/new')) {
+        editor.focus();
+        focusEditor.disconnect();
+      }
+    });
+    focusEditor.observe(document.documentElement, { childList: true, subtree: true });
+  </script>
+</body>
+</html>

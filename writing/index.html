@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Notes and essays by Zach Mohr on design, engineering, products, culture, and technology.">
+  <meta name="author" content="Zach Mohr">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Writing — Zach Mohr">
+  <meta property="og:description" content="Notes and essays by Zach Mohr on design, engineering, products, culture, and technology.">
+  <meta property="og:url" content="https://zachmohr.work/writing/">
+  <meta name="twitter:card" content="summary">
+  <link rel="canonical" href="https://zachmohr.work/writing/">
+  <link rel="alternate" type="application/rss+xml" title="Zach Mohr — Writing" href="https://zachmohr.work/writing/rss.xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700;900&family=IBM+Plex+Mono:wght@400;500&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/main.css?v=6">
+  <link rel="stylesheet" href="/css/typography.css?v=6">
+  <link rel="stylesheet" href="/css/writing.css?v=1">
+
+  <title>Writing — Zach Mohr</title>
+</head>
+<body>
+  <nav class="nav" aria-label="Primary navigation">
+    <div class="nav-container">
+      <a href="/" class="nav-logo" aria-label="Zach Mohr home">ZM</a>
+      <ul class="nav-menu">
+        <li><a href="/projects" class="nav-link">Projects</a></li>
+        <li><a href="/writing" class="nav-link active">Writing</a></li>
+        <li><a href="/contact.html" class="nav-link">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+  <main class="writing-archive">
+    <header class="writing-archive__header container">
+      <p class="writing-kicker">Notes &amp; essays</p>
+      <h1>Writing</h1>
+      <p>A public archive of ideas in progress—on design, engineering, products, culture, and whatever else seems worth preserving.</p>
+    </header>
+    <section class="writing-controls container" aria-label="Filter writing">
+      <div class="writing-filter" role="group" aria-label="Type">
+        <button class="is-active" type="button" data-filter="all">Everything</button>
+        <button type="button" data-filter="essay">Essays</button>
+        <button type="button" data-filter="note">Notes</button>
+      </div>
+      <label class="writing-search"><span class="visually-hidden">Search writing</span><input type="search" placeholder="Search the archive" data-writing-search></label>
+    </section>
+    <section class="writing-list container" aria-live="polite">
+      <p class="writing-empty">The archive is ready. The first thought is still being written.</p>
+      <p class="writing-empty" data-no-results hidden>No writing matches that search.</p>
+    </section>
+  </main>
+  <footer class="footer">
+    <div class="container footer-content">
+      <p class="footer-text">&copy; 2026 Zach Mohr. A public archive of work and thinking.</p>
+      <div class="footer-links"><a href="mailto:zmohr026@gmail.com" class="footer-link">Email</a></div>
+    </div>
+  </footer>
+  <script src="/js/writing.js" defer></script>
+</body>
+</html>

@@ -349,6 +349,7 @@ ${renderStructuredData(project, pageUrl)}
       <ul class="nav-menu">
         <li><a href="index.html#about" class="nav-link">About</a></li>
         <li><a href="/projects" class="nav-link active">Projects</a></li>
+        <li><a href="/writing" class="nav-link">Writing</a></li>
         <li><a href="contact.html" class="nav-link">Contact</a></li>
       </ul>
     </div>

@@ -198,6 +198,27 @@ Modify intensity in `css/dithering.css`:
 - Safari (latest)
 - Mobile browsers (iOS Safari, Chrome Mobile)
 
+## Publishing writing
+
+The public archive lives at `/writing`, and the private editor lives at `/admin`. After signing in with the GitHub account that can write to `zachmohr/portfolio-site`, choose **New Thought**. The body field comes first and is focused automatically, so a thought can begin as body text plus the default title. Use **Save** to keep it in Decap's editorial workflow; use **Publish** to merge it to `main` and trigger the normal Cloudflare Pages deployment.
+
+Writing is ordinary Markdown with YAML front matter in `content/writing/`. Uploaded images are committed to `assets/writing/`. The build script generates static archive and article HTML, `/writing/rss.xml`, article metadata/JSON-LD, and sitemap entries. Entries with `published: false` are excluded from every public output. A note can become an essay by changing `type`; the filename (or explicit `slug`) remains its permanent URL.
+
+### Test locally
+
+Run `npm run dev`, then open `http://localhost:8788/admin/`. The admin page detects localhost, uses Decap's local proxy, opens the editor without GitHub login, and writes directly to this checkout. It also switches locally to Decap's simple publishing mode because the proxy does not support Editorial Workflow; test private/public behavior with the `published` toggle. Production keeps the full GitHub-backed Editorial Workflow.
+
+### One-time CMS setup
+
+1. In GitHub, create an OAuth App with homepage `https://zachmohr.work` and callback `https://zachmohr.work/api/callback`.
+2. In the existing Cloudflare Pages project, add encrypted variables `GITHUB_CLIENT_ID` and `GITHUB_CLIENT_SECRET` for both Production and Preview.
+3. Set the Pages build command to `npm run build` and the output directory to `/` (the repository root). Keep the existing `main` production branch and Git integration.
+4. Deploy, then visit `https://zachmohr.work/admin/` and use **Login with GitHub**.
+
+Authentication is same-site GitHub OAuth handled by Cloudflare Pages Functions in `functions/api/`. `/admin` is public by design, but it cannot edit anything without a valid GitHub token for a user with repository write access. OAuth state is checked with a short-lived, secure, HTTP-only cookie; the GitHub client secret remains in Cloudflare and is never sent to the browser.
+
+If Decap ever stops working, edit or add a Markdown file in `content/writing/` directly on GitHub, set `published: true`, and commit it to `main`. Cloudflare runs `npm run build` and deploys the same static result. Drafts created through Editorial Workflow are recoverable as `cms/writing/*` branches and pull requests. CMS maintenance is limited to the pinned Decap script version in `admin/index.html`, the GitHub OAuth App, and the two Cloudflare secret variables.
+
 ## Performance
 
 - Loads in < 2 seconds
