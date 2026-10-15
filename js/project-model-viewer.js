@@ -687,7 +687,7 @@ function initModelViewer(container) {
             state.model = model;
 
             if (container.getAttribute('data-chess-game') === 'true') {
-                import('./chess-game.js?v=10').then(function (mod) {
+                import('./chess-game.js?v=11').then(function (mod) {
                     var current = viewerStates.get(container);
                     if (!current || current.disposed || currentModelNode !== model) return;
                     current.chess = mod.attachChessGame({

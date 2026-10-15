@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex,nofollow">
-  <title>Download Stats | Zach Mohr</title>
+  <title>Site Stats | Zach Mohr</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -37,6 +37,17 @@
       <thead><tr><th>Day</th><th class="num">Downloads</th></tr></thead>
       <tbody id="daily"></tbody>
     </table>
+
+    <h1 style="margin-top:56px">Chess</h1>
+    <p class="muted">Games on the SCS Chess Set page. Win/loss/draw are vs the computer only.</p>
+    <table>
+      <tbody id="chess-totals"><tr><td colspan="2" class="muted">Loading…</td></tr></tbody>
+    </table>
+    <h2>Chess, last 30 days</h2>
+    <table>
+      <thead><tr><th>Day</th><th class="num">Started</th><th class="num">Finished</th><th class="num">Saved</th></tr></thead>
+      <tbody id="chess-daily"></tbody>
+    </table>
   </main>
   <script>
     function row(label, count) {
@@ -46,6 +57,37 @@
       tr.appendChild(a); tr.appendChild(b);
       return tr;
     }
+    function cells(values) {
+      var tr = document.createElement('tr');
+      values.forEach(function (v, i) {
+        var td = document.createElement('td');
+        if (i) td.className = 'num';
+        td.textContent = v;
+        tr.appendChild(td);
+      });
+      return tr;
+    }
+    fetch('/api/chess/stats', { cache: 'no-store' })
+      .then(function (res) { return res.json(); })
+      .then(function (data) {
+        var totals = document.getElementById('chess-totals');
+        totals.textContent = '';
+        if (data.error) { totals.appendChild(cells([data.error, ''])); return; }
+        var t = data.totals || {};
+        [['Games started', t.start], ['Games finished', t.finish], ['Wins vs computer', t.finish_win], ['Losses vs computer', t.finish_loss], ['Draws vs computer', t.finish_draw], ['Scores saved', t.saved], ['Players on leaderboard', data.players]]
+          .forEach(function (row) { totals.appendChild(cells([row[0], row[1] || 0])); });
+        var daily = document.getElementById('chess-daily');
+        Object.keys(data.daily || {}).sort().reverse().slice(0, 30).forEach(function (day) {
+          var d = data.daily[day];
+          daily.appendChild(cells([day, d.start || 0, d.finish || 0, d.saved || 0]));
+        });
+      })
+      .catch(function (err) {
+        var totals = document.getElementById('chess-totals');
+        totals.textContent = '';
+        totals.appendChild(cells(['Could not load chess stats: ' + err.message, '']));
+      });
+
     fetch('/api/downloads', { cache: 'no-store' })
       .then(function (res) { return res.json(); })
       .then(function (data) {

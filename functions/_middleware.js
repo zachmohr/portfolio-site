@@ -13,6 +13,7 @@ const BLOCKED = [
 const PRIVATE = [
   /^\/admin(\/|$)/i,
   /^\/api\/downloads\/?$/i,
+  /^\/api\/chess\/stats\/?$/i,
 ];
 
 export function isBlocked(pathname) {

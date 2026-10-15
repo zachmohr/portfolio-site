@@ -102,7 +102,7 @@ test('admin and download stats are private', async () => {
   const next = () => new Response('secret');
   const basic = (pw) => ({ Authorization: 'Basic ' + btoa('zach:' + pw) });
 
-  for (const path of ['/admin', '/admin/', '/admin/index.html', '/admin/config.yml', '/admin/downloads.html', '/api/downloads']) {
+  for (const path of ['/admin', '/admin/', '/admin/index.html', '/admin/config.yml', '/admin/downloads.html', '/api/downloads', '/api/chess/stats']) {
     // No password configured: hidden entirely.
     const hidden = await onRequest({ request: new Request('https://zachmohr.work' + path), env: {}, next });
     assert.equal(hidden.status, 404, path);
