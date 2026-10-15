@@ -328,6 +328,14 @@ function renderProjectPage(project) {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <base href="/">
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-H6RYHHMSFB"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-H6RYHHMSFB');
+  </script>
   <meta name="description" content="${escapeAttr(description)}">
   <meta name="robots" content="index,follow">
   <title>${escapeHtml(title)}</title>
@@ -401,7 +409,7 @@ ${renderStructuredData(project, pageUrl)}
   </script>
 
   <script src="js/main.js?v=6"></script>
-  <script type="module" src="js/project-model-viewer.js?v=34"></script>
+  <script type="module" src="js/project-model-viewer.js?v=35"></script>
 </body>
 </html>`;
 }

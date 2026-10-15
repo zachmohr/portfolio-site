@@ -21,6 +21,18 @@ function track(eventName, params) {
     if (typeof window.gtag === 'function') window.gtag('event', eventName, params || {});
 }
 
+// Anonymous first-party counters for the private stats page (see functions/api/chess/event.js).
+function countEvent(body) {
+    try {
+        var payload = JSON.stringify(body);
+        if (navigator.sendBeacon) {
+            navigator.sendBeacon('/api/chess/event', new Blob([payload], { type: 'application/json' }));
+        } else {
+            fetch('/api/chess/event', { method: 'POST', body: payload, headers: { 'Content-Type': 'application/json' }, keepalive: true });
+        }
+    } catch (e) { /* counting must never break the game */ }
+}
+
 function forEachMaterial(object, fn) {
     object.traverse(function (child) {
         if (!child.isMesh || !child.material) return;
@@ -495,6 +507,8 @@ export function attachChessGame(ctx) {
     function checkGameOver() {
         if (!game.isGameOver()) return false;
         track('chess_game_over', { result: statusEl.textContent, ranked: ranked });
+        var outcome = game.isCheckmate() ? (game.turn() === 'b' ? 'win' : 'loss') : 'draw';
+        countEvent(ranked ? { type: 'finish', result: outcome } : { type: 'finish' });
         if (ranked) setTimeout(showResult, MOVE_MS + 300);
         return true;
     }
@@ -628,6 +642,7 @@ export function attachChessGame(ctx) {
                 if (!out.ok) throw new Error(out.data.error || 'Could not save your score.');
                 rememberName(out.data.player.name);
                 track('chess_score_saved', { result: out.data.result });
+                countEvent({ type: 'saved' });
                 showScores(out.data.players, out.data.player.name, out.data.total);
             })
             .catch(function (err) {
@@ -886,6 +901,7 @@ export function attachChessGame(ctx) {
             lastAspect = camera.aspect;
             flyToPlayerView();
             track('chess_game_start', { fullscreen: isFullscreen() });
+            countEvent({ type: 'start' });
         }).catch(function (err) {
             console.error('Chess game: could not load rules engine', err);
             hint.disabled = false;
@@ -926,6 +942,7 @@ export function attachChessGame(ctx) {
         if (action === 'close-scores') { scoresCard.hidden = true; return; }
         if (action === 'new') {
             game.reset();
+            countEvent({ type: 'start' });
             thinking = false;
             ranked = vsComputer;
             resultCard.hidden = true;

@@ -88,3 +88,24 @@ test('records never expire and keep the first-played date', async () => {
   assert.equal(second.player.since, first.player.since);
   assert.deepEqual([second.player.wins, second.player.losses, second.player.points], [1, 1, 3]);
 });
+
+test('chess play events are counted per metric and per day', async () => {
+  const { onRequestPost: recordEvent, metricsFor } = await import('../functions/api/chess/event.js');
+  const { onRequestGet: stats } = await import('../functions/api/chess/stats.js');
+  const LEADERBOARD = memoryKv();
+  const send = (body, ua = 'Mozilla/5.0') => recordEvent({ request: new Request('https://zachmohr.work/api/chess/event', { method: 'POST', body: JSON.stringify(body), headers: { 'User-Agent': ua } }), env: { LEADERBOARD } });
+
+  assert.equal((await send({ type: 'start' })).status, 204);
+  await send({ type: 'start' });
+  await send({ type: 'finish', result: 'win' });
+  await send({ type: 'finish' });
+  await send({ type: 'saved' });
+  await send({ type: 'hack' });
+  await send({ type: 'start' }, 'Googlebot/2.1');
+
+  assert.deepEqual(metricsFor({ type: 'finish', result: 'win' }), ['finish', 'finish_win']);
+  const data = await (await stats({ env: { LEADERBOARD } })).json();
+  assert.deepEqual(data.totals, { start: 2, finish: 2, finish_win: 1, saved: 1 });
+  const today = Object.values(data.daily)[0];
+  assert.equal(today.start, 2);
+});
