@@ -122,10 +122,12 @@
             ' data-project-slug="' + escapeAttr(projectSlug) + '"' +
             (projectAliases ? ' data-project-aliases="' + escapeAttr(projectAliases) + '"' : '') +
             '>' +
-            '<div class="project-image">' +
-            '<img src="' + project.hero.src + '" alt="' + escapeAttr(project.hero.alt) + '"' +
-            lazy + ' width="1600" height="1000">' +
-            '</div>' +
+            (project.heroModel
+                ? '<div class="project-image project-image--model">' + renderModelEntry(project.heroModel) + '</div>'
+                : '<div class="project-image">' +
+                  '<img src="' + project.hero.src + '" alt="' + escapeAttr(project.hero.alt) + '"' +
+                  lazy + ' width="1600" height="1000">' +
+                  '</div>') +
             '<div class="project-content">' +
             '<span class="project-date">' + formatDate(project.date) + '</span>' +
             '<h3 class="project-title">' + escapeHtml(project.title) + '</h3>' +
@@ -582,7 +584,7 @@
     function initToggleHandlers(container) {
         container.addEventListener('click', function (e) {
             // Skip if clicking interactive elements inside the card (except the log toggle itself)
-            if (e.target.closest('a, button:not(.project-log-toggle), input, .description-toggle, .project-log, video, .sketch-nav, .model-controls, .strobe-controls')) return;
+            if (e.target.closest('a, button:not(.project-log-toggle), input, .description-toggle, .project-log, video, .sketch-nav, .model-controls, .strobe-controls, .model-viewer-container, .chess-card')) return;
 
             // Allow clicks anywhere on a log card to toggle the build log
             var card = e.target.closest('.project-card--log');

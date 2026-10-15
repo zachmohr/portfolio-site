@@ -26,7 +26,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700;900&family=IBM+Plex+Mono:wght@400;500&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="css/main.css?v=9">
+  <link rel="stylesheet" href="css/main.css?v=17">
   <link rel="stylesheet" href="css/typography.css?v=5">
   <link rel="stylesheet" href="css/dithering.css?v=5">
 
@@ -35,7 +35,7 @@
   "@context": "https://schema.org",
   "@type": "CreativeWork",
   "name": "SCS Chess Set",
-  "description": "A full two-player chess set designed to be cut entirely from flat sheet metal and ordered from SendCutSend. Each piece is a 1/8\" laser-cut profile bolted to a round base, the 64 board squares sit in a cut plate, and a bent sheet-metal base holds it together. Every part is free to download as a STEP file, ready to upload for a quote.",
+  "description": "A full two-player chess set designed to be cut entirely from flat sheet metal and ordered from SendCutSend. Each piece is a 1/8\" laser-cut profile bolted to a round base, the 64 board squares sit in a cut plate, and a bent sheet-metal base holds it together. Every part is free to download as a STEP file, ready to upload for a quote. Heads up: I haven't built this board yet, and material thickness and cut tolerances vary by material and vendor, so check the fit of the squares and pieces before ordering a full set. The board squares are drawn at 2.21\" for 0.02\" of clearance per side in the 2.25\" plate holes.",
   "url": "https://zachmohr.work/projects/scs-chess-set",
   "image": "https://zachmohr.work/assets/images/projects/scs-chess-set/hero.jpg",
   "author": {
@@ -54,7 +54,6 @@
       <ul class="nav-menu">
         <li><a href="index.html#about" class="nav-link">About</a></li>
         <li><a href="/projects" class="nav-link active">Projects</a></li>
-        <li><a href="/writing" class="nav-link">Writing</a></li>
         <li><a href="contact.html" class="nav-link">Contact</a></li>
       </ul>
     </div>
@@ -72,13 +71,16 @@
   <div class="container">
     <div class="projects-grid" style="grid-template-columns: minmax(0, 1fr);">
       <article class="project-card project-card--log" data-category="fabrication" data-date="2026-10" style="grid-column: 1 / -1; cursor: default;">
-        <div class="project-image">
-          <img src="assets/images/projects/scs-chess-set/hero.jpg" alt="Isometric render of the sheet metal chess set with red and blue pieces set up on both sides of the board" width="1600" height="1000" fetchpriority="high">
-        </div>
+        <div class="project-image project-image--model">
+<div class="log-entry log-entry--model">
+  <div class="model-wrapper model-viewer-container" data-src="assets/images/projects/scs-chess-set/SCSChessSet.glb" data-ar-enabled="true" data-ar-src="assets/images/projects/scs-chess-set/SCSChessSet.usdz" data-ar-title="SCS Chess Set" data-chess-game="true" role="img" aria-label="Interactive 3D model of the sheet metal chess set"></div>
+  <a class="model-ar-link" hidden href="#" aria-label="Open model in augmented reality">Open in AR</a>
+  <p class="log-caption">Hit Play to play a full game on the actual pieces, then put your name on the leaderboard.</p>
+</div></div>
         <div class="project-content">
           <span class="project-date">October 2026</span>
           <h1 class="project-title">SCS Chess Set</h1>
-          <p class="project-description">A full two-player chess set designed to be cut entirely from flat sheet metal and ordered from SendCutSend. Each piece is a 1/8&quot; laser-cut profile bolted to a round base, the 64 board squares sit in a cut plate, and a bent sheet-metal base holds it together. Every part is free to download as a STEP file, ready to upload for a quote.</p>
+          <p class="project-description">A full two-player chess set designed to be cut entirely from flat sheet metal and ordered from SendCutSend. Each piece is a 1/8&quot; laser-cut profile bolted to a round base, the 64 board squares sit in a cut plate, and a bent sheet-metal base holds it together. Every part is free to download as a STEP file, ready to upload for a quote. Heads up: I haven&#39;t built this board yet, and material thickness and cut tolerances vary by material and vendor, so check the fit of the squares and pieces before ordering a full set. The board squares are drawn at 2.21&quot; for 0.02&quot; of clearance per side in the 2.25&quot; plate holes.</p>
           
 <div class="project-tags">
   <span class="tag">Sheet Metal</span>
@@ -110,12 +112,6 @@
         </div>
         <div class="project-log">
           
-<div class="log-entry log-entry--model">
-  <div class="model-wrapper model-viewer-container" data-src="assets/images/projects/scs-chess-set/SCSChessSet.glb" data-ar-enabled="true" data-ar-src="assets/images/projects/scs-chess-set/SCSChessSet.usdz" data-ar-title="SCS Chess Set" data-chess-game="true" role="img" aria-label="Interactive 3D model of the sheet metal chess set"></div>
-  <a class="model-ar-link" hidden href="#" aria-label="Open model in augmented reality">Open in AR</a>
-  <p class="log-caption">Interactive 3D model of the full assembly, with mobile AR support.</p>
-</div>
-
 <div class="log-entry">
   <img src="assets/images/projects/scs-chess-set/hero.jpg" alt="Isometric view of the chess board set up for a game, red pieces on one side and blue on the other" loading="lazy" decoding="async">
   <p class="log-caption">Complete set for two players: 2 kings, 2 queens, 4 bishops, 4 knights, 4 rooks, 16 pawns, 32 bases, 64 squares, a board plate, and a bent base. Each piece fastens to its base with a McMaster 92210A194 flat head screw and 90631A009 nylon-insert locknut (32 of each). The full BOM is included in the download.</p>
@@ -149,6 +145,6 @@
   </script>
 
   <script src="js/main.js?v=6"></script>
-  <script type="module" src="js/project-model-viewer.js?v=26"></script>
+  <script type="module" src="js/project-model-viewer.js?v=34"></script>
 </body>
 </html>

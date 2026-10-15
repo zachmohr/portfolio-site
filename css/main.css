@@ -1039,6 +1039,8 @@ ol {
     display: block;
     width: 100%;
     height: auto;
+    max-height: 80vh;
+    object-fit: contain;
     background-color: var(--color-white);
 }
 
@@ -1334,8 +1336,8 @@ ol {
     font-size: 0.75rem;
     padding: 0.375rem 0.625rem;
     background: rgba(255, 255, 255, 0.9);
-    border: var(--border-width) solid var(--color-gray-400);
-    color: var(--color-gray-900);
+    border: var(--border-width) solid #999999;
+    color: #0A0A0A;
     cursor: pointer;
     opacity: 0;
     transform: translateY(-4px);
@@ -1345,6 +1347,8 @@ ol {
 
 .model-wrapper:hover .chess-hint,
 .model-wrapper.chess-hint-visible .chess-hint,
+.model-wrapper.chess-touch .chess-hint,
+.model-wrapper.chess-hint-always .chess-hint,
 .chess-hint:focus-visible {
     opacity: 1;
     transform: none;
@@ -1352,7 +1356,23 @@ ol {
 }
 
 .chess-hint:hover {
-    background: var(--color-white);
+    background: #FFFFFF;
+}
+
+.model-wrapper.chess-hint-always .chess-hint {
+    font-size: 0.85rem;
+    font-weight: 700;
+    padding: 0.5rem 0.9rem;
+    background: #FFFFFF;
+    border-color: #0A0A0A;
+}
+
+.project-image--model .log-entry--model {
+    margin: 0;
+}
+
+.project-image--model .log-caption {
+    padding: 0 var(--space-sm);
 }
 
 .chess-panel {
@@ -1379,8 +1399,8 @@ ol {
     font-size: 0.75rem;
     padding: 0.375rem 0.625rem;
     background: rgba(255, 255, 255, 0.9);
-    border: var(--border-width) solid var(--color-gray-400);
-    color: var(--color-gray-900);
+    border: var(--border-width) solid #999999;
+    color: #0A0A0A;
     pointer-events: auto;
 }
 
@@ -1395,13 +1415,238 @@ ol {
 }
 
 .chess-actions button:hover {
-    background: var(--color-white);
+    background: #FFFFFF;
 }
 
 .chess-actions button[aria-pressed="true"] {
-    background: var(--color-blue);
-    color: var(--color-white);
-    border-color: var(--color-blue);
+    background: #0A0A0A;
+    color: #FFFFFF;
+    border-color: #0A0A0A;
+}
+
+/* Chess full screen: native Fullscreen API where available, fixed overlay everywhere (iPhone) */
+.model-wrapper.chess-fullscreen,
+.model-wrapper:fullscreen {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    padding: 0;
+    margin: 0;
+    aspect-ratio: auto;
+    border: 0;
+}
+
+.model-wrapper.chess-fullscreen .chess-panel {
+    top: max(var(--space-sm), env(safe-area-inset-top));
+    left: max(var(--space-sm), env(safe-area-inset-left));
+    right: max(var(--space-sm), env(safe-area-inset-right));
+}
+
+.model-wrapper.chess-fullscreen .model-controls,
+.model-wrapper.chess-fullscreen ~ .model-ar-link {
+    display: none;
+}
+
+html.chess-scroll-lock,
+html.chess-scroll-lock body {
+    overflow: hidden;
+    overscroll-behavior: none;
+}
+
+.model-wrapper.chess-playing canvas {
+    touch-action: none;
+}
+
+/* Full screen layout: status pinned top, game buttons in a bottom bar so the board stays clear */
+.model-wrapper.chess-fullscreen .chess-panel {
+    bottom: max(var(--space-sm), env(safe-area-inset-bottom));
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: space-between;
+}
+
+.model-wrapper.chess-fullscreen .chess-status {
+    align-self: flex-start;
+}
+
+.model-wrapper.chess-fullscreen .chess-actions {
+    justify-content: center;
+    flex-wrap: nowrap;
+    gap: 0.35rem;
+}
+
+.model-wrapper.chess-fullscreen .chess-actions button {
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 0.6rem 0.25rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.model-wrapper.chess-fullscreen .chess-actions button[hidden] {
+    display: none;
+}
+
+/* Result + leaderboard cards */
+.chess-card {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 12;
+    width: min(92%, 360px);
+    max-height: 80%;
+    overflow: auto;
+    padding: var(--space-md);
+    background: #FFFFFF;
+    border: var(--border-width) solid #0A0A0A;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: #0A0A0A;
+}
+
+.chess-card[hidden] {
+    display: none;
+}
+
+.chess-card-title {
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    font-weight: 900;
+    margin: 0 0 var(--space-xs);
+    color: #0A0A0A;
+}
+
+.chess-card-text {
+    margin: 0 0 var(--space-sm);
+    line-height: 1.5;
+}
+
+.chess-name-label {
+    display: block;
+    margin-bottom: 0.25rem;
+}
+
+.chess-name-row {
+    display: flex;
+    gap: var(--space-xs);
+}
+
+.chess-name-input {
+    flex: 1;
+    min-width: 0;
+    font-family: var(--font-mono);
+    font-size: 16px; /* 16px stops iOS from zooming into the field */
+    padding: 0.4rem 0.5rem;
+    border: var(--border-width) solid #999999;
+    border-radius: 0;
+}
+
+.chess-card button {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    padding: 0.45rem 0.7rem;
+    background: #FFFFFF;
+    border: var(--border-width) solid #0A0A0A;
+    color: #0A0A0A;
+    cursor: pointer;
+}
+
+.chess-card button[type="submit"],
+.chess-card-actions button:first-child {
+    background: #2563EB;
+    border-color: #2563EB;
+    color: #FFFFFF;
+}
+
+.chess-card button:disabled {
+    opacity: 0.6;
+    cursor: default;
+}
+
+.chess-form-msg {
+    min-height: 1.2em;
+    margin: 0.35rem 0 0;
+    color: #D62839;
+}
+
+.chess-card-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+    margin-top: var(--space-sm);
+}
+
+.chess-scores-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    counter-reset: chess-rank;
+}
+
+.chess-scores-list li {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-xs);
+    padding: 0.35rem 0;
+    border-bottom: 1px solid #CCCCCC;
+}
+
+.chess-scores-list li::before {
+    counter-increment: chess-rank;
+    content: counter(chess-rank) ".";
+    min-width: 1.6em;
+}
+
+.chess-scores-list li.is-you {
+    font-weight: 700;
+    color: #2563EB;
+}
+
+.chess-scores-list li.chess-scores-empty::before {
+    content: none;
+}
+
+.chess-scores-name {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.chess-scores-record {
+    white-space: nowrap;
+}
+
+.chess-scores-count {
+    margin: 0 0 var(--space-xs);
+    font-weight: 700;
+}
+
+.chess-scores-list {
+    max-height: 45vh;
+    overflow-y: auto;
+}
+
+.chess-scores-since {
+    display: block;
+    font-size: 0.65rem;
+    color: #777777;
+    font-weight: 400;
+}
+
+@media (max-width: 600px) {
+    .chess-actions button {
+        padding: 0.45rem 0.55rem;
+    }
+
+    .model-wrapper:not(.chess-fullscreen) .chess-status {
+        flex-basis: 100%;
+    }
 }
 
 .model-slider-wrap {

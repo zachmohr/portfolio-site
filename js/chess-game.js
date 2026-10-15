@@ -247,9 +247,11 @@ export function attachChessGame(ctx) {
     var hint = document.createElement('button');
     hint.type = 'button';
     hint.className = 'chess-hint';
-    hint.innerHTML = '&#9823; Play';
+    hint.innerHTML = '&#9823; Play chess';
     hint.setAttribute('aria-label', 'Play chess on this board');
     container.appendChild(hint);
+    // At the top of a project card the game is the headline, so the button is always shown.
+    if (container.closest('.project-image--model')) container.classList.add('chess-hint-always');
 
     var panel = document.createElement('div');
     panel.className = 'chess-panel';
@@ -260,14 +262,55 @@ export function attachChessGame(ctx) {
         '<button type="button" data-chess="mode"></button>' +
         '<button type="button" data-chess="undo">Undo</button>' +
         '<button type="button" data-chess="new">New game</button>' +
+        '<button type="button" data-chess="scores">Scores</button>' +
+        '<button type="button" data-chess="fullscreen">Full screen</button>' +
         '<button type="button" data-chess="exit">Exit</button>' +
         '</div>';
     container.appendChild(panel);
     var statusEl = panel.querySelector('.chess-status');
     var modeBtn = panel.querySelector('[data-chess="mode"]');
+    var fullscreenBtn = panel.querySelector('[data-chess="fullscreen"]');
+
+    // End-of-game card (vs computer) and the leaderboard sheet.
+    var resultCard = document.createElement('div');
+    resultCard.className = 'chess-card chess-result';
+    resultCard.hidden = true;
+    resultCard.innerHTML =
+        '<h3 class="chess-card-title"></h3>' +
+        '<p class="chess-card-text"></p>' +
+        '<form class="chess-name-form">' +
+        '<label class="chess-name-label" for="chess-name-' + Math.random().toString(36).slice(2, 8) + '">Your name for the leaderboard</label>' +
+        '<div class="chess-name-row">' +
+        '<input class="chess-name-input" type="text" maxlength="20" autocomplete="nickname" enterkeyhint="done" required>' +
+        '<button type="submit">Save score</button>' +
+        '</div>' +
+        '<p class="chess-form-msg" aria-live="polite"></p>' +
+        '</form>' +
+        '<div class="chess-card-actions">' +
+        '<button type="button" data-chess="new">Play again</button>' +
+        '<button type="button" data-chess="scores">Scores</button>' +
+        '</div>';
+    container.appendChild(resultCard);
+    var nameInput = resultCard.querySelector('.chess-name-input');
+    nameInput.id = resultCard.querySelector('.chess-name-label').getAttribute('for');
+    var nameForm = resultCard.querySelector('.chess-name-form');
+    var formMsg = resultCard.querySelector('.chess-form-msg');
+
+    var scoresCard = document.createElement('div');
+    scoresCard.className = 'chess-card chess-scores';
+    scoresCard.hidden = true;
+    scoresCard.innerHTML =
+        '<h3 class="chess-card-title">Leaderboard</h3>' +
+        '<p class="chess-card-text">Everyone who saves a game stays on the board for good. Win = 3, draw = 1, vs the computer only.</p>' +
+        '<p class="chess-scores-count"></p>' +
+        '<ol class="chess-scores-list"></ol>' +
+        '<div class="chess-card-actions"><button type="button" data-chess="close-scores">Close</button></div>';
+    container.appendChild(scoresCard);
+    var scoresList = scoresCard.querySelector('.chess-scores-list');
+    var scoresCount = scoresCard.querySelector('.chess-scores-count');
 
     function updateModeLabel() {
-        modeBtn.textContent = vsComputer ? 'vs Computer' : '2 Players';
+        modeBtn.textContent = vsComputer ? 'vs CPU' : '2 Players';
         modeBtn.setAttribute('aria-pressed', vsComputer ? 'true' : 'false');
     }
 
@@ -449,12 +492,16 @@ export function attachChessGame(ctx) {
         history.forEach(function (move) { applyMove(move, false); });
     }
 
+    function checkGameOver() {
+        if (!game.isGameOver()) return false;
+        track('chess_game_over', { result: statusEl.textContent, ranked: ranked });
+        if (ranked) setTimeout(showResult, MOVE_MS + 300);
+        return true;
+    }
+
     function afterMove() {
         setStatus();
-        if (game.isGameOver()) {
-            track('chess_game_over', { result: statusEl.textContent });
-            return;
-        }
+        if (checkGameOver()) return;
         if (vsComputer && game.turn() === 'b') {
             thinking = true;
             setStatus();
@@ -465,10 +512,129 @@ export function attachChessGame(ctx) {
                 applyMove(reply, true);
                 thinking = false;
                 setStatus();
-                if (game.isGameOver()) track('chess_game_over', { result: statusEl.textContent });
+                checkGameOver();
             }, MOVE_MS + 120);
         }
     }
+
+    // ---------- Leaderboard ----------
+    var LEADERBOARD_URL = '/api/chess/leaderboard';
+    var NAME_KEY = 'scs-chess-name';
+    var ranked = true;
+
+    function savedName() {
+        try { return localStorage.getItem(NAME_KEY) || ''; } catch (e) { return ''; }
+    }
+
+    function rememberName(name) {
+        try { localStorage.setItem(NAME_KEY, name); } catch (e) { /* storage unavailable */ }
+    }
+
+    function showResult() {
+        if (!playing || !game || !game.isGameOver()) return;
+        var title = resultCard.querySelector('.chess-card-title');
+        var text = resultCard.querySelector('.chess-card-text');
+        if (game.isCheckmate() && game.turn() === 'b') {
+            title.textContent = 'You win!';
+            text.textContent = 'Checkmate in ' + Math.ceil(game.history().length / 2) + ' moves. Put your name on the board.';
+        } else if (game.isCheckmate()) {
+            title.textContent = 'Blue wins';
+            text.textContent = 'The computer got you this time. Losses count too, so save it if you are keeping score.';
+        } else {
+            title.textContent = 'Draw';
+            text.textContent = 'A draw is worth a point on the leaderboard.';
+        }
+        nameInput.value = savedName();
+        formMsg.textContent = '';
+        nameForm.hidden = false;
+        nameForm.querySelector('button').disabled = false;
+        scoresCard.hidden = true;
+        resultCard.hidden = false;
+    }
+
+    function sinceLabel(iso) {
+        if (!iso) return '';
+        var date = new Date(iso);
+        if (isNaN(date)) return '';
+        return 'since ' + date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+    }
+
+    function renderScores(players, highlight, total) {
+        scoresList.textContent = '';
+        var count = total || players.length;
+        scoresCount.textContent = count ? count + (count === 1 ? ' player has' : ' players have') + ' left their mark.' : '';
+        var mine = null;
+        if (!players.length) {
+            var empty = document.createElement('li');
+            empty.className = 'chess-scores-empty';
+            empty.textContent = 'No scores yet. Beat the computer to be first.';
+            scoresList.appendChild(empty);
+            return;
+        }
+        players.forEach(function (p) {
+            var li = document.createElement('li');
+            if (highlight && p.name.toLowerCase() === highlight.toLowerCase()) li.className = 'is-you';
+            var name = document.createElement('span');
+            name.className = 'chess-scores-name';
+            name.textContent = p.name;
+            var since = document.createElement('span');
+            since.className = 'chess-scores-since';
+            since.textContent = sinceLabel(p.since);
+            name.appendChild(since);
+            var record = document.createElement('span');
+            record.className = 'chess-scores-record';
+            record.textContent = p.points + ' pts · ' + p.wins + 'W ' + p.draws + 'D ' + p.losses + 'L';
+            li.appendChild(name);
+            li.appendChild(record);
+            scoresList.appendChild(li);
+            if (li.className === 'is-you') mine = li;
+        });
+        if (mine) mine.scrollIntoView({ block: 'nearest' });
+    }
+
+    function showScores(players, highlight, total) {
+        resultCard.hidden = true;
+        scoresCard.hidden = false;
+        if (players) {
+            renderScores(players, highlight, total);
+            return;
+        }
+        scoresList.innerHTML = '<li class="chess-scores-empty">Loading...</li>';
+        fetch(LEADERBOARD_URL, { cache: 'no-store' })
+            .then(function (res) { return res.json(); })
+            .then(function (data) {
+                if (data.error) throw new Error(data.error);
+                renderScores(data.players || [], savedName(), data.total);
+            })
+            .catch(function () {
+                scoresList.innerHTML = '<li class="chess-scores-empty">Could not load the leaderboard.</li>';
+            });
+    }
+
+    nameForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+        var name = nameInput.value.replace(/\s+/g, ' ').trim();
+        if (!name) return;
+        var button = nameForm.querySelector('button');
+        button.disabled = true;
+        formMsg.textContent = 'Saving...';
+        fetch(LEADERBOARD_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name: name, moves: game.history() })
+        })
+            .then(function (res) { return res.json().then(function (data) { return { ok: res.ok, data: data }; }); })
+            .then(function (out) {
+                if (!out.ok) throw new Error(out.data.error || 'Could not save your score.');
+                rememberName(out.data.player.name);
+                track('chess_score_saved', { result: out.data.result });
+                showScores(out.data.players, out.data.player.name, out.data.total);
+            })
+            .catch(function (err) {
+                formMsg.textContent = err.message;
+                button.disabled = false;
+            });
+    });
 
     function tryMove(from, to) {
         var legal = game.moves({ square: from, verbose: true }).filter(function (m) { return m.to === to; });
@@ -566,10 +732,25 @@ export function attachChessGame(ctx) {
 
     function flyToPlayerView() {
         var target = model.localToWorld(grid.center(3.5, 3.5, baseY));
-        var dist = camera.position.distanceTo(controls.target);
+        // Fit the board plus the captured-piece rows on either side to the current viewport,
+        // looking steeper on portrait screens so the board fills a phone.
+        var vfov = camera.fov * Math.PI / 180;
+        var hfov = 2 * Math.atan(Math.tan(vfov / 2) * camera.aspect);
+        // On narrow screens frame the board itself (captured pieces may sit just off-screen)
+        // so the pieces are big enough to tap.
+        var width = grid.pitch * (camera.aspect < 1 ? 10.3 : 11.5);
+        // Leave room for the status line on top and the button bar on the bottom.
+        var depth = grid.pitch * (isFullscreen() && camera.aspect < 1 ? 11.5 : 9);
+        var elevation = (camera.aspect < 1 ? 64 : 52) * Math.PI / 180;
+        var dist = Math.max(
+            (width / 2) / Math.tan(hfov / 2),
+            (depth * Math.sin(elevation) / 2) / Math.tan(vfov / 2)
+        ) * 1.08;
         var back = new THREE.Vector3();
         back[grid.rankAxis] = -grid.rankDir;
-        var to = target.clone().add(back.multiplyScalar(dist * 0.62)).add(new THREE.Vector3(0, dist * 0.78, 0));
+        var to = target.clone()
+            .add(back.multiplyScalar(dist * Math.cos(elevation)))
+            .add(new THREE.Vector3(0, dist * Math.sin(elevation), 0));
         cameraTween = {
             fromPos: camera.position.clone(),
             toPos: to,
@@ -603,12 +784,98 @@ export function attachChessGame(ctx) {
         });
     }
 
+    // ---------- Full screen ----------
+    // Uses the Fullscreen API where it exists; iPhone Safari only allows it for <video>,
+    // so the .chess-fullscreen class also pins the viewer over the whole viewport.
+    var isTouch = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
+    var nativeFullscreen = false;
+    // Phones and tablets always play full screen, so there is no toggle to show.
+    if (isTouch) {
+        fullscreenBtn.hidden = true;
+        container.classList.add('chess-touch');
+    }
+
+    function isFullscreen() {
+        return container.classList.contains('chess-fullscreen');
+    }
+
+    function refitSoon() {
+        setTimeout(function () { if (playing) flyToPlayerView(); }, 260);
+    }
+
+    // Project cards use transforms and scroll fades, which trap position: fixed, so the
+    // viewer moves to <body> while full screen and returns to this placeholder after.
+    var placeholder = document.createComment('chess viewer');
+
+    function enterFullscreen() {
+        if (isFullscreen()) return;
+        container.parentNode.insertBefore(placeholder, container);
+        document.body.appendChild(container);
+        container.classList.add('chess-fullscreen');
+        document.documentElement.classList.add('chess-scroll-lock');
+        fullscreenBtn.textContent = 'Exit full screen';
+        var request = container.requestFullscreen || container.webkitRequestFullscreen;
+        if (request) {
+            try {
+                var result = request.call(container);
+                nativeFullscreen = true;
+                if (result && result.catch) result.catch(function () { nativeFullscreen = false; });
+            } catch (e) {
+                nativeFullscreen = false;
+            }
+        }
+        refitSoon();
+    }
+
+    function exitFullscreen() {
+        if (!isFullscreen()) return;
+        container.classList.remove('chess-fullscreen');
+        document.documentElement.classList.remove('chess-scroll-lock');
+        fullscreenBtn.textContent = 'Full screen';
+        var current = document.fullscreenElement || document.webkitFullscreenElement;
+        if (current === container) {
+            var exit = document.exitFullscreen || document.webkitExitFullscreen;
+            if (exit) exit.call(document);
+        }
+        nativeFullscreen = false;
+        if (placeholder.parentNode) {
+            placeholder.parentNode.insertBefore(container, placeholder);
+            placeholder.remove();
+        }
+        refitSoon();
+    }
+
+    // Leaving native full screen with Esc or the Android back gesture.
+    function onFullscreenChange() {
+        var current = document.fullscreenElement || document.webkitFullscreenElement;
+        if (nativeFullscreen && current !== container) exitFullscreen();
+    }
+    document.addEventListener('fullscreenchange', onFullscreenChange);
+    document.addEventListener('webkitfullscreenchange', onFullscreenChange);
+
+    // Re-frame the board when the phone rotates or the window resizes mid-game.
+    var lastAspect = camera.aspect;
+    var resizeWatch = new ResizeObserver(function () {
+        if (!playing) return;
+        clearTimeout(resizeWatch.timer);
+        resizeWatch.timer = setTimeout(function () {
+            if (Math.abs(camera.aspect - lastAspect) > 0.05) {
+                lastAspect = camera.aspect;
+                flyToPlayerView();
+            }
+        }, 200);
+    });
+    resizeWatch.observe(container);
+
     function start() {
         hint.disabled = true;
+        // Must run inside the tap's user gesture for the browser to allow full screen.
+        if (isTouch) enterFullscreen();
         loadChess().then(function () {
             game = new Chess();
             playing = true;
             thinking = false;
+            ranked = vsComputer;
             controls.autoRotate = false;
             placeAll();
             updateModeLabel();
@@ -616,11 +883,13 @@ export function attachChessGame(ctx) {
             panel.hidden = false;
             hint.hidden = true;
             container.classList.add('chess-playing');
+            lastAspect = camera.aspect;
             flyToPlayerView();
-            track('chess_game_start', {});
+            track('chess_game_start', { fullscreen: isFullscreen() });
         }).catch(function (err) {
             console.error('Chess game: could not load rules engine', err);
             hint.disabled = false;
+            exitFullscreen();
         });
     }
 
@@ -630,6 +899,9 @@ export function attachChessGame(ctx) {
         deselect();
         placeAll();
         game = null;
+        exitFullscreen();
+        resultCard.hidden = true;
+        scoresCard.hidden = true;
         panel.hidden = true;
         hint.hidden = false;
         hint.disabled = false;
@@ -638,19 +910,33 @@ export function attachChessGame(ctx) {
     }
 
     hint.addEventListener('click', start);
-    panel.addEventListener('click', function (event) {
-        var action = event.target.getAttribute('data-chess');
+    function onAction(event) {
+        var target = event.target.closest('[data-chess]');
+        var action = target && target.getAttribute('data-chess');
         if (!action || !game) return;
         if (action === 'exit') { stop(); return; }
+        if (action === 'fullscreen') {
+            if (isFullscreen()) exitFullscreen(); else enterFullscreen();
+            return;
+        }
+        if (action === 'scores') {
+            if (scoresCard.hidden) showScores(); else scoresCard.hidden = true;
+            return;
+        }
+        if (action === 'close-scores') { scoresCard.hidden = true; return; }
         if (action === 'new') {
             game.reset();
             thinking = false;
+            ranked = vsComputer;
+            resultCard.hidden = true;
+            scoresCard.hidden = true;
             rebuildFromHistory();
             setStatus();
             return;
         }
         if (action === 'undo') {
             if (thinking || tweens.length) return;
+            resultCard.hidden = true;
             game.undo();
             if (vsComputer && game.turn() === 'b') game.undo();
             rebuildFromHistory();
@@ -659,10 +945,15 @@ export function attachChessGame(ctx) {
         }
         if (action === 'mode') {
             vsComputer = !vsComputer;
+            // A game that was ever two-player can't go on the leaderboard.
+            if (!vsComputer) ranked = false;
             updateModeLabel();
             afterMove();
         }
-    });
+    }
+    panel.addEventListener('click', onAction);
+    resultCard.addEventListener('click', onAction);
+    scoresCard.addEventListener('click', onAction);
 
     return {
         dispose: function () {
@@ -670,9 +961,15 @@ export function attachChessGame(ctx) {
             canvas.removeEventListener('pointerup', onPointerUp);
             canvas.removeEventListener('pointermove', onPointerMove);
             canvas.removeEventListener('pointerdown', onTouchReveal);
+            document.removeEventListener('fullscreenchange', onFullscreenChange);
+            document.removeEventListener('webkitfullscreenchange', onFullscreenChange);
+            resizeWatch.disconnect();
+            exitFullscreen();
             clearMarkers();
             hint.remove();
             panel.remove();
+            resultCard.remove();
+            scoresCard.remove();
             container.classList.remove('chess-playing', 'chess-hint-visible');
         }
     };
