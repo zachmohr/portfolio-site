@@ -219,7 +219,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // ============================================
     console.log('%cHey there! 👋', 'font-size: 20px; font-weight: bold; color: #E63946;');
     console.log('%cLike what you see? Let\'s build something together.', 'font-size: 14px; color: #F5F5F0;');
-    console.log('%cEmail: zmohr026@gmail.com', 'font-size: 12px; color: #E63946;');
+    console.log('%cEmail: zach@figurastudio.com', 'font-size: 12px; color: #E63946;');
 
 });
 

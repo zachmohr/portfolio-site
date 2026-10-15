@@ -111,7 +111,7 @@ ${extraHead ? `  ${extraHead}\n` : ''}
   <footer class="footer">
     <div class="container footer-content">
       <p class="footer-text">&copy; ${new Date().getUTCFullYear()} Zach Mohr. A public archive of work and thinking.</p>
-      <div class="footer-links"><a href="mailto:zmohr026@gmail.com" class="footer-link">Email</a></div>
+      <div class="footer-links"><a href="mailto:zach@figurastudio.com" class="footer-link">Email</a></div>
     </div>
   </footer>
   ${scripts}

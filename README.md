@@ -238,4 +238,4 @@ If Decap ever stops working, edit or add a Markdown file in `content/writing/` d
 
 ---
 
-**Questions?** Contact me at zmohr026@gmail.com
+**Questions?** Contact me at zach@figurastudio.com
