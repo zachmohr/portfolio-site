@@ -1393,6 +1393,110 @@
                     "alt": "Top-down view of the walnut top grain"
                 }
             ]
+        },
+        {
+            "id": "scs-chess-set",
+            "slug": "scs-chess-set",
+            "type": "log",
+            "title": "SCS Chess Set",
+            "date": "2026-10",
+            "category": "fabrication",
+            "tags": [
+                "Sheet Metal",
+                "Laser Cutting",
+                "SendCutSend",
+                "CAD",
+                "Free Download",
+                "AR"
+            ],
+            "description": "A full two-player chess set designed to be cut entirely from flat sheet metal and ordered from SendCutSend. Each piece is a 1/8\" laser-cut profile bolted to a round base, the 64 board squares sit in a cut plate, and a bent sheet-metal base holds it together. Every part is free to download as a STEP file, ready to upload for a quote.",
+            "hero": {
+                "src": "assets/images/projects/scs-chess-set/hero.jpg",
+                "alt": "Isometric render of the sheet metal chess set with one side's pieces on the board"
+            },
+            "video": null,
+            "downloads": [
+                {
+                    "label": "All files (STEP + BOM)",
+                    "file": "scs-chess-set/SCSChessSet-AllFiles.zip",
+                    "size": "518 KB"
+                },
+                {
+                    "label": "Full assembly",
+                    "file": "scs-chess-set/SCSChessSet_FullAssembly.step",
+                    "size": "2.0 MB"
+                },
+                {
+                    "label": "King",
+                    "file": "scs-chess-set/KingBody.step",
+                    "size": "99 KB"
+                },
+                {
+                    "label": "Queen",
+                    "file": "scs-chess-set/QueenBody.step",
+                    "size": "105 KB"
+                },
+                {
+                    "label": "Bishop",
+                    "file": "scs-chess-set/BishopBody.step",
+                    "size": "75 KB"
+                },
+                {
+                    "label": "Knight",
+                    "file": "scs-chess-set/KnightBody.step",
+                    "size": "154 KB"
+                },
+                {
+                    "label": "Rook",
+                    "file": "scs-chess-set/RookBody.step",
+                    "size": "91 KB"
+                },
+                {
+                    "label": "Pawn",
+                    "file": "scs-chess-set/PawnBody.step",
+                    "size": "37 KB"
+                },
+                {
+                    "label": "Piece base",
+                    "file": "scs-chess-set/PieceBase.step",
+                    "size": "9 KB"
+                },
+                {
+                    "label": "Board square",
+                    "file": "scs-chess-set/BoardSquare.step",
+                    "size": "10 KB"
+                },
+                {
+                    "label": "Board plate",
+                    "file": "scs-chess-set/BoardPlate.step",
+                    "size": "377 KB"
+                },
+                {
+                    "label": "Bent base",
+                    "file": "scs-chess-set/Base_SheetMetal.step",
+                    "size": "56 KB"
+                },
+                {
+                    "label": "Bill of materials",
+                    "file": "scs-chess-set/BOM.csv",
+                    "size": "1 KB"
+                }
+            ],
+            "entries": [
+                {
+                    "type": "model",
+                    "src": "assets/images/projects/scs-chess-set/SCSChessSet.glb",
+                    "iosSrc": "assets/images/projects/scs-chess-set/SCSChessSet.usdz",
+                    "arTitle": "SCS Chess Set",
+                    "alt": "Interactive 3D model of the sheet metal chess set",
+                    "caption": "Interactive 3D model of the full assembly, with mobile AR support."
+                },
+                {
+                    "src": "assets/images/projects/scs-chess-set/hero.jpg",
+                    "alt": "Isometric view of the chess board with pieces",
+                    "caption": "Complete set for two players: 2 kings, 2 queens, 4 bishops, 4 knights, 4 rooks, 16 pawns, 32 bases, 64 squares, a board plate, and a bent base. Each piece fastens to its base with a McMaster 92210A194 flat head screw and 90631A009 nylon-insert locknut (32 of each). The full BOM is included in the download."
+                }
+            ]
         }
     ]
 }

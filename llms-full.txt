@@ -7,12 +7,14 @@
 - Name: Zach Mohr
 - Site: https://zachmohr.work
 - Email: zach@zachmohr.work
+- Current role: Mechanical Engineer, Pump Studios (Austin, Texas); founder of Figura Studio
+- Previous: Interiors Research and Innovation, Textron Aviation
 - Status: Passively open to opportunities
 - Target roles: Mechanical Engineering, Manufacturing Engineering, Product Design, Outdoor/Adventure Industry
 - Willing to relocate: Yes, anywhere
 
 ## Education
-- MS Innovation Design — Wichita State University, graduating May 2025
+- MS Innovation Design — Wichita State University, May 2025
 - BS Mechanical Engineering, Minor: Business/Entrepreneurship — South Dakota School of Mines & Technology, graduated 2023
 
 ## Skills & Capabilities
@@ -255,6 +257,13 @@ Design: Original furniture design, product design, CAD, graphic design, brand id
 - Tags: Concept Design, Transportation, CAD, 3D Modeling, AR
 - URL: https://zachmohr.work/projects.html#lightship-mikros-concept-camper
 - Description: Conceptual compact camper study completed in March 2026, inspired by the current Lightship RV lineup and its simple utilitarian design language. I wanted to explore that same design DNA in a much smaller form factor, with a focus on highly detailed CAD development and interior packaging decisions. Key features include a fold-out couch/bed system and a telescoping canopy that raises the small camper to full stand-up height. This log keeps the image set intentionally tight so the interactive 3D model can be the centerpiece.
+
+### SCS Chess Set
+- Date: October 2026
+- Category: Fabrication
+- Tags: Sheet Metal, Laser Cutting, SendCutSend, CAD, Free Download, AR
+- URL: https://zachmohr.work/projects/scs-chess-set
+- Description: A full two-player chess set designed to be cut entirely from flat sheet metal and ordered from SendCutSend. Each piece is a 1/8" laser-cut profile bolted to a round base, the 64 board squares sit in a cut plate, and a bent sheet-metal base holds it together. Every part is free to download as a STEP file, along with a full bill of materials.
 
 ---
 

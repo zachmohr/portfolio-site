@@ -110,6 +110,18 @@ function renderLinksBlock(className, itemClass, icon, items) {
     .join('\n')}\n</div>`;
 }
 
+function renderDownloads(downloads) {
+  if (!Array.isArray(downloads) || downloads.length === 0) return '';
+
+  return `\n<div class="project-downloads">\n  <span class="project-downloads-title">Free Downloads</span>\n${downloads
+    .map((item, index) => {
+      const href = `/api/download/${String(item.file || '').split('/').map(encodeURIComponent).join('/')}`;
+      const size = item.size ? ` <span class="download-size">${escapeHtml(item.size)}</span>` : '';
+      return `  <a class="download-link${index === 0 ? ' download-link--primary' : ''}" href="${escapeAttr(href)}" rel="nofollow" download>&#x2913; ${escapeHtml(item.label || item.file)}${size}</a>`;
+    })
+    .join('\n')}\n</div>`;
+}
+
 function renderVideoSources(entry) {
   let sources = [];
   if (Array.isArray(entry.sources) && entry.sources.length > 0) {
@@ -242,6 +254,7 @@ function renderProjectBody(project) {
   const isLog = project.type === 'log';
   const press = renderLinksBlock('project-press', 'press-link', '&#x1F4F0;', project.press);
   const patents = renderLinksBlock('project-patents', 'patent-link', '&#x2316;', project.patents);
+  const downloads = renderDownloads(project.downloads);
 
   const logContent = isLog
     ? renderEntries(project.entries)
@@ -262,6 +275,7 @@ function renderProjectBody(project) {
           ${renderTags(project.tags)}
           ${press}
           ${patents}
+          ${downloads}
         </div>
         <div class="project-log">
           ${logContent}
@@ -334,7 +348,7 @@ function renderProjectPage(project) {
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700;900&family=IBM+Plex+Mono:wght@400;500&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="css/main.css?v=7">
+  <link rel="stylesheet" href="css/main.css?v=8">
   <link rel="stylesheet" href="css/typography.css?v=5">
   <link rel="stylesheet" href="css/dithering.css?v=5">
 
