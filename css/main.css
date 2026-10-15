@@ -841,6 +841,52 @@ ol {
     color: var(--color-red);
 }
 
+/* Downloads */
+.project-downloads {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-xs);
+    margin-top: var(--space-sm);
+}
+
+.project-downloads-title {
+    flex-basis: 100%;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-gray-700);
+}
+
+.download-link {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+    border: 1px solid var(--color-gray-300);
+    color: var(--color-gray-700);
+    text-decoration: none;
+    transition: border-color 0.15s, color 0.15s, background-color 0.15s;
+}
+
+.download-link:hover {
+    border-color: var(--color-red);
+    color: var(--color-red);
+}
+
+.download-link--primary {
+    border-color: var(--color-red);
+    background-color: var(--color-red);
+    color: var(--color-white);
+}
+
+.download-link--primary:hover {
+    background-color: transparent;
+}
+
+.download-size {
+    opacity: 0.7;
+}
+
 /* Patents */
 .project-patents {
     display: flex;

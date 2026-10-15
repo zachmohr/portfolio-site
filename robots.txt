@@ -3,3 +3,4 @@ Allow: /
 Sitemap: https://zachmohr.work/sitemap.xml
 
 Disallow: /admin/
+Disallow: /api/

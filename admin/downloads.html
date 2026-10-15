@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Download Stats | Zach Mohr</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root { --black: #0A0A0A; --white: #F5F5F0; --red: #E63946; --gray: #8a8a85; }
+    * { box-sizing: border-box; }
+    body { margin: 0; padding: 32px 16px; background: var(--white); color: var(--black); font-family: 'IBM Plex Mono', monospace; }
+    main { max-width: 760px; margin: 0 auto; }
+    h1 { font-family: 'Space Grotesk', sans-serif; font-weight: 900; font-size: 2rem; margin: 0 0 4px; }
+    .total { font-family: 'Space Grotesk', sans-serif; font-size: 4rem; font-weight: 900; color: var(--red); line-height: 1; margin: 24px 0 4px; }
+    .muted { color: var(--gray); font-size: 0.8rem; }
+    table { width: 100%; border-collapse: collapse; margin-top: 24px; font-size: 0.85rem; }
+    th, td { text-align: left; padding: 8px 4px; border-bottom: 1px solid #ddd; }
+    td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+    h2 { font-family: 'Space Grotesk', sans-serif; margin-top: 40px; font-size: 1.1rem; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Download Stats</h1>
+    <p class="muted">Counts from /api/download, crawlers excluded.</p>
+    <div class="total" id="total">–</div>
+    <div class="muted">total downloads</div>
+    <table>
+      <thead><tr><th>File</th><th class="num">Downloads</th></tr></thead>
+      <tbody id="files"><tr><td colspan="2" class="muted">Loading…</td></tr></tbody>
+    </table>
+    <h2>Last 30 days</h2>
+    <table>
+      <thead><tr><th>Day</th><th class="num">Downloads</th></tr></thead>
+      <tbody id="daily"></tbody>
+    </table>
+  </main>
+  <script>
+    function row(label, count) {
+      var tr = document.createElement('tr');
+      var a = document.createElement('td'); a.textContent = label;
+      var b = document.createElement('td'); b.className = 'num'; b.textContent = count;
+      tr.appendChild(a); tr.appendChild(b);
+      return tr;
+    }
+    fetch('/api/downloads', { cache: 'no-store' })
+      .then(function (res) { return res.json(); })
+      .then(function (data) {
+        var files = document.getElementById('files');
+        files.textContent = '';
+        if (data.error) { files.appendChild(row(data.error, '')); return; }
+        document.getElementById('total').textContent = data.total;
+        Object.keys(data.files).sort(function (a, b) { return data.files[b] - data.files[a]; })
+          .forEach(function (file) { files.appendChild(row(file, data.files[file])); });
+        if (!Object.keys(data.files).length) files.appendChild(row('No downloads yet', 0));
+        var daily = document.getElementById('daily');
+        Object.keys(data.daily).sort().reverse().slice(0, 30)
+          .forEach(function (day) { daily.appendChild(row(day, data.daily[day])); });
+      })
+      .catch(function (err) {
+        var files = document.getElementById('files');
+        files.textContent = '';
+        files.appendChild(row('Could not load stats: ' + err.message, ''));
+      });
+  </script>
+</body>
+</html>

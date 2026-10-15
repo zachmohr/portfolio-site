@@ -1,0 +1,84 @@
+import assert from 'node:assert/strict';
+import test from 'node:test';
+import { onRequestGet as download } from '../functions/api/download/[[path]].js';
+import { onRequestGet as stats } from '../functions/api/downloads.js';
+
+function memoryKv() {
+  const store = new Map();
+  return {
+    store,
+    async get(key) { return store.has(key) ? store.get(key) : null; },
+    async put(key, value) { store.set(key, value); },
+    async list({ prefix }) {
+      return { keys: [...store.keys()].filter((k) => k.startsWith(prefix)).map((name) => ({ name })), list_complete: true };
+    },
+  };
+}
+
+function assets(files) {
+  return {
+    async fetch(request) {
+      const path = new URL(request.url).pathname;
+      if (files[path]) return new Response(files[path], { headers: { 'Content-Type': 'application/octet-stream' } });
+      return new Response('<html>index</html>', { headers: { 'Content-Type': 'text/html' } });
+    },
+  };
+}
+
+const ASSETS = assets({ '/assets/downloads/scs-chess-set/KingBody.step': 'ISO-10303-21;' });
+
+function get(path, userAgent = 'Mozilla/5.0') {
+  return new Request(`https://zachmohr.work${path}`, { headers: { 'User-Agent': userAgent } });
+}
+
+test('download serves the file as an attachment and counts it', async () => {
+  const DOWNLOADS = memoryKv();
+  const response = await download({ request: get('/api/download/scs-chess-set/KingBody.step'), env: { ASSETS, DOWNLOADS }, params: { path: ['scs-chess-set', 'KingBody.step'] } });
+
+  assert.equal(response.status, 200);
+  assert.equal(await response.text(), 'ISO-10303-21;');
+  assert.equal(response.headers.get('Content-Disposition'), 'attachment; filename="KingBody.step"');
+  assert.equal(DOWNLOADS.store.get('total:scs-chess-set/KingBody.step'), '1');
+  assert.equal([...DOWNLOADS.store.keys()].filter((k) => k.startsWith('day:')).length, 1);
+});
+
+test('missing files 404 without counting, even when Pages falls back to HTML', async () => {
+  const DOWNLOADS = memoryKv();
+  const response = await download({ request: get('/api/download/scs-chess-set/Nope.step'), env: { ASSETS, DOWNLOADS }, params: { path: ['scs-chess-set', 'Nope.step'] } });
+  assert.equal(response.status, 404);
+  assert.equal(DOWNLOADS.store.size, 0);
+});
+
+test('path traversal is rejected', async () => {
+  const response = await download({ request: get('/api/download/x'), env: { ASSETS, DOWNLOADS: memoryKv() }, params: { path: ['..', 'index.html'] } });
+  assert.equal(response.status, 404);
+});
+
+test('crawlers get the file but are not counted', async () => {
+  const DOWNLOADS = memoryKv();
+  const response = await download({ request: get('/api/download/scs-chess-set/KingBody.step', 'Googlebot/2.1'), env: { ASSETS, DOWNLOADS }, params: { path: ['scs-chess-set', 'KingBody.step'] } });
+  assert.equal(response.status, 200);
+  assert.equal(DOWNLOADS.store.size, 0);
+});
+
+test('download still works when the KV namespace is not bound', async () => {
+  const response = await download({ request: get('/api/download/scs-chess-set/KingBody.step'), env: { ASSETS }, params: { path: ['scs-chess-set', 'KingBody.step'] } });
+  assert.equal(response.status, 200);
+});
+
+test('stats totals files and filters by project', async () => {
+  const DOWNLOADS = memoryKv();
+  DOWNLOADS.store.set('total:scs-chess-set/KingBody.step', '3');
+  DOWNLOADS.store.set('total:scs-chess-set/PawnBody.step', '2');
+  DOWNLOADS.store.set('total:other/thing.step', '5');
+  DOWNLOADS.store.set('day:2026-10-14:scs-chess-set/KingBody.step', '3');
+  DOWNLOADS.store.set('day:2026-10-14:scs-chess-set/PawnBody.step', '2');
+  DOWNLOADS.store.set('day:2026-10-14:other/thing.step', '5');
+
+  const all = await (await stats({ request: get('/api/downloads'), env: { DOWNLOADS } })).json();
+  assert.equal(all.total, 10);
+
+  const chess = await (await stats({ request: get('/api/downloads?project=scs-chess-set'), env: { DOWNLOADS } })).json();
+  assert.equal(chess.total, 5);
+  assert.deepEqual(chess.daily, { '2026-10-14': 5 });
+});

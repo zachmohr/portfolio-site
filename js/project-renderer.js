@@ -133,6 +133,7 @@
             renderTags(project.tags) +
             renderPress(project.press) +
             renderPatents(project.patents) +
+            renderDownloads(project.downloads) +
             '<button class="project-log-toggle" aria-expanded="false">' +
             'View Build Log <span class="toggle-indicator">[+]</span>' +
             '</button>' +
@@ -467,6 +468,24 @@
         press.forEach(function (item) {
             html += '<a class="press-link" href="' + escapeAttr(item.url) + '" target="_blank" rel="noopener">' +
                 '&#x1F4F0; ' + escapeHtml(item.label) +
+                '</a>';
+        });
+        html += '</div>';
+        return html;
+    }
+
+    // ============================================
+    // DOWNLOADS
+    // ============================================
+    function renderDownloads(downloads) {
+        if (!downloads || downloads.length === 0) return '';
+
+        var html = '<div class="project-downloads"><span class="project-downloads-title">Free Downloads</span>';
+        downloads.forEach(function (item, index) {
+            var href = '/api/download/' + String(item.file || '').split('/').map(encodeURIComponent).join('/');
+            html += '<a class="download-link' + (index === 0 ? ' download-link--primary' : '') + '" href="' + escapeAttr(href) + '" rel="nofollow" download>' +
+                '&#x2913; ' + escapeHtml(item.label || item.file) +
+                (item.size ? ' <span class="download-size">' + escapeHtml(item.size) + '</span>' : '') +
                 '</a>';
         });
         html += '</div>';
