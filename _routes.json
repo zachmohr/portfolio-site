@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "include": [
+    "/api/*",
+    "/README.md",
+    "/ROADMAP.md",
+    "/DEPLOYMENT.md",
+    "/ADDING-YOUR-ASSETS.md",
+    "/CAD-EXPORT-GUIDE.md",
+    "/DITHERING-GUIDE.md",
+    "/EXPLODED-VIEW-QUICKSTART.md",
+    "/WRITING-PROJECT-DESCRIPTIONS.md",
+    "/package.json",
+    "/package-lock.json",
+    "/.gitignore",
+    "/scripts/*",
+    "/tests/*",
+    "/tools/*",
+    "/content/*",
+    "/functions/*",
+    "/node_modules/*"
+  ],
+  "exclude": []
+}

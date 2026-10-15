@@ -82,3 +82,17 @@ test('stats totals files and filters by project', async () => {
   assert.equal(chess.total, 5);
   assert.deepEqual(chess.daily, { '2026-10-14': 5 });
 });
+
+test('repo notes and tooling are blocked, site files are not', async () => {
+  const { isBlocked, onRequest } = await import('../functions/_middleware.js');
+  for (const path of ['/ROADMAP.md', '/README.md', '/package.json', '/package-lock.json', '/.gitignore', '/scripts/usdz-to-glb.py', '/tests/downloads.test.mjs', '/tools/editor.js', '/content/writing/x.md', '/functions/api/downloads.js']) {
+    assert.equal(isBlocked(path), true, path);
+  }
+  for (const path of ['/', '/index.html', '/projects/scs-chess-set', '/data/projects.json', '/llms.txt', '/Zach_Mohr_Portfolio.pdf', '/assets/downloads/scs-chess-set/README.txt', '/api/downloads', '/admin/downloads.html']) {
+    assert.equal(isBlocked(path), false, path);
+  }
+  const blocked = await onRequest({ request: new Request('https://zachmohr.work/ROADMAP.md'), next: () => new Response('leak') });
+  assert.equal(blocked.status, 404);
+  const allowed = await onRequest({ request: new Request('https://zachmohr.work/api/downloads'), next: () => new Response('ok') });
+  assert.equal(await allowed.text(), 'ok');
+});
