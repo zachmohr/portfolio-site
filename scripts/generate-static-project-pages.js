@@ -265,9 +265,11 @@ function renderProjectBody(project) {
   <div class="container">
     <div class="projects-grid" style="grid-template-columns: minmax(0, 1fr);">
       <article class="project-card project-card--log" data-category="${escapeAttr(project.category || '')}" data-date="${escapeAttr(project.date || '')}" style="grid-column: 1 / -1; cursor: default;">
-        <div class="project-image">
+        ${project.heroModel
+          ? `<div class="project-image project-image--model">${renderModelEntry(project.heroModel)}</div>`
+          : `<div class="project-image">
           <img src="${escapeAttr(assetUrl(project.hero && project.hero.src ? project.hero.src : ''))}" alt="${escapeAttr(project.hero && project.hero.alt ? project.hero.alt : project.title)}" width="1600" height="1000" fetchpriority="high">
-        </div>
+        </div>`}
         <div class="project-content">
           <span class="project-date">${escapeHtml(formatDate(project.date || ''))}</span>
           <h1 class="project-title">${escapeHtml(project.title || 'Project')}</h1>
@@ -348,7 +350,7 @@ function renderProjectPage(project) {
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700;900&family=IBM+Plex+Mono:wght@400;500&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="css/main.css?v=9">
+  <link rel="stylesheet" href="css/main.css?v=17">
   <link rel="stylesheet" href="css/typography.css?v=5">
   <link rel="stylesheet" href="css/dithering.css?v=5">
 
@@ -363,7 +365,6 @@ ${renderStructuredData(project, pageUrl)}
       <ul class="nav-menu">
         <li><a href="index.html#about" class="nav-link">About</a></li>
         <li><a href="/projects" class="nav-link active">Projects</a></li>
-        <li><a href="/writing" class="nav-link">Writing</a></li>
         <li><a href="contact.html" class="nav-link">Contact</a></li>
       </ul>
     </div>
@@ -401,7 +402,7 @@ ${renderStructuredData(project, pageUrl)}
   </script>
 
   <script src="js/main.js?v=6"></script>
-  <script type="module" src="js/project-model-viewer.js?v=26"></script>
+  <script type="module" src="js/project-model-viewer.js?v=34"></script>
 </body>
 </html>`;
 }

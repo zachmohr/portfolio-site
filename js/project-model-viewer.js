@@ -687,7 +687,7 @@ function initModelViewer(container) {
             state.model = model;
 
             if (container.getAttribute('data-chess-game') === 'true') {
-                import('./chess-game.js?v=2').then(function (mod) {
+                import('./chess-game.js?v=10').then(function (mod) {
                     var current = viewerStates.get(container);
                     if (!current || current.disposed || currentModelNode !== model) return;
                     current.chess = mod.attachChessGame({
@@ -760,7 +760,7 @@ function initModelViewer(container) {
         current.frameId = requestAnimationFrame(animate);
 
         // Skip render if card/log is not visible.
-        if (container.offsetParent === null || contextLost) return;
+        if (container.getClientRects().length === 0 || contextLost) return;
 
         if (frameCallbacks.length) {
             var now = performance.now();
@@ -778,7 +778,8 @@ function syncCardViewers(card) {
     var log = card.querySelector('.project-log');
     if (!log) return;
 
-    var containers = card.querySelectorAll('.model-viewer-container');
+    // Only viewers inside the build log follow its open/closed state; a hero model stays live.
+    var containers = log.querySelectorAll('.model-viewer-container');
     if (!containers.length) return;
 
     if (log.hidden) {
@@ -820,8 +821,7 @@ function initVisibleModelViewers(scope) {
     containers.forEach(function (container) {
         if (viewerStates.has(container)) return;
 
-        var card = container.closest('.project-card--log');
-        var log = card ? card.querySelector('.project-log') : null;
+        var log = container.closest('.project-log');
         if (log && log.hidden) return;
 
         if (initModelViewer(container)) {

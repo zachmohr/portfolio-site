@@ -1123,7 +1123,7 @@
             "id": "span-robotics-wall-e",
             "slug": "span-robotics-wall-e",
             "type": "log",
-            "title": "Real-Life WALL-E Robot + SPAN Robotics",
+            "title": "SPAN Robotics",
             "date": "2026-05",
             "category": "robotics",
             "tags": [
@@ -1134,7 +1134,7 @@
                 "Rapid Prototyping",
                 "AR"
             ],
-            "description": "Autonomous litter-collection robot built from scratch: custom 3D-printed chassis, servo-driven arm, Jetson Orin Nano vision stack, and PS5 teleoperation. Documented publicly as the \"Day X building real life WALL-E\" series, it became the prototype for SPAN Robotics, which a fellow MID classmate and I took to Wichita State's 2026 Shocker New Venture Competition and won second place.",
+            "description": "SPAN Robotics started as a personal challenge in January 2026: build a real-life WALL-E that picks up litter on its own. I designed and built the prototype from scratch, with a 3D-printed chassis, a servo-driven arm, a Jetson Orin Nano vision stack trained to find trash, and PS5 teleoperation for testing. Partnering with a fellow MID classmate, I turned the robot into a company: an autonomous waste collection system that pairs solar-powered trash stations with rovers and drones to keep outdoor spaces clean and generate environmental data. We pitched SPAN at Wichita State's 2026 Shocker New Venture Competition and won second place.",
             "hero": {
                 "src": "assets/images/projects/span-robotics-wall-e/IMG_3960.JPG",
                 "alt": "Finished WALL-E robot showing the complete assembled chassis, arm, and collection bin"
@@ -1144,13 +1144,16 @@
                 {
                     "label": "SPAN Robotics",
                     "url": "https://spanrobotics.io/"
-                },
-                {
-                    "label": "Build log posts on X (@mohr_zachary)",
-                    "url": "https://x.com/mohr_zachary"
                 }
             ],
             "entries": [
+                {
+                    "type": "video",
+                    "src": "assets/images/projects/span-robotics-wall-e/span-cad-design.mp4",
+                    "poster": "assets/images/projects/span-robotics-wall-e/span-cad-design-poster.jpg",
+                    "alt": "Fusion CAD walkthrough of the robot arm and chassis design",
+                    "caption": "Where it started: designing the arm and chassis in Fusion."
+                },
                 {
                     "type": "model",
                     "models": [
@@ -1166,62 +1169,24 @@
                     "iosSrc": "assets/images/projects/span-robotics-wall-e/WALL-E 2 v30.usdz",
                     "arTitle": "Real-Life WALL-E Robot",
                     "alt": "Interactive 3D model of the WALL-E inspired autonomous litter collection robot",
-                    "caption": "3D models of the robot: V0 (initial prototype) and V1 (current build)."
-                },
-                {
-                    "src": "assets/images/projects/span-robotics-wall-e/ScreenshotsDayXWallE/Screenshot 2026-03-08 at 6.55.30 PM.png",
-                    "alt": "Day 1 post outlining project intent and early CAD baseline for the robot arm",
-                    "caption": "Day 1 (Jan 30): project goal and initial architecture, including the pivot from complex stepper/CNC controls toward a simpler servo-based arm."
-                },
-                {
-                    "src": "assets/images/projects/span-robotics-wall-e/ScreenshotsDayXWallE/Screenshot 2026-03-08 at 6.55.22 PM.png",
-                    "alt": "Day 2 post showing three.js arm simulator controlling a physical prototype",
-                    "caption": "Day 2 (Jan 31): three.js web interface drives arm kinematics and streams joint values to the ESP32 over serial."
-                },
-                {
-                    "src": "assets/images/projects/span-robotics-wall-e/ScreenshotsDayXWallE/Screenshot 2026-03-08 at 6.55.12 PM.png",
-                    "alt": "Day 3 post showing chassis CAD with revised steering architecture",
-                    "caption": "Day 3 (Feb 1): chassis redesign pivoted to a single front wheel approach for tighter steering and better internal packaging."
-                },
-                {
-                    "src": "assets/images/projects/span-robotics-wall-e/ScreenshotsDayXWallE/Screenshot 2026-03-08 at 6.55.02 PM.png",
-                    "alt": "Combined Day 4 and Day 5 post showing printed chassis parts, bevel gears, and electronics planning",
-                    "caption": "Days 4-5 (Feb 3-4): printed chassis components, integrated custom bevel gearing, and planned electronics packaging around Jetson Orin Nano plus microcontroller control."
-                },
-                {
-                    "src": "assets/images/projects/span-robotics-wall-e/ScreenshotsDayXWallE/Screenshot 2026-03-08 at 6.54.47 PM.png",
-                    "alt": "Day 6 post showing first chassis drive tests with PS5 controller",
-                    "caption": "Day 6 (Feb 6): first successful chassis control test with PS5 teleoperation through ESP32."
-                },
-                {
-                    "src": "assets/images/projects/span-robotics-wall-e/ScreenshotsDayXWallE/Screenshot 2026-03-08 at 6.54.35 PM.png",
-                    "alt": "Day 7 post documenting power and wiring debugging during integration",
-                    "caption": "Day 7 (Feb 9): resolved servo power brownouts by rerouting servo 5V supply to a regulated rail and planning a dedicated 12V-to-5V board."
-                },
-                {
-                    "src": "assets/images/projects/span-robotics-wall-e/ScreenshotsDayXWallE/Screenshot 2026-03-08 at 6.54.18 PM.png",
-                    "alt": "Day 8 post showing first successful manual trash pickup",
-                    "caption": "Day 8 (Feb 17): first successful trash pickup during manual operation, validating end-to-end mechanical feasibility."
-                },
-                {
-                    "src": "assets/images/projects/span-robotics-wall-e/ScreenshotsDayXWallE/Screenshot 2026-03-08 at 6.54.03 PM.png",
-                    "alt": "Day 9 post showing real-time trash segmentation and detection output",
-                    "caption": "Day 9 (Feb 19): computer vision milestone using YOLO segmentation trained on TACO to detect trash regions and compute grasp-point centroids."
+                    "caption": "From first prototype (V0) to the competition build (V1)."
                 },
                 {
                     "src": "assets/images/projects/span-robotics-wall-e/IMG_3958.JPG",
-                    "alt": "Finished WALL-E robot front view showing the arm, chassis, and collection bin",
-                    "caption": "Finished build: front view of the completed robot with arm, custom bevel-gear drivetrain, and onboard collection bin."
+                    "alt": "Finished SPAN Robotics prototype with arm, bevel-gear drivetrain, and collection bin",
+                    "caption": "The working prototype: servo-driven arm, custom bevel-gear drivetrain, onboard bin, and a vision model that finds litter and picks grasp points."
                 },
                 {
-                    "src": "assets/images/projects/span-robotics-wall-e/IMG_3960.JPG",
-                    "alt": "Finished WALL-E robot side profile showing the full assembled platform",
-                    "caption": "Finished build: side profile of the fully assembled autonomous litter collection robot."
+                    "type": "video",
+                    "src": "assets/images/projects/span-robotics-wall-e/span-arm-act-policy.mp4",
+                    "poster": "assets/images/projects/span-robotics-wall-e/span-arm-act-policy-poster.jpg",
+                    "alt": "Robot arm autonomously picking up a piece of trash and dropping it in a bin",
+                    "caption": "Teaching the arm: my first ACT policy, trained on about 40 demonstrations from the wrist camera, picking up trash on its own."
                 },
                 {
                     "src": "assets/images/projects/span-robotics-wall-e/snvc-2026-booth.jpg",
                     "alt": "SPAN Robotics booth at the 2026 Shocker New Venture Competition with the robot prototype on display",
-                    "caption": "SPAN Robotics at the 2026 Shocker New Venture Competition at Wichita State, pitched with a fellow MID classmate: an autonomous waste collection system using solar stations, rovers, and drones."
+                    "caption": "Pitching SPAN Robotics at the 2026 Shocker New Venture Competition at Wichita State."
                 },
                 {
                     "src": "assets/images/projects/span-robotics-wall-e/snvc-2026-award.jpg",
@@ -1351,7 +1316,7 @@
                 "Free Download",
                 "AR"
             ],
-            "description": "A full two-player chess set designed to be cut entirely from flat sheet metal and ordered from SendCutSend. Each piece is a 1/8\" laser-cut profile bolted to a round base, the 64 board squares sit in a cut plate, and a bent sheet-metal base holds it together. Every part is free to download as a STEP file, ready to upload for a quote.",
+            "description": "A full two-player chess set designed to be cut entirely from flat sheet metal and ordered from SendCutSend. Each piece is a 1/8\" laser-cut profile bolted to a round base, the 64 board squares sit in a cut plate, and a bent sheet-metal base holds it together. Every part is free to download as a STEP file, ready to upload for a quote. Heads up: I haven't built this board yet, and material thickness and cut tolerances vary by material and vendor, so check the fit of the squares and pieces before ordering a full set. The board squares are drawn at 2.21\" for 0.02\" of clearance per side in the 2.25\" plate holes.",
             "hero": {
                 "src": "assets/images/projects/scs-chess-set/hero.jpg",
                 "alt": "Isometric render of the sheet metal chess set with red and blue pieces set up on both sides of the board"
@@ -1426,20 +1391,20 @@
             ],
             "entries": [
                 {
-                    "type": "model",
-                    "src": "assets/images/projects/scs-chess-set/SCSChessSet.glb",
-                    "iosSrc": "assets/images/projects/scs-chess-set/SCSChessSet.usdz",
-                    "arTitle": "SCS Chess Set",
-                    "alt": "Interactive 3D model of the sheet metal chess set",
-                    "caption": "Interactive 3D model of the full assembly, with mobile AR support.",
-                    "chessGame": true
-                },
-                {
                     "src": "assets/images/projects/scs-chess-set/hero.jpg",
                     "alt": "Isometric view of the chess board set up for a game, red pieces on one side and blue on the other",
                     "caption": "Complete set for two players: 2 kings, 2 queens, 4 bishops, 4 knights, 4 rooks, 16 pawns, 32 bases, 64 squares, a board plate, and a bent base. Each piece fastens to its base with a McMaster 92210A194 flat head screw and 90631A009 nylon-insert locknut (32 of each). The full BOM is included in the download."
                 }
-            ]
+            ],
+            "heroModel": {
+                "type": "model",
+                "src": "assets/images/projects/scs-chess-set/SCSChessSet.glb",
+                "iosSrc": "assets/images/projects/scs-chess-set/SCSChessSet.usdz",
+                "arTitle": "SCS Chess Set",
+                "alt": "Interactive 3D model of the sheet metal chess set",
+                "caption": "Hit Play to play a full game on the actual pieces, then put your name on the leaderboard.",
+                "chessGame": true
+            }
         }
     ]
 }
