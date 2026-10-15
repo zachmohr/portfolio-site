@@ -7,7 +7,7 @@ Rook,RookBody.step,0.125in,2,4,Split by color (2 + 2)
 Pawn,PawnBody.step,0.125in,8,16,Split by color (8 + 8)
 Piece Base,PieceBase.step,0.125in,16,32,One per piece
 Board Square,BoardSquare.step,3mm (0.118in),32,64,32 light + 32 dark
-Board Plate,BoardPlate.step,0.074in (~14ga),-,1,
-Base,Base_SheetMetal.step,0.074in G90 steel (bent),-,1,Order with bending
+Board Plate,BoardPlate.step,0.074in steel,-,1,
+Base,Base_SheetMetal.step,0.074in steel (bent),-,1,Order with bending
 Flat Head Screw,McMaster 92210A194,-,16,32,Buy from McMaster
 Nylon-Insert Locknut,McMaster 90631A009,-,16,32,Buy from McMaster

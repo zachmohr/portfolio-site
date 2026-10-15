@@ -12,8 +12,8 @@ Rook            RookBody.step           0.125"             4  (2 per color)
 Pawn            PawnBody.step           0.125"             16 (8 per color)
 Piece base      PieceBase.step          0.125"             32 (one per piece)
 Board square    BoardSquare.step        3 mm (0.118")      64 (32 light + 32 dark)
-Board plate     BoardPlate.step         0.074" (~14 ga)    1
-Base            Base_SheetMetal.step    0.074" G90 steel   1  (bent - order with bending)
+Board plate     BoardPlate.step         0.074" steel       1
+Base            Base_SheetMetal.step    0.074" steel        1  (bent - order with bending)
 
 Hardware (McMaster-Carr):
 Flat head screw         92210A194   32
