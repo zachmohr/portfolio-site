@@ -332,7 +332,8 @@ ol {
 
 .about-grid {
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 1fr;
+    max-width: 760px;
     gap: var(--space-xl);
     align-items: center;
 }
