@@ -233,15 +233,6 @@ Design: Original furniture design, product design, CAD, graphic design, brand id
 
 ---
 
-### Figura Studio — Brand & E-commerce Build
-- Date: August 2025
-- Category: Design
-- Tags: Brand Direction, Shopify Theme, Packaging Design, Content Creation, E-commerce
-- URL: https://zachmohr.work/projects.html#figura-studio-brand-and-ecommerce
-- Description: Figura Studio is my home goods design brand, where I led the full creative and digital direction: brand identity, logo and color system, custom Shopify theme design and implementation, packaging direction, product storytelling, and launch content. It is also the home for turning quick idea sketches into real, manufacturable products. This project captures my design taste and how I translate early concepts into a complete brand and commerce experience.
-
----
-
 ### Designer Sheet Metal Furniture Study
 - Date: September 2025
 - Category: Design
