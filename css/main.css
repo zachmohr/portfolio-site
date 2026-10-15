@@ -1324,6 +1324,86 @@ ol {
     border-color: var(--color-blue);
 }
 
+/* Hidden chess mode (js/chess-game.js) */
+.chess-hint {
+    position: absolute;
+    top: var(--space-sm);
+    right: var(--space-sm);
+    z-index: 11;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    padding: 0.375rem 0.625rem;
+    background: rgba(255, 255, 255, 0.9);
+    border: var(--border-width) solid var(--color-gray-400);
+    color: var(--color-gray-900);
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(-4px);
+    transition: opacity 0.25s, transform 0.25s;
+    pointer-events: none;
+}
+
+.model-wrapper:hover .chess-hint,
+.model-wrapper.chess-hint-visible .chess-hint,
+.chess-hint:focus-visible {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+}
+
+.chess-hint:hover {
+    background: var(--color-white);
+}
+
+.chess-panel {
+    position: absolute;
+    top: var(--space-sm);
+    left: var(--space-sm);
+    right: var(--space-sm);
+    z-index: 11;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-xs);
+    pointer-events: none;
+}
+
+.chess-panel[hidden] {
+    display: none;
+}
+
+.chess-status,
+.chess-actions button {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    padding: 0.375rem 0.625rem;
+    background: rgba(255, 255, 255, 0.9);
+    border: var(--border-width) solid var(--color-gray-400);
+    color: var(--color-gray-900);
+    pointer-events: auto;
+}
+
+.chess-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+}
+
+.chess-actions button {
+    cursor: pointer;
+}
+
+.chess-actions button:hover {
+    background: var(--color-white);
+}
+
+.chess-actions button[aria-pressed="true"] {
+    background: var(--color-blue);
+    color: var(--color-white);
+    border-color: var(--color-blue);
+}
+
 .model-slider-wrap {
     flex: 1;
     display: flex;

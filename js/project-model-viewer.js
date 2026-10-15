@@ -92,6 +92,10 @@ function disposeViewer(container) {
         state.resizeObserver.disconnect();
     }
 
+    if (state.chess) {
+        state.chess.dispose();
+    }
+
     if (state.controls) {
         state.controls.dispose();
     }
@@ -326,6 +330,7 @@ function initModelViewer(container) {
     var currentModelNode = null;
     var currentBox = null;
     var ground = null;
+    var frameCallbacks = [];
     var currentModelUrl = src;
     var hasTrackedViewerLoad = false;
     var hasTrackedViewerInteract = false;
@@ -681,6 +686,23 @@ function initModelViewer(container) {
             currentModelNode = model;
             state.model = model;
 
+            if (container.getAttribute('data-chess-game') === 'true') {
+                import('./chess-game.js?v=2').then(function (mod) {
+                    var current = viewerStates.get(container);
+                    if (!current || current.disposed || currentModelNode !== model) return;
+                    current.chess = mod.attachChessGame({
+                        container: container,
+                        canvas: canvas,
+                        camera: camera,
+                        controls: controls,
+                        model: model,
+                        registerFrame: function (fn) { frameCallbacks.push(fn); }
+                    });
+                }).catch(function (err) {
+                    console.warn('Chess game failed to load:', err);
+                });
+            }
+
             if (!hasTrackedViewerLoad) {
                 hasTrackedViewerLoad = true;
                 trackViewerEvent('project_3d_viewer_load', {
@@ -740,6 +762,10 @@ function initModelViewer(container) {
         // Skip render if card/log is not visible.
         if (container.offsetParent === null || contextLost) return;
 
+        if (frameCallbacks.length) {
+            var now = performance.now();
+            frameCallbacks.forEach(function (fn) { fn(now); });
+        }
         controls.update();
         renderer.render(scene, camera);
     }
