@@ -88,11 +88,33 @@ test('repo notes and tooling are blocked, site files are not', async () => {
   for (const path of ['/ROADMAP.md', '/README.md', '/package.json', '/package-lock.json', '/.gitignore', '/scripts/usdz-to-glb.py', '/tests/downloads.test.mjs', '/tools/editor.js', '/content/writing/x.md', '/functions/api/downloads.js']) {
     assert.equal(isBlocked(path), true, path);
   }
-  for (const path of ['/', '/index.html', '/projects/scs-chess-set', '/data/projects.json', '/llms.txt', '/Zach_Mohr_Portfolio.pdf', '/assets/downloads/scs-chess-set/README.txt', '/api/downloads', '/admin/downloads.html']) {
+  for (const path of ['/', '/index.html', '/projects/scs-chess-set', '/data/projects.json', '/llms.txt', '/Zach_Mohr_Portfolio.pdf', '/assets/downloads/scs-chess-set/README.txt', '/api/chess/leaderboard']) {
     assert.equal(isBlocked(path), false, path);
   }
-  const blocked = await onRequest({ request: new Request('https://zachmohr.work/ROADMAP.md'), next: () => new Response('leak') });
+  const blocked = await onRequest({ request: new Request('https://zachmohr.work/ROADMAP.md'), env: {}, next: () => new Response('leak') });
   assert.equal(blocked.status, 404);
-  const allowed = await onRequest({ request: new Request('https://zachmohr.work/api/downloads'), next: () => new Response('ok') });
+  const allowed = await onRequest({ request: new Request('https://zachmohr.work/api/chess/leaderboard'), env: {}, next: () => new Response('ok') });
   assert.equal(await allowed.text(), 'ok');
+});
+
+test('admin and download stats are private', async () => {
+  const { onRequest } = await import('../functions/_middleware.js');
+  const next = () => new Response('secret');
+  const basic = (pw) => ({ Authorization: 'Basic ' + btoa('zach:' + pw) });
+
+  for (const path of ['/admin', '/admin/', '/admin/index.html', '/admin/config.yml', '/admin/downloads.html', '/api/downloads']) {
+    // No password configured: hidden entirely.
+    const hidden = await onRequest({ request: new Request('https://zachmohr.work' + path), env: {}, next });
+    assert.equal(hidden.status, 404, path);
+    // Password configured: challenge without credentials, reject wrong ones, allow the right one.
+    const env = { ADMIN_PASSWORD: 'correct horse' };
+    assert.equal((await onRequest({ request: new Request('https://zachmohr.work' + path), env, next })).status, 401, path);
+    assert.equal((await onRequest({ request: new Request('https://zachmohr.work' + path, { headers: basic('wrong') }), env, next })).status, 401, path);
+    const ok = await onRequest({ request: new Request('https://zachmohr.work' + path, { headers: basic('correct horse') }), env, next });
+    assert.equal(await ok.text(), 'secret', path);
+  }
+
+  // The CMS's GitHub sign-in endpoints stay reachable.
+  const auth = await onRequest({ request: new Request('https://zachmohr.work/api/auth'), env: {}, next: () => new Response('oauth') });
+  assert.equal(await auth.text(), 'oauth');
 });
