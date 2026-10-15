@@ -112,4 +112,4 @@ Clicking a node opens the project log.
 - Image editor: `tools/editor.js` (Express + Sharp) at localhost:3001
 - Deploy: GitHub (`zachmohr/portfolio-site`) → Cloudflare Pages (auto on push to main)
 - Domain: `zachmohr.work` (registered through Cloudflare)
-- Email: `zach@zachmohr.work` → Cloudflare Email Routing → `zmohr026@gmail.com`
+- Email: `zach@zachmohr.work` → Cloudflare Email Routing

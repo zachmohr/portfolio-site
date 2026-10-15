@@ -6,7 +6,7 @@
 ## Person
 - Name: Zach Mohr
 - Site: https://zachmohr.work
-- Email: zach@zachmohr.work
+- Email: zach@figurastudio.com
 - Current role: Mechanical Engineer, Pump Studios (Austin, Texas); founder of Figura Studio
 - Previous: Interiors Research and Innovation, Textron Aviation
 - Status: Passively open to opportunities
