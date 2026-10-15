@@ -374,6 +374,7 @@
             (modelArTitle ? ' data-ar-title="' + escapeAttr(modelArTitle) + '"' : '') +
             (entry.allowCrossSection ? ' data-allow-cross-section="true"' : '') +
             (entry.autoColorize ? ' data-auto-colorize="true"' : '') +
+            (entry.chessGame ? ' data-chess-game="true"' : '') +
             ' role="img" aria-label="' + escapeAttr(entry.alt) + '">' +
             '</div>' +
             (arEnabled

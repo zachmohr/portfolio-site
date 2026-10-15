@@ -1124,16 +1124,17 @@
             "slug": "span-robotics-wall-e",
             "type": "log",
             "title": "Real-Life WALL-E Robot + SPAN Robotics",
-            "date": "Ongoing",
+            "date": "2026-05",
             "category": "robotics",
             "tags": [
                 "Robotics",
                 "Autonomous Systems",
                 "Computer Vision",
+                "Entrepreneurship",
                 "Rapid Prototyping",
                 "AR"
             ],
-            "description": "Autonomous litter-collection robot built from scratch—custom 3D-printed chassis, servo-driven arm, Jetson Orin Nano vision stack, and PS5 teleoperation. Documented publicly as the \"Day X building real life WALL-E\" series and now the foundation of SPAN Robotics.",
+            "description": "Autonomous litter-collection robot built from scratch: custom 3D-printed chassis, servo-driven arm, Jetson Orin Nano vision stack, and PS5 teleoperation. Documented publicly as the \"Day X building real life WALL-E\" series, it became the prototype for SPAN Robotics, which a fellow MID classmate and I took to Wichita State's 2026 Shocker New Venture Competition and won second place.",
             "hero": {
                 "src": "assets/images/projects/span-robotics-wall-e/IMG_3960.JPG",
                 "alt": "Finished WALL-E robot showing the complete assembled chassis, arm, and collection bin"
@@ -1216,6 +1217,16 @@
                     "src": "assets/images/projects/span-robotics-wall-e/IMG_3960.JPG",
                     "alt": "Finished WALL-E robot side profile showing the full assembled platform",
                     "caption": "Finished build: side profile of the fully assembled autonomous litter collection robot."
+                },
+                {
+                    "src": "assets/images/projects/span-robotics-wall-e/snvc-2026-booth.jpg",
+                    "alt": "SPAN Robotics booth at the 2026 Shocker New Venture Competition with the robot prototype on display",
+                    "caption": "SPAN Robotics at the 2026 Shocker New Venture Competition at Wichita State, pitched with a fellow MID classmate: an autonomous waste collection system using solar stations, rovers, and drones."
+                },
+                {
+                    "src": "assets/images/projects/span-robotics-wall-e/snvc-2026-award.jpg",
+                    "alt": "Award presentation at Wichita State University for the Shocker New Venture Competition",
+                    "caption": "Second place at the 2026 Shocker New Venture Competition."
                 }
             ]
         },
@@ -1420,7 +1431,8 @@
                     "iosSrc": "assets/images/projects/scs-chess-set/SCSChessSet.usdz",
                     "arTitle": "SCS Chess Set",
                     "alt": "Interactive 3D model of the sheet metal chess set",
-                    "caption": "Interactive 3D model of the full assembly, with mobile AR support."
+                    "caption": "Interactive 3D model of the full assembly, with mobile AR support.",
+                    "chessGame": true
                 },
                 {
                     "src": "assets/images/projects/scs-chess-set/hero.jpg",

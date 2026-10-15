@@ -34,6 +34,7 @@ Mechanical Engineering, FEA/Simulation, Manufacturing Engineering, FMEA, Standar
 - Autonomous RC Boat (2022) — Undergraduate mechatronics project; ultrasonic sensor on servo sweeps field of view to build spatial map for obstacle avoidance
 - Aircraft Rib Wrinkle Prediction (2022) — Aerospace internship; FEA simulation in Altair HyperForm to predict wrinkle formation in hydroformed aluminum aircraft ribs; designed relief cutouts into tooling; validated with physical prototype
 - Arachno Side Table (2022) — Miniaturized Arachno concept as pedestal side table; CAD concepts extend the design language to a nightstand and dresser
+- Real-Life WALL-E Robot + SPAN Robotics (2026) — Autonomous litter-collection robot (Jetson Orin Nano vision, servo arm); prototype for SPAN Robotics, 2nd place at Wichita State's 2026 Shocker New Venture Competition with a fellow MID classmate
 - SCS Chess Set (2026) — Two-player chess set laser-cut from sheet metal via SendCutSend; all STEP files and BOM free to download at https://zachmohr.work/projects/scs-chess-set
 
 ## Full project details

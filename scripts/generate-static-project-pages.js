@@ -194,7 +194,7 @@ function renderModelEntry(entry) {
 
   return `
 <div class="log-entry log-entry--model">
-  <div class="model-wrapper model-viewer-container" data-src="${escapeAttr(assetUrl(modelSrc))}"${modelsAttr ? ` data-models="${modelsAttr}"` : ''}${arEnabled ? ' data-ar-enabled="true"' : ''}${modelArSrc ? ` data-ar-src="${escapeAttr(assetUrl(modelArSrc))}"` : ''}${modelArTitle ? ` data-ar-title="${escapeAttr(modelArTitle)}"` : ''}${entry.allowCrossSection ? ' data-allow-cross-section="true"' : ''}${entry.autoColorize ? ' data-auto-colorize="true"' : ''} role="img" aria-label="${escapeAttr(entry.alt || '')}"></div>
+  <div class="model-wrapper model-viewer-container" data-src="${escapeAttr(assetUrl(modelSrc))}"${modelsAttr ? ` data-models="${modelsAttr}"` : ''}${arEnabled ? ' data-ar-enabled="true"' : ''}${modelArSrc ? ` data-ar-src="${escapeAttr(assetUrl(modelArSrc))}"` : ''}${modelArTitle ? ` data-ar-title="${escapeAttr(modelArTitle)}"` : ''}${entry.allowCrossSection ? ' data-allow-cross-section="true"' : ''}${entry.autoColorize ? ' data-auto-colorize="true"' : ''}${entry.chessGame ? ' data-chess-game="true"' : ''} role="img" aria-label="${escapeAttr(entry.alt || '')}"></div>
   ${arEnabled ? '<a class="model-ar-link" hidden href="#" aria-label="Open model in augmented reality">Open in AR</a>' : ''}
   ${entry.caption ? `<p class="log-caption">${escapeHtml(entry.caption)}</p>` : ''}
 </div>`;
@@ -348,7 +348,7 @@ function renderProjectPage(project) {
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700;900&family=IBM+Plex+Mono:wght@400;500&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="css/main.css?v=8">
+  <link rel="stylesheet" href="css/main.css?v=9">
   <link rel="stylesheet" href="css/typography.css?v=5">
   <link rel="stylesheet" href="css/dithering.css?v=5">
 
@@ -401,7 +401,7 @@ ${renderStructuredData(project, pageUrl)}
   </script>
 
   <script src="js/main.js?v=6"></script>
-  <script type="module" src="js/project-model-viewer.js?v=22"></script>
+  <script type="module" src="js/project-model-viewer.js?v=26"></script>
 </body>
 </html>`;
 }
