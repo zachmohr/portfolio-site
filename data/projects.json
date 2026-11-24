@@ -1405,6 +1405,26 @@
                 "caption": "Hit Play to play a full game on the actual pieces, then put your name on the leaderboard.",
                 "chessGame": true
             }
+        },
+        {
+            "id": "cocreate-pitch-2026",
+            "type": "log",
+            "title": "Alibaba.com CoCreate Pitch 2026 Finalist",
+            "date": "2026-09",
+            "category": "product-design",
+            "tags": [
+                "Pitch Competition",
+                "Entrepreneurship",
+                "Figura Studio",
+                "Roto"
+            ],
+            "description": "I was selected as one of 20 U.S. finalists in Alibaba.com's CoCreate Pitch 2026 and pitched the Roto live on stage at CoCreate in Los Angeles. The judges were Marcus Lemonis, host of The Fixer; Barry Poznick, executive producer of Shark Tank; Everette Taylor, CEO of Kickstarter; Shiza Shahid, co-founder and co-CEO of Our Place; and David Rogier, founder and CEO of MasterClass.",
+            "hero": {
+                "src": "assets/images/projects/cocreate-pitch-2026/hero.jpg",
+                "alt": "Zach Mohr pitching the Roto on stage at Alibaba.com CoCreate 2026 in Los Angeles, with his name on the screen and the five judges seated beside him"
+            },
+            "video": null,
+            "entries": []
         }
     ]
 }
