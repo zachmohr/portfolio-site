@@ -253,6 +253,15 @@ Design: Original furniture design, product design, CAD, graphic design, brand id
 - URL: https://zachmohr.work/projects/span-robotics-wall-e
 - Description: SPAN Robotics started as a personal challenge in January 2026: build a real-life WALL-E that picks up litter on its own. I designed and built the prototype from scratch, with a 3D-printed chassis, a servo-driven arm, a Jetson Orin Nano vision stack trained to find trash, and PS5 teleoperation for testing. Partnering with a fellow MID classmate, I turned the robot into a company: an autonomous waste collection system that pairs solar-powered trash stations with rovers and drones to keep outdoor spaces clean and generate environmental data. We pitched SPAN at Wichita State's 2026 Shocker New Venture Competition and won second place.
 
+### Alibaba.com CoCreate Pitch 2026 Finalist
+- Date: September 2026
+- Category: Product Design
+- Tags: Pitch Competition, Entrepreneurship, Figura Studio, Roto
+- URL: https://zachmohr.work/projects/cocreate-pitch-2026
+- Description: I was selected as one of 20 U.S. finalists in Alibaba.com's CoCreate Pitch 2026 and pitched the Roto live on stage at CoCreate in Los Angeles. The judges were Marcus Lemonis, host of The Fixer; Barry Poznick, executive producer of Shark Tank; Everette Taylor, CEO of Kickstarter; Shiza Shahid, co-founder and co-CEO of Our Place; and David Rogier, founder and CEO of MasterClass.
+
+---
+
 ### SCS Chess Set
 - Date: October 2026
 - Category: Fabrication
