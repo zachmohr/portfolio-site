@@ -39,7 +39,7 @@ let out = `# Zach Mohr — Full Portfolio Reference
 - Email: zach@figurastudio.com
 
 ## Education
-- MS Innovation Design — Wichita State University (May 2025)
+- MS Innovation Design — Wichita State University (May 2026)
 - BS Mechanical Engineering, Minor: Business/Entrepreneurship — South Dakota School of Mines & Technology, graduated 2023
 
 ## Skills & Capabilities
