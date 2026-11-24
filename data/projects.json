@@ -339,7 +339,7 @@
                 "Furniture",
                 "Jig Building"
             ],
-            "description": "Matched coffee and end table set built around walnut cookie slabs — cross-sections that preserve the full growth ring and live edge of the tree. The slabs required flattening with a custom-built router sled jig before the natural voids and cracks could be filled with epoxy. Welded steel bases were fabricated for both pieces, giving the organic slab tops a clean industrial counterpoint. The set lives together as a cohesive suite in the client's living room.",
+            "description": "Matched coffee table and two end tables built around walnut cookie slabs — cross-sections that preserve the full growth ring and live edge of the tree. The slabs required flattening with a custom-built router sled jig before the natural voids and cracks could be filled with epoxy. Welded steel bases were fabricated for all three pieces, giving the organic slab tops a clean industrial counterpoint. The set lives together as a cohesive suite in the client's living room.",
             "hero": {
                 "src": "assets/images/projects/walnut-coffee-tables/hero.jpg",
                 "alt": "Finished walnut cookie slab coffee table with epoxy-filled voids on welded steel base"
@@ -478,16 +478,16 @@
                 "Furniture",
                 "Original Design"
             ],
-            "description": "Second-generation application of the brazed steel rod joinery technique developed in the Claro Walnut Coffee Table — this time constrained into a rectangular, grid-like base geometry. Where the original base was organic and radial, the Arachno base imposes order on the chaos: rods cut, bent, and brazed mid-air into a repeating structural lattice. Topped with a walnut slab and epoxy river pour. The feet are custom-turned on the lathe from offcuts of the same top slab, tying the wood and steel together as one cohesive piece.",
+            "description": "Second-generation application of the brazed steel rod joinery technique developed in the Claro Walnut Coffee Table — this time constrained into a rectangular, grid-like base geometry. Where the original base was organic and radial, the Arachno base imposes order on the chaos: rods cut, bent, and brazed mid-air into a repeating structural lattice. Topped with a birds-eye maple slab and epoxy river pour. The feet are custom-turned on the lathe from offcuts of the same top slab, tying the wood and steel together as one cohesive piece.",
             "hero": {
                 "src": "assets/images/projects/arachno-coffee-table/hero.jpg",
-                "alt": "Finished arachno coffee table with walnut and epoxy top on brazed steel lattice base"
+                "alt": "Finished arachno coffee table with birds-eye maple and epoxy top on brazed steel lattice base"
             },
             "video": null,
             "entries": [
                 {
                     "src": "assets/images/projects/arachno-coffee-table/01-base-fabrication.jpg",
-                    "alt": "Brazed steel lattice base dry-fit with raw walnut top in the workshop"
+                    "alt": "Brazed steel lattice base dry-fit with raw birds-eye maple top in the workshop"
                 },
                 {
                     "src": "assets/images/projects/arachno-coffee-table/02-brazing-detail.jpg",
@@ -509,7 +509,7 @@
                 "Capstone",
                 "Aluminum"
             ],
-            "description": "Senior capstone project at SD Mines in partnership with the Rushmore Music Festival — a travelling orchestra that brings classical music to rural communities across the Northern Great Plains. The team designed and built the BeethoVAN: a fully outfitted cargo trailer serving as a mobile concert hall with indoor/outdoor performance capability, instrument storage, HVAC, solar power, and AV systems. My primary contribution was the modular aluminum stage system. No off-the-shelf stage had the combination of features required, so the stages were designed and built from scratch. Work included determining all structural loads, hand calculations for beam deflection using composite beam theory to account for the wood deck and aluminum frame acting together, and FEA to validate the results. The stages feature height-adjustable legs with cam lock handles fabricated from laminated sheet metal and modified McMaster components — built to be as cheap as possible while still locking securely under load. Also welded and assembled the articulating piano platform: an actuator-driven frame that stores the grand piano vertically during transport to minimize string detune from road vibration. The BeethoVAN began touring in summer 2023 and has been covered by SD Mines and the Rapid City Journal.",
+            "description": "Senior capstone project at SD Mines in partnership with the Rushmore Music Festival — a travelling orchestra that brings classical music to rural communities across the Northern Great Plains. The team designed and built the BeethoVAN: a fully outfitted cargo trailer serving as a mobile concert hall with indoor/outdoor performance capability, instrument storage, HVAC, solar power, and AV systems. My primary contribution was the modular aluminum stage system. No off-the-shelf stage had the combination of features required, so the stages were designed and built from scratch. Work included determining all structural loads, hand calculations for beam deflection using composite beam theory to account for the wood deck and aluminum frame acting together, and FEA to validate the results. The stages feature height-adjustable legs with cam lock handles fabricated from rod stock and sheet metal with modified McMaster components — built to be as cheap as possible while still locking securely under load. Also welded and assembled the articulating piano platform: an actuator-driven frame that stores the grand piano vertically during transport to minimize string detune from road vibration. The BeethoVAN began touring in summer 2023 and has been covered by SD Mines and the Rapid City Journal.",
             "hero": {
                 "src": "assets/images/projects/modular-portable-stages/hero.jpg",
                 "alt": "BeethoVAN trailer deployed at the SD Mines design fair with modular stages extended"
@@ -548,7 +548,7 @@
                 },
                 {
                     "src": "assets/images/projects/modular-portable-stages/06-cam-lock-handle.jpg",
-                    "alt": "Custom-machined cam lock handle disassembled showing the mechanism components"
+                    "alt": "Shop-made cam lock handle disassembled showing the rod stock and sheet metal components"
                 },
                 {
                     "src": "assets/images/projects/modular-portable-stages/07-team-design-fair.jpg",
@@ -790,7 +790,7 @@
                 "3D Printing",
                 "Original Design"
             ],
-            "description": "A fully automatic indoor garden disguised as a side table, designed for my Innovation Studio 1 graduate course. The prompt was to make fresh produce more accessible to people in food deserts — rather than adding another appliance to the home, this integrates a garden into existing furniture. The prototype features a soil moisture sensor, grow lights, a peristaltic pump for automated watering, and a camera for machine vision plant monitoring, all connected to the web for remote access. The lid is height-adjustable for easy access to the garden. This was a rapid prototyping class focused on the thinking process over a polished final product.",
+            "description": "A fully automatic indoor garden disguised as a side table, designed for my Innovation Studio 1 graduate course. The prompt was to make fresh produce more accessible to people in food deserts — rather than adding another appliance to the home, this integrates a garden into existing furniture. The prototype features a soil moisture sensor, grow lights, a peristaltic pump for automated watering, and a camera for machine vision plant monitoring, all connected to the web for remote access. The lid is height-adjustable for easy access to the garden. The course focused on rapid prototyping and the thinking process over a polished final product.",
             "hero": {
                 "src": "assets/images/projects/side-table-home-garden/IMG_0793.JPG",
                 "alt": "Side table home garden prototype with lid raised showing grow lights, planter pot, and wood-wrapped bucket form factor"
