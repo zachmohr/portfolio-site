@@ -9,12 +9,9 @@
 - Email: zach@figurastudio.com
 - Current role: Mechanical Engineer, Pump Studios (Austin, Texas); founder of Figura Studio
 - Previous: Interiors Research and Innovation, Textron Aviation
-- Status: Passively open to opportunities
-- Target roles: Mechanical Engineering, Manufacturing Engineering, Product Design, Outdoor/Adventure Industry
-- Willing to relocate: Yes, anywhere
 
 ## Education
-- MS Innovation Design — Wichita State University, May 2025
+- MS Innovation Design — Wichita State University, May 2026
 - BS Mechanical Engineering, Minor: Business/Entrepreneurship — South Dakota School of Mines & Technology, graduated 2023
 
 ## Skills & Capabilities
@@ -130,7 +127,7 @@ Design: Original furniture design, product design, CAD, graphic design, brand id
 - Category: Furniture
 - Tags: Brazing, Welding, Woodworking, Furniture, Original Design
 - URL: https://zachmohr.work/projects.html#arachno-coffee-table
-- Description: Second-generation application of the brazed steel rod joinery technique developed in the Claro Walnut Coffee Table — this time constrained into a rectangular, grid-like base geometry. Where the original base was organic and radial, the Arachno base imposes order on the chaos: rods cut, bent, and brazed mid-air into a repeating structural lattice. Topped with a walnut slab and epoxy river pour. The feet are custom-turned on the lathe from offcuts of the same top slab, tying the wood and steel together as one cohesive piece.
+- Description: Second-generation application of the brazed steel rod joinery technique developed in the Claro Walnut Coffee Table — this time constrained into a rectangular, grid-like base geometry. Where the original base was organic and radial, the Arachno base imposes order on the chaos: rods cut, bent, and brazed mid-air into a repeating structural lattice. Topped with a birds-eye maple slab and epoxy river pour. The feet are custom-turned on the lathe from offcuts of the same top slab, tying the wood and steel together as one cohesive piece.
 
 ---
 
@@ -139,7 +136,7 @@ Design: Original furniture design, product design, CAD, graphic design, brand id
 - Category: Furniture
 - Tags: Woodworking, Welding, Epoxy, Furniture, Jig Building
 - URL: https://zachmohr.work/projects.html#walnut-coffee-tables
-- Description: Matched coffee and end table set built around walnut cookie slabs — cross-sections that preserve the full growth ring and live edge of the tree. The slabs required flattening with a custom-built router sled jig before the natural voids and cracks could be filled with epoxy. Welded steel bases were fabricated for both pieces, giving the organic slab tops a clean industrial counterpoint. The set lives together as a cohesive suite in the client's living room.
+- Description: Matched coffee table and two end tables built around walnut cookie slabs — cross-sections that preserve the full growth ring and live edge of the tree. The slabs required flattening with a custom-built router sled jig before the natural voids and cracks could be filled with epoxy. Welded steel bases were fabricated for all three pieces, giving the organic slab tops a clean industrial counterpoint. The set lives together as a cohesive suite in the client's living room.
 
 ---
 
@@ -157,7 +154,7 @@ Design: Original furniture design, product design, CAD, graphic design, brand id
 - Category: Robotics
 - Tags: Robotics, Mechatronics, Prototyping, Autonomy, Sensor Fusion
 - URL: https://zachmohr.work/projects.html#autonomous-rc-boat
-- Description: Undergraduate mechatronics project: an RC boat converted into an autonomous obstacle-avoidance platform. The approach was self-derived — looking at the dev kit components available, the idea emerged to mount an ultrasonic sensor on a servo and sweep it across the field of view, building a spatial map of what's ahead. No AI, no LIDAR, no prior framework — just first-principles thinking that happened to reinvent phased-array radar logic from scratch. The boat uses that distance map to steer around obstacles in real time.
+- Description: Undergraduate mechatronics project: an RC boat converted into an autonomous obstacle-avoidance platform. The approach was self-derived — looking at the dev kit components available, the idea emerged to mount an ultrasonic sensor on a servo and sweep it across the field of view, building a spatial map of what's ahead. No AI, no LIDAR, no prior framework — just first-principles thinking that independently arrived at the same idea behind scanning sonar. The boat uses that distance map to steer around obstacles in real time.
 
 ---
 
@@ -184,7 +181,7 @@ Design: Original furniture design, product design, CAD, graphic design, brand id
 - Category: Engineering
 - Tags: Mechanical Engineering, FEA, Welding, Fabrication, Capstone, Aluminum
 - URL: https://zachmohr.work/projects.html#beethovan-modular-stages
-- Description: Senior capstone project at SD Mines in partnership with the Rushmore Music Festival — a travelling orchestra that brings classical music to rural communities across the Northern Great Plains. The team designed and built the BeethoVAN: a fully outfitted cargo trailer serving as a mobile concert hall with indoor/outdoor performance capability, instrument storage, HVAC, solar power, and AV systems. My primary contribution was the modular aluminum stage system. No off-the-shelf stage had the combination of features required, so the stages were designed and built from scratch. Work included determining all structural loads, hand calculations for beam deflection using composite beam theory to account for the wood deck and aluminum frame acting together, and FEA to validate the results. The stages feature height-adjustable legs with cam lock handles fabricated from laminated sheet metal and modified McMaster components — built to be as cheap as possible while still locking securely under load. Also welded and assembled the articulating piano platform: an actuator-driven frame that stores the grand piano vertically during transport to minimize string detune from road vibration. The BeethoVAN began touring in summer 2023 and has been covered by SD Mines and the Rapid City Journal.
+- Description: Senior capstone project at SD Mines in partnership with the Rushmore Music Festival — a travelling orchestra that brings classical music to rural communities across the Northern Great Plains. The team designed and built the BeethoVAN: a fully outfitted cargo trailer serving as a mobile concert hall with indoor/outdoor performance capability, instrument storage, HVAC, solar power, and AV systems. My primary contribution was the modular aluminum stage system. No off-the-shelf stage had the combination of features required, so the stages were designed and built from scratch. Work included determining all structural loads, hand calculations for beam deflection using composite beam theory to account for the wood deck and aluminum frame acting together, and FEA to validate the results. The stages feature height-adjustable legs with cam lock handles fabricated from rod stock and sheet metal with modified McMaster components — built to be as cheap as possible while still locking securely under load. Also welded and assembled the articulating piano platform: an actuator-driven frame that stores the grand piano vertically during transport to minimize string detune from road vibration. The BeethoVAN began touring in summer 2023 and has been covered by SD Mines and the Rapid City Journal.
 
 ---
 
@@ -211,7 +208,7 @@ Design: Original furniture design, product design, CAD, graphic design, brand id
 - Category: Product Design
 - Tags: Prototyping, IoT, 3D Printing, Original Design
 - URL: https://zachmohr.work/projects.html#side-table-home-garden
-- Description: A fully automatic indoor garden disguised as a side table, designed for my Innovation Studio 1 graduate course. The prompt was to make fresh produce more accessible to people in food deserts — rather than adding another appliance to the home, this integrates a garden into existing furniture. The prototype features a soil moisture sensor, grow lights, a peristaltic pump for automated watering, and a camera for machine vision plant monitoring, all connected to the web for remote access. The lid is height-adjustable for easy access to the garden. This was a rapid prototyping class focused on the thinking process over a polished final product.
+- Description: A fully automatic indoor garden disguised as a side table, designed for my Innovation Studio 1 graduate course. The prompt was to make fresh produce more accessible to people in food deserts — rather than adding another appliance to the home, this integrates a garden into existing furniture. The prototype features a soil moisture sensor, grow lights, a peristaltic pump for automated watering, and a camera for machine vision plant monitoring, all connected to the web for remote access. The lid is height-adjustable for easy access to the garden. The course focused on rapid prototyping and the thinking process over a polished final product.
 
 ---
 
@@ -229,7 +226,7 @@ Design: Original furniture design, product design, CAD, graphic design, brand id
 - Category: Product Design
 - Tags: Product Design, Patent Pending, Consumer Product, Home Goods, Ongoing
 - URL: https://zachmohr.work/projects.html#roto-toilet-paper-holder
-- Description: Roto is my first consumer product and the first product launch from Figura Studio, my home goods design company. The design focuses on one-handed operation to make toilet paper roll changes faster, cleaner, and more accessible in everyday use. I filed for patent protection in April 2025, and this is an active ongoing program with future material iterations and collaborative versions planned with other creators and brands.
+- Description: Roto is my first consumer product and the first product launch from Figura Studio, my home goods design company. The design focuses on one-handed operation to make toilet paper roll changes faster, cleaner, and more accessible in everyday use. I filed for patent protection in April 2025, and this is an active ongoing program. In summer 2026 I partnered with Betterway on a Special Edition Roto, and more material iterations and collaborations with other creators and brands are planned.
 
 ---
 
@@ -256,6 +253,15 @@ Design: Original furniture design, product design, CAD, graphic design, brand id
 - URL: https://zachmohr.work/projects/span-robotics-wall-e
 - Description: SPAN Robotics started as a personal challenge in January 2026: build a real-life WALL-E that picks up litter on its own. I designed and built the prototype from scratch, with a 3D-printed chassis, a servo-driven arm, a Jetson Orin Nano vision stack trained to find trash, and PS5 teleoperation for testing. Partnering with a fellow MID classmate, I turned the robot into a company: an autonomous waste collection system that pairs solar-powered trash stations with rovers and drones to keep outdoor spaces clean and generate environmental data. We pitched SPAN at Wichita State's 2026 Shocker New Venture Competition and won second place.
 
+### Alibaba.com CoCreate Pitch 2026 Finalist
+- Date: September 2026
+- Category: Product Design
+- Tags: Pitch Competition, Entrepreneurship, Figura Studio, Roto
+- URL: https://zachmohr.work/projects/cocreate-pitch-2026
+- Description: I was selected as one of 20 U.S. finalists in Alibaba.com's CoCreate Pitch 2026 and pitched the Roto live on stage at CoCreate in Los Angeles. The judges were Marcus Lemonis, host of The Fixer; Barry Poznick, executive producer of Shark Tank; Everette Taylor, CEO of Kickstarter; Shiza Shahid, co-founder and co-CEO of Our Place; and David Rogier, founder and CEO of MasterClass.
+
+---
+
 ### SCS Chess Set
 - Date: October 2026
 - Category: Fabrication
@@ -272,4 +278,4 @@ Design: Original furniture design, product design, CAD, graphic design, brand id
 - **Lathe work**: Custom feet on Arachno Coffee Table and Side Table, turned from slab offcuts
 - **Client work**: Console Table, Pub Table, Walnut Cookie Slab Set
 - **Engineering internships**: Bobcat (manufacturing), aerospace company (hydroforming simulation)
-- **First-principles problem solving**: Autonomous RC Boat (reinvented phased-array radar logic independently), Slab Mirror (structural load path design)
+- **First-principles problem solving**: Autonomous RC Boat (independently arrived at scanning-sonar-style obstacle mapping), Slab Mirror (structural load path design)

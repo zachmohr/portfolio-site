@@ -36,13 +36,10 @@ let out = `# Zach Mohr — Full Portfolio Reference
 ## Person
 - Name: Zach Mohr
 - Site: https://zachmohr.work
-- Email: zach@zachmohr.work
-- Status: Passively open to opportunities
-- Target roles: Mechanical Engineering, Manufacturing Engineering, Product Design, Outdoor/Adventure Industry
-- Willing to relocate: Yes, anywhere
+- Email: zach@figurastudio.com
 
 ## Education
-- MS Innovation Design — Wichita State University, graduating May 2025
+- MS Innovation Design — Wichita State University (May 2026)
 - BS Mechanical Engineering, Minor: Business/Entrepreneurship — South Dakota School of Mines & Technology, graduated 2023
 
 ## Skills & Capabilities
@@ -73,7 +70,7 @@ out += `## Themes & Connections
 - **Lathe work**: Custom feet on Arachno Coffee Table and Side Table, turned from slab offcuts
 - **Client work**: Console Table, Pub Table, Walnut Cookie Slab Set
 - **Engineering internships**: Bobcat (manufacturing), aerospace company (hydroforming simulation)
-- **First-principles problem solving**: Autonomous RC Boat (reinvented phased-array radar logic independently), Slab Mirror (structural load path design)
+- **First-principles problem solving**: Autonomous RC Boat (independently arrived at scanning-sonar-style obstacle mapping), Slab Mirror (structural load path design)
 `;
 
 fs.writeFileSync(outputPath, out);

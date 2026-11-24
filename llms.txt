@@ -1,16 +1,16 @@
 # Zach Mohr — Portfolio
 
-> Mechanical engineer, maker, and designer. BS Mechanical Engineering, South Dakota School of Mines & Technology (2023). MS Innovation Design, Wichita State University (May 2025). Currently a mechanical engineer at Pump Studios in Austin, Texas, and building Figura Studio, his home goods design company. Open to opportunities in mechanical/manufacturing engineering, product design, and the outdoor/adventure industry.
+> Mechanical engineer, maker, and designer. BS Mechanical Engineering, South Dakota School of Mines & Technology (2023). MS Innovation Design, Wichita State University (May 2026). Currently a mechanical engineer at Pump Studios in Austin, Texas, and building Figura Studio, his home goods design company.
 
 ## Contact
 - Site: https://zachmohr.work
 - Email: zach@figurastudio.com
 
 ## Background
-Zach Mohr is a mechanical engineer and hands-on maker with a broad skillset spanning engineering analysis, manufacturing process development, original furniture design, welding, woodworking, blacksmithing, brazing, and product design. He developed a signature brazed steel rod joinery technique that he has iterated across multiple original furniture pieces. His engineering experience includes aerospace internship work (hydroforming simulation, FEA) and a manufacturing engineering co-op at Bobcat where he supported prototype production of the L35 small articulated loader and optimized a weld production line. He earned a Master's in Innovation Design from Wichita State University (May 2025) while working on the Interiors Research and Innovation team at Textron Aviation. He now works as a mechanical engineer at Pump Studios in Austin, Texas, and runs Figura Studio, his home goods design company.
+Zach Mohr is a mechanical engineer and hands-on maker with a broad skillset spanning engineering analysis, manufacturing process development, original furniture design, welding, woodworking, blacksmithing, brazing, and product design. He developed a signature brazed steel rod joinery technique that he has iterated across multiple original furniture pieces. His engineering experience includes aerospace internship work (hydroforming simulation, FEA) and a manufacturing engineering co-op at Bobcat where he supported prototype production of the L35 small articulated loader and optimized a weld production line. He earned a Master's in Innovation Design from Wichita State University (May 2026) while working on the Interiors Research and Innovation team at Textron Aviation. He now works as a mechanical engineer at Pump Studios in Austin, Texas, and runs Figura Studio, his home goods design company.
 
 ## Education
-- MS Innovation Design — Wichita State University (May 2025)
+- MS Innovation Design — Wichita State University (May 2026)
 - BS Mechanical Engineering, Minor: Business/Entrepreneurship — South Dakota School of Mines & Technology (2023)
 
 ## Skills
@@ -35,6 +35,7 @@ Mechanical Engineering, FEA/Simulation, Manufacturing Engineering, FMEA, Standar
 - Aircraft Rib Wrinkle Prediction (2022) — Aerospace internship; FEA simulation in Altair HyperForm to predict wrinkle formation in hydroformed aluminum aircraft ribs; designed relief cutouts into tooling; validated with physical prototype
 - Arachno Side Table (2022) — Miniaturized Arachno concept as pedestal side table; CAD concepts extend the design language to a nightstand and dresser
 - SPAN Robotics (2026) — Autonomous litter-collection robot (Jetson Orin Nano vision, servo arm); prototype for SPAN Robotics, 2nd place at Wichita State's 2026 Shocker New Venture Competition with a fellow MID classmate
+- Alibaba.com CoCreate Pitch 2026 Finalist (2026) — One of 20 U.S. finalists; pitched the Roto on stage in Los Angeles to judges Marcus Lemonis, Barry Poznick, Everette Taylor, Shiza Shahid and David Rogier
 - SCS Chess Set (2026) — Two-player chess set laser-cut from sheet metal via SendCutSend; all STEP files and BOM free to download at https://zachmohr.work/projects/scs-chess-set
 
 ## Full project details
