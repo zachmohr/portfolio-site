@@ -113,6 +113,7 @@
     function renderLogCard(project, lazy) {
         var projectSlug = project._routeSlug || '';
         var projectAliases = (project._routeAliases || []).join(',');
+        var logEntries = renderLogEntries(project.entries);
 
         return (
             '<article class="project-card project-card--log" data-category="' + project.category + '" data-date="' + project.date + '"' +
@@ -136,13 +137,16 @@
             renderPress(project.press) +
             renderPatents(project.patents) +
             renderDownloads(project.downloads) +
-            '<button class="project-log-toggle" aria-expanded="false">' +
-            'View Build Log <span class="toggle-indicator">[+]</span>' +
-            '</button>' +
+            // Only offer a build log when there is something in it
+            (logEntries
+                ? '<button class="project-log-toggle" aria-expanded="false">' +
+                  'View Build Log <span class="toggle-indicator">[+]</span>' +
+                  '</button>'
+                : '') +
             '</div>' +
-            '<div class="project-log" hidden>' +
-            renderLogEntries(project.entries) +
-            '</div>' +
+            (logEntries
+                ? '<div class="project-log" hidden>' + logEntries + '</div>'
+                : '') +
             '</article>'
         );
     }
@@ -554,7 +558,8 @@
         return (
             '<p class="project-description">' +
             escapeHtml(split.preview) +
-            '&hellip;<span class="description-extra" hidden> ' + escapeHtml(split.overflow) + '</span>' +
+            '<span class="description-ellipsis">&hellip;</span>' +
+            '<span class="description-extra" hidden> ' + escapeHtml(split.overflow) + '</span>' +
             '</p>' +
             '<button class="description-toggle" aria-expanded="false">' +
             'Read More <span class="toggle-indicator">[+]</span>' +
@@ -569,10 +574,13 @@
 
             var content = toggle.closest('.project-content');
             var extra = content.querySelector('.description-extra');
+            var ellipsis = content.querySelector('.description-ellipsis');
             var isExpanded = toggle.getAttribute('aria-expanded') === 'true';
 
             toggle.setAttribute('aria-expanded', String(!isExpanded));
             extra.hidden = isExpanded;
+            // Hide the preview ellipsis while the full text is showing
+            if (ellipsis) ellipsis.hidden = !isExpanded;
             toggle.childNodes[0].nodeValue = isExpanded ? 'Read More ' : 'Read Less ';
             toggle.querySelector('.toggle-indicator').textContent = isExpanded ? '[+]' : '[-]';
         });
@@ -689,7 +697,8 @@
             if (e.target.closest('a, button, input, .description-toggle, .project-log, video, .sketch-nav, .model-controls, .strobe-controls')) return;
 
             var card = e.target.closest('.project-card');
-            if (!card || card.classList.contains('project-card--log')) return;
+            // Log cards with a build log handle routing in their own toggle handler
+            if (!card || card.querySelector('.project-log-toggle')) return;
 
             setProjectPath(card.getAttribute('data-project-slug'), false);
             trackProjectOpen(card, 'card_open');
