@@ -37,9 +37,6 @@ let out = `# Zach Mohr — Full Portfolio Reference
 - Name: Zach Mohr
 - Site: https://zachmohr.work
 - Email: zach@figurastudio.com
-- Status: Passively open to opportunities
-- Target roles: Mechanical Engineering, Manufacturing Engineering, Product Design, Outdoor/Adventure Industry
-- Willing to relocate: Yes, anywhere
 
 ## Education
 - MS Innovation Design — Wichita State University (May 2025)
